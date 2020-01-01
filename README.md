@@ -23,7 +23,7 @@ Run container
 
 Run tests
 
-`sparrowdo --bootstrap --docker=$container-name --repo=http://repo.westus.cloudapp.azure.com/ --sparrowfile=modules/red/sparrowfile`
+`sparrowdo --bootstrap --no_sudo --docker=$container-name --repo=http://repo.westus.cloudapp.azure.com/ --sparrowfile=modules/red/sparrowfile`
 
 # Available reports
 

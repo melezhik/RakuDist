@@ -26,12 +26,13 @@ bash "cd {$directory} && ls -l";
 zef "Test::META";
 
 zef $directory, %( 
+  force => False,
   depsonly => True, 
   notest => True, 
   user => $user 
 );
 
-bash "cd {$directory} && zef test .", %(
+bash "cd {$directory} && zef test . --verbose", %(
   description => "zef test",
   user => $user
 );
