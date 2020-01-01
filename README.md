@@ -13,7 +13,7 @@ Install Sparrowdo
 
 `zef install --/test Sparrowdo`
 
-Pull dicker images
+Pull docker images
 
 `docker pull debian`
 
