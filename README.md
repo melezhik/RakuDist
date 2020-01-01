@@ -19,7 +19,7 @@ Pull docker images
 
 Run container
 
-`docker run -t --rm --name $container-name debian`
+`docker run -d -t --rm --name $container-name debian`
 
 Run tests
 
