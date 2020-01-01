@@ -135,6 +135,13 @@ Run tests
 
 TBD
 
+# Adding new modules
+
+* Create a new folder in `modules/` directory
+* Write high-level scenario preparing configuration/environment for your module
+* See `modules/red` as an example
+
+
 # Author
 
 Alexey Melezhik
