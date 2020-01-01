@@ -4,7 +4,7 @@ Test Raku modules against different OS, Rakudo versions
 
 # Automatic tests
 
-I am working on tests get run automatically and reports get published to public domain,
+I am working on tests get run automatically and reports get published to a public domain,
 so far module authors could run tests manually.
 
 # Runs tests manually
