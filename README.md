@@ -145,7 +145,7 @@ TBD
 # See also
 
 * [Sparrow6](https://github.com/melezhik/Sparrow6)
-* [Sparrow6 DSL][https://github.com/melezhik/Sparrow6/blob/master/documentation/dsl.md]
+* [Sparrow6 DSL](https://github.com/melezhik/Sparrow6/blob/master/documentation/dsl.md)
 * [Sparrowdo](https://github.com/melezhik/sparrowdo)
 
 # Thanks to
