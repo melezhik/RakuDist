@@ -1,0 +1,312 @@
+[melezhik@localhost cro]$ sparrowdo --no_sudo --docker=alpine --repo=http://repo.westus.cloudapp.azure.com
+03:04:49 01/02/2020 [repository] index updated from http://repo.westus.cloudapp.azure.com/api/v1/index
+03:04:51 01/02/2020 [create user cro] update of existing user is not supported for alpine OS
+03:04:54 01/02/2020 [create directory /data/test/cro] directory path: /data/test/cro
+03:04:54 01/02/2020 [create directory /data/test/cro] directory owner: <cro>
+03:04:54 01/02/2020 [create directory /data/test/cro] directory group: <cro>
+03:04:54 01/02/2020 [create directory /data/test/cro] directory access rights: drwxr-xr-x
+[task check] stdout match <owner: <cro>> True
+[task check] stdout match <group: <cro>> True
+03:04:58 01/02/2020 [bash: git checkout https://github.com/croservices/cro.gi ...] /data/test/cro
+03:04:58 01/02/2020 [bash: git checkout https://github.com/croservices/cro.gi ...] Already up to date.
+03:05:00 01/02/2020 [bash: last commit] commit c24c28f1cc0ef62c7b08097a71188f175b0f845e
+03:05:00 01/02/2020 [bash: last commit] Author: Altai-man <alexander.kiryuhin@gmail.com>
+03:05:00 01/02/2020 [bash: last commit] Date:   Sun Nov 24 18:05:52 2019 +0200
+03:05:00 01/02/2020 [bash: last commit] 
+03:05:00 01/02/2020 [bash: last commit]     Fix markup
+03:05:00 01/02/2020 [bash: last commit] 
+03:05:00 01/02/2020 [bash: last commit] M docs/reference/cro-http-test.md
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] total 20
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] -rw-r--r--    1 cro      cro           8902 Jan  2 02:42 LICENSE
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] -rw-r--r--    1 cro      cro           2699 Jan  2 02:42 META6.json
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] -rw-r--r--    1 cro      cro            303 Jan  2 02:42 README.md
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] drwxr-xr-x    2 cro      cro             17 Jan  2 02:42 bin
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] drwxr-xr-x    4 cro      cro            246 Jan  2 02:42 docs
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] drwxr-xr-x    3 cro      cro             17 Jan  2 02:42 lib
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] drwxr-xr-x    4 cro      cro             33 Jan  2 02:42 resources
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] drwxr-xr-x    4 cro      cro            152 Jan  2 02:42 t
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] drwxr-xr-x    3 cro      cro            138 Jan  2 02:42 web-frontend
+03:05:02 01/02/2020 [bash: cd /data/test/cro && ls -l] drwxr-xr-x    2 cro      cro             30 Jan  2 02:42 xt
+03:05:06 01/02/2020 [bash: zef install Test::META] stderr: All candidates are currently installed
+03:05:06 01/02/2020 [bash: zef install Test::META] No reason to proceed. Use --force-install to continue anyway
+03:05:07 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] fetch http://dl-cdn.alpinelinux.org/alpine/v3.11/main/x86_64/APKINDEX.tar.gz
+03:05:09 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] fetch http://dl-cdn.alpinelinux.org/alpine/v3.11/community/x86_64/APKINDEX.tar.gz
+03:05:10 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] v3.11.2-15-gaad4175d78 [http://dl-cdn.alpinelinux.org/alpine/v3.11/main]
+03:05:10 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] v3.11.2-24-g7cfe3a1534 [http://dl-cdn.alpinelinux.org/alpine/v3.11/community]
+03:05:10 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] OK: 11262 distinct packages available
+03:05:10 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] trying to install make ...
+03:05:10 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] installer - apk
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] OK: 175 MiB in 46 packages
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] Installed:                                Available:
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] make-4.2.1-r2                           = 4.2.1-r2 
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] make
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] trying to install gcc ...
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] installer - apk
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] OK: 175 MiB in 46 packages
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] Installed:                                Available:
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] gcc-9.2.0-r3                            = 9.2.0-r3 
+03:05:11 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] gcc
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] trying to install libc-dev ...
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] installer - apk
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] OK: 175 MiB in 46 packages
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] Installed:                                Available:
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] libc-dev-0.7.2-r0                       = 0.7.2-r0 
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] libc-dev
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] trying to install openssl-dev ...
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] installer - apk
+03:05:12 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] (1/4) Upgrading libcrypto1.1 (1.1.1d-r2 -> 1.1.1d-r3)
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] (2/4) Upgrading libssl1.1 (1.1.1d-r2 -> 1.1.1d-r3)
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] (3/4) Installing pkgconf (1.6.3-r0)
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] (4/4) Installing openssl-dev (1.1.1d-r3)
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] Executing busybox-1.31.1-r8.trigger
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] Executing ca-certificates-20191127-r0.trigger
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] OK: 177 MiB in 48 packages
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] Installed:                                Available:
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] openssl-dev-1.1.1d-r3                   = 1.1.1d-r3 
+03:05:13 01/02/2020 [install package(s): make gcc libc-dev openssl-dev.perl] openssl-dev
+03:05:20 01/02/2020 [bash: zef install /data/test/cro] ===> Searching for missing dependencies: Shell::Command, File::Find, Terminal::ANSIColor, Cro::WebSocket
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Searching for missing dependencies: Cro::HTTP, Digest::SHA1::Native, Crypt::Random, File::Which
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Searching for missing dependencies: JSON::JWT, DateTime::Parse, Log::Timeline, if, LibraryMake
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Searching for missing dependencies: Digest::HMAC
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Searching for missing dependencies: Digest
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Building: Digest::SHA1::Native:ver<0.04>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Building [OK] for Digest::SHA1::Native:ver<0.04>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: if:ver<0.1.1>:auth<github:FROGGS>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Crypt::Random:ver<0.4.1>:auth<github:skinkade>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Digest:ver<0.3.4>:auth<Lucien Grondin>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Digest::HMAC:ver<1.0.0>:auth<github:retupmoca>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: JSON::JWT:ver<1.0>:auth<github:retupmoca>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: DateTime::Parse:ver<0.9.1>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Log::Timeline:ver<0.3>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Cro::HTTP:ver<0.8.2>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: LibraryMake:ver<1.0.0>:auth<github:retupmoca>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: File::Which:ver<1.0.1>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: File::Find:ver<0.1>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Shell::Command
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Digest::SHA1::Native:ver<0.04>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Cro::WebSocket:ver<0.8.2>
+03:07:15 01/02/2020 [bash: zef install /data/test/cro] ===> Installing: Terminal::ANSIColor:ver<0.5>
+03:07:19 01/02/2020 [bash: zef test] ===> Testing: cro:ver<0.8.2>
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 1 - Minimal file parses
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 2 - Correct id
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 3 - Correct name
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 4 - Correct entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 5 - File without name parses
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 6 - Correct id
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 7 - Correct name (defaulted to id)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 8 - Correct entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..3
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches cro
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 9 - Cannot cope with missing cro field
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..3
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches id
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 10 - Cannot cope with missing id field
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..3
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 11 - Cannot cope with missing entrypoint field
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..3
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Unexpected)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches wat
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 12 - Unexpected field is an error
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..3
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Version)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .got matches 2
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 13 - Unrecognized version is an error
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 14 - Endpoints parse
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 15 - Parsed 2 endpoints
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 16 - Correct endpoint id (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 17 - Correct endpoint name (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 18 - Correct endpoint protocol (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 19 - Correct endpoint host-env (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 20 - Correct endpoint port-env (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 21 - Correct endpoint id (2)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 22 - Correct endpoint name defaulted from id (2)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 23 - Correct endpoint protocol (2)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 24 - Correct endpoint host-env (2)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 25 - Correct endpoint port-env (2)
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .in matches entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .field matches id
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 26 - Cannot cope with missing id field in entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .in matches entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .field matches protocol
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 27 - Cannot cope with missing protocol field in entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches host-env
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .in matches entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 28 - Cannot cope with missing host-env field in entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .in matches entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .field matches port-env
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 29 - Cannot cope with missing port-env field in entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Unexpected)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .in matches entrypoint
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .field matches wat
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 30 - Unexpected entrypoint field is an error
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 31 - Links parse
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 32 - Parsed 2 links
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 33 - Correct link service (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 34 - Correct link endpoint (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 35 - Correct link host-env (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 36 - Correct link port-env (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 37 - Correct link service (2)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 38 - Correct link endpoint (2)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 39 - Correct link host-env (2)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 40 - Correct link port-env (2)
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches service
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .in matches link
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 41 - Cannot cope with missing service field in link
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .in matches link
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .field matches endpoint
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 42 - Cannot cope with missing endpoint field in link
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .in matches link
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .field matches host-env
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 43 - Cannot cope with missing host-env field in link
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches port-env
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .in matches link
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 44 - Cannot cope with missing port-env field in link
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Unexpected)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches wat
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .in matches link
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 45 - Unexpected link field is an error
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 46 - Environment vars parse
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 47 - Parsed 2 environment variables
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 48 - Correct environment name (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 49 - Correct environment name (1)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 50 - Correct environment name (2)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 51 - Correct environment name (2)
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .in matches env
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .field matches name
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 52 - Cannot cope with missing name field in env
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Missing)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .field matches value
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .in matches env
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 53 - Cannot cope with missing value field in env
+03:07:42 01/02/2020 [bash: zef test] [cro]     1..4
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 1 - code dies
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 2 - right exception type (X::Cro::Tools::CroFile::Unexpected)
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 3 - .in matches env
+03:07:42 01/02/2020 [bash: zef test] [cro]     ok 4 - .field matches wat
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 54 - Unexpected env field is an error
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 55 - Serializing to YAML lives
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 56 - Has cro version identifier
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 57 - Could parse output
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 58 - Correct id (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 59 - Correct name (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 60 - Correct entrypoint (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 61 - Roundtripped 1 endpoint
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 62 - Correct endpoint id (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 63 - Correct endpoint name (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 64 - Correct endpoint protocol (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 65 - Correct endpoint host-env (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 66 - Correct endpoint port-env (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 67 - Roundtripped 1 link
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 68 - Correct link service (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 69 - Correct link endpoint (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 70 - Correct link host-env (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 71 - Correct link port-env (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 72 - Roundtripped 1 environment variables
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 73 - Correct environment name (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 74 - Correct environment name (roundtrip)
+03:07:42 01/02/2020 [bash: zef test] [cro] 1..74
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 1 - Can add link
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 2 - Links section is filled
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 3 - Host is added
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 4 - Port is added
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 5 - Can remove link
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 6 - Links section is empty
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 7 - Host is removed
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 8 - Port is removed
+03:07:42 01/02/2020 [bash: zef test] [cro] 1..8
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 1 - Got started event
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 2 - Correct service ID was started
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 3 - Have the Cro file object
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 4 - Endpoint was assigned a port
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 5 - HTTP endpoing exists in ports
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 6 - Port number available as an Int
+03:07:42 01/02/2020 [bash: zef test] [cro] # Check service up attempt 1: connection refused
+03:07:42 01/02/2020 [bash: zef test] [cro] # Check service up attempt 2: connection refused
+03:07:42 01/02/2020 [bash: zef test] [cro] # Check service up attempt 3: Timed out after 10s
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 7 - Could call the started service
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 8 - Got expected response from service
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 9 - Got an output message after request
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 10 - Was not on STDERR
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 11 - Got log line mentioning status code
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 12 - Got restarted message
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 13 - Correct service ID was restarted
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 14 - Have the Cro file object again
+03:07:42 01/02/2020 [bash: zef test] [cro] # Check service up attempt 1: connection refused
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 15 - Could call the restarted service
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 16 - Got response indicating new service running
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 17 - Got an output message from restarted service
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 18 - Was not on STDERR
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 19 - Got log line mentioning status code
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 20 - Service is shut down when tap closed
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 21 - Bad .cro.yml emits a useful message about that
+03:07:42 01/02/2020 [bash: zef test] [cro] 1..21
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 1 - Discovered one service existing at startup
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 2 - Discovered another service existing at startup
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 3 - First service has correct path
+03:07:42 01/02/2020 [bash: zef test] [cro] ok 4 - First service has correct .cro.yml
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 5 - Second service has correct path
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 6 - Second service has correct .cro.yml
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 7 - No third service discovered at start
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 8 - Third service created after startup is found
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 9 - Third service has correct path
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 10 - Third service has correct .cro.yml
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 11 - No initial metadata change reported
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 12 - Metadata change received
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 13 - Cro file is reloaded
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 14 - No initial source change reported
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 15 - Got notified of changed service source file
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 16 - Metadata changes not mis-delivered to second service
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 17 - Source changes not mis-delivered to second service
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 18 - No exception is set when no error
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 19 - Got notification of change to second service .cro.yml
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 20 - Parse error gives undefined .cro-file
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 21 - Exception is set on error
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 22 - Deleted Promise kept when service deleted
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 23 - Metadata changed Supply done when service deleted
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 24 - Source changed Supply done when service deleted
+03:07:44 01/02/2020 [bash: zef test] [cro] ok 25 - Getting deleted Promise after deletion has it completed
+03:07:44 01/02/2020 [bash: zef test] [cro] 1..25
+03:07:44 01/02/2020 [bash: zef test] ===> Testing [OK] for cro:ver<0.8.2>
+
