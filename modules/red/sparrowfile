@@ -25,6 +25,23 @@ bash "cd {$directory} && ls -l";
 
 zef "Test::META";
 
+if os() eq 'alpine' {
+
+  # this is needed for alpine rakudo installation
+  unless "/bin/zef".IO ~~ :e {
+    copy "/opt/rakudo-pkg/share/perl6/core/bin/zef", "/bin/zef"
+  }
+
+  # this is needed for alpine rakudo installation
+  unless "/bin/perl6".IO ~~ :e {
+    copy "/opt/rakudo-pkg/bin/perl6", "/bin/perl6"
+  }
+
+  package-install "sqlite-libs";
+
+}
+
+
 zef $directory, %( 
   force => False,
   depsonly => True, 
