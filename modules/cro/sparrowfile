@@ -37,9 +37,13 @@ if os() eq 'alpine' {
     copy "/opt/rakudo-pkg/bin/perl6", "/bin/perl6"
   }
 
-  package-install "make gcc libc-dev openssl-dev";
 
 }
+
+package-install %(
+  apline => "make gcc libc-dev openssl-dev",
+  debian => "libssl-dev"
+);
 
 
 zef $directory, %( 
