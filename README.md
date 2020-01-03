@@ -19,7 +19,7 @@ Pull docker images
 
 Run container
 
-`docker run -d -t --rm --name $container-name debian`
+`container_name=debian-rakudist && docker run -d -t --rm --name $container_name debian`
 
 Run tests
 
@@ -29,7 +29,7 @@ Cd to module dir
 
 Run sparrowdo
 
-`sparrowdo --bootstrap --no_sudo --docker=$container-name --repo=http://repo.westus.cloudapp.azure.com`
+`sparrowdo --bootstrap --no_sudo --docker=$container_name --repo=http://repo.westus.cloudapp.azure.com`
 
 # Example report
 
