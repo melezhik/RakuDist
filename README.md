@@ -19,7 +19,7 @@ Pull docker images
 
 Run container
 
-`container_name=debian-rakudist && docker run -d -t --rm --name $container_name debian`
+`container_name='debian-rakudist' && docker run -d -t --rm --name $container_name debian`
 
 Run tests
 
