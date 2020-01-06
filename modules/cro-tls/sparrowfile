@@ -37,9 +37,13 @@ if os() eq 'alpine' {
     copy "/opt/rakudo-pkg/bin/perl6", "/bin/perl6"
   }
 
-  package-install "sqlite-libs";
 
 }
+
+#package-install %(
+#  apline => "make gcc libc-dev openssl-dev",
+#  debian => "libssl-dev"
+#);
 
 
 zef $directory, %( 
@@ -49,7 +53,7 @@ zef $directory, %(
   user => $user 
 );
 
-bash "cd {$directory} && zef test .", %(
+bash "cd {$directory} && zef test . --verbose", %(
   description => "zef test",
   user => $user
 );
