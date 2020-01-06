@@ -1,0 +1,80 @@
+23:02:34 01/06/2020 [repository] index updated from http://repo.westus.cloudapp.azure.com/api/v1/index
+23:02:41 01/06/2020 [create user chart-gnupplot] Don't change user home as managehome set to 'no' OR homedir not set
+23:02:41 01/06/2020 [create user chart-gnupplot] user chart-gnupplot - nothing changed
+23:02:41 01/06/2020 [create user chart-gnupplot] uid=1003(chart-gnupplot) gid=1003(chart-gnupplot) groups=1003(chart-gnupplot)
+23:02:46 01/06/2020 [create directory /data/test/chart-gnupplot] directory path: /data/test/chart-gnupplot
+23:02:46 01/06/2020 [create directory /data/test/chart-gnupplot] directory owner: <chart-gnupplot>
+23:02:46 01/06/2020 [create directory /data/test/chart-gnupplot] directory group: <chart-gnupplot>
+23:02:46 01/06/2020 [create directory /data/test/chart-gnupplot] directory access rights: drwxr-xr-x
+[task check] stdout match <owner: <chart-gnupplot>> True
+[task check] stdout match <group: <chart-gnupplot>> True
+23:02:52 01/06/2020 [bash: git checkout https://github.com/titsuki/raku-Chart ...] /data/test/chart-gnupplot
+23:02:52 01/06/2020 [bash: git checkout https://github.com/titsuki/raku-Chart ...] Already up to date.
+23:02:55 01/06/2020 [bash: last commit] commit 280ba29eb10e2a0b9445d1d110725f3e31e9bcf7
+23:02:55 01/06/2020 [bash: last commit] Author: titsuki <titsuki@cpan.org>
+23:02:55 01/06/2020 [bash: last commit] Date:   Fri Jan 3 01:56:28 2020 +0900
+23:02:55 01/06/2020 [bash: last commit] 
+23:02:55 01/06/2020 [bash: last commit]     Delete superfluous .say
+23:02:55 01/06/2020 [bash: last commit] 
+23:02:55 01/06/2020 [bash: last commit] M	t/02-terminal.t
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] total 124
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] -rw-r--r--. 1 chart-gnupplot chart-gnupplot  2603 Jan  6 22:54 Changes
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] -rw-r--r--. 1 chart-gnupplot chart-gnupplot   686 Jan  6 22:54 LICENSE
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] -rw-r--r--. 1 chart-gnupplot chart-gnupplot  1548 Jan  6 22:54 META6.json
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] -rw-r--r--. 1 chart-gnupplot chart-gnupplot 20714 Jan  6 22:54 README.md
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] -rw-r--r--. 1 chart-gnupplot chart-gnupplot   120 Jan  6 22:54 dist.ini
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] -rw-r--r--. 1 chart-gnupplot chart-gnupplot  4122 Jan  6 22:54 histogram.png
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] drwxr-xr-x. 3 chart-gnupplot chart-gnupplot    19 Jan  6 22:54 lib
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] -rw-r--r--. 1 chart-gnupplot chart-gnupplot 29506 Jan  6 22:54 sinx.png
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] -rw-r--r--. 1 chart-gnupplot chart-gnupplot 37944 Jan  6 22:54 surface.dem.00.png
+23:02:58 01/06/2020 [bash: cd /data/test/chart-gnupplot && ls -l] drwxr-xr-x. 2 chart-gnupplot chart-gnupplot  4096 Jan  6 22:54 t
+23:03:02 01/06/2020 [bash: zef install Test::META] stderr: All candidates are currently installed
+23:03:02 01/06/2020 [bash: zef install Test::META] No reason to proceed. Use --force-install to continue anyway
+23:03:04 01/06/2020 [install package(s): gnuplot.perl] trying to install gnuplot ...
+23:03:04 01/06/2020 [install package(s): gnuplot.perl] installer - apt-get
+23:03:04 01/06/2020 [install package(s): gnuplot.perl] Package: gnuplot
+23:03:04 01/06/2020 [install package(s): gnuplot.perl] Version: 5.2.6+dfsg1-1+deb10u1
+23:03:04 01/06/2020 [install package(s): gnuplot.perl] Status: install ok installed
+[task check] stdout match <Status: install ok installed> True
+23:03:08 01/06/2020 [bash: zef install /data/test/chart-gnupplot] stderr: All candidates are currently installed
+23:03:08 01/06/2020 [bash: zef install /data/test/chart-gnupplot] <empty stdout>
+23:03:11 01/06/2020 [bash: zef test] ===> Testing: Chart::Gnuplot:ver<0.0.17>:auth<cpan:TITSUKI>
+23:03:23 01/06/2020 [bash: zef test] stderr: Aborting due to test failure: Chart::Gnuplot:ver<0.0.17>:auth<cpan:TITSUKI> (use --force-test to override)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Unhandled exception in code scheduled on thread 4
+23:03:23 01/06/2020 [bash: zef test] [Chart::Gnuplot] Failed to spawn process /home/chart-gnupplot/.p6chart-gnuplot/bin/gnuplot: no such file or directory (error code -2)
+23:03:23 01/06/2020 [bash: zef test] ===> Testing [FAIL]: Chart::Gnuplot:ver<0.0.17>:auth<cpan:TITSUKI>
+23:03:23 01/06/2020 [bash: zef test] task exit status: 1
+23:03:23 01/06/2020 [bash: zef test] task bash: zef test FAILED
