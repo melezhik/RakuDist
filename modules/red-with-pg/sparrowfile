@@ -40,7 +40,6 @@ if os() eq 'alpine' {
 
 }
 
-
 package-install %(
   alpine => "sqlite-libs",
   debian => "postgresql postgresql-contrib libpq5 libpq-dev"
@@ -71,20 +70,31 @@ zef $directory, %(
   user => $user 
 );
 
+file "/home/$user/.pgpass", %(
+  owner => $user,
+  group => $user ,
+  mode => '0600',
+  content => '*:*:*:$user:123'
+);
+
 task-run "files/tasks/set-pg-user-password/", %(
   user  => $user,
   password => "123"
 );
 
-file "/home/$user/.pgpass", %(
-  owner => $user,
-  group => $user ,
-  mode => '600',
-  content => '*:*:*:$user:123'
+bash "dropdb {$user}; createdb {$user}", %(
+  description => "create test database - {$user}",
+  user => $user
+);
+
+bash "dropdb {$user}_test_db; createdb {$user}_test_db", %(
+  description => "create test database - {$user}_test_db",
+  user => $user
 );
 
 bash "cd {$directory} && zef test .", %(
   description => "zef test",
   user => $user,
+  envvars => %( RED_DATABASE => "{$user}_test_db")
 );
 
