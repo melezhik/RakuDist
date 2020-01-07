@@ -1,16 +1,5 @@
 my $user = config()<user>;
 
-task-run "files/tasks/create-pg-user/", %(
-  user  => $user
-);
-
-task-run "files/tasks/set-pg-user-password/", %(
-  user  => $user,
-  password => "123"
-);
-
-exit(0);
-
 
 my $directory = "/data/test/{$user}";
 
@@ -54,7 +43,7 @@ if os() eq 'alpine' {
 
 package-install %(
   alpine => "sqlite-libs",
-  debian => "postgresql postgresql-contrib"
+  debian => "postgresql postgresql-contrib libpq5 libpq-dev"
 );
 
 service-enable "postgresql";
@@ -69,7 +58,11 @@ task-run "files/tasks/create-pg-user/", %(
   user  => $user
 );
 
-exit(0);
+
+task-run "files/tasks/patch-t-files", %(
+  dir  => $directory,
+);
+
 
 zef $directory, %( 
   force => False,
@@ -78,8 +71,20 @@ zef $directory, %(
   user => $user 
 );
 
+task-run "files/tasks/set-pg-user-password/", %(
+  user  => $user,
+  password => "123"
+);
+
+file "/home/$user/.pgpass", %(
+  owner => $user,
+  group => $user ,
+  mode => '600',
+  content => '*:*:*:$user:123'
+);
+
 bash "cd {$directory} && zef test .", %(
   description => "zef test",
-  user => $user
+  user => $user,
 );
 
