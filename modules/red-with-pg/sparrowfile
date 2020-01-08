@@ -58,9 +58,11 @@ task-run "files/tasks/create-pg-user/", %(
 );
 
 
-task-run "files/tasks/patch-t-files", %(
+my %state = task-run "files/tasks/patch-t-files", %(
   dir  => $directory,
 );
+
+my $dbnum = %state<dbnum>;
 
 
 zef $directory, %( 
@@ -82,12 +84,15 @@ task-run "files/tasks/set-pg-user-password/", %(
   password => "123"
 );
 
-bash "dropdb {$user}; createdb {$user} && echo db {$user} created", %(
-  description => "create test database - {$user}",
-  user => $user
-);
+for 0 .. $dbnum-1 -> $i {
+  my $dbname = "red{$i}";
+  bash "dropdb {$dbname}; createdb {$dbname} && echo db {$dbname} created", %(
+    description => "create test database - {$dbname}",
+    user => $user
+  );
+}
 
-bash "cd {$directory} && zef test .", %(
+bash "cd {$directory} && zef test . --verbose", %(
   description => "zef test",
   user => $user,
 );
