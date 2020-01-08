@@ -6,4 +6,3 @@ cat /tmp/pg-user-password.sql
 
 su - postgres -l -c "psql -f  /tmp/pg-user-password.sql"
 
-echo "*:*:*:$user:$password" > "/home/$user/.pgpass"

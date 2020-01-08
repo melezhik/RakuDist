@@ -82,19 +82,13 @@ task-run "files/tasks/set-pg-user-password/", %(
   password => "123"
 );
 
-bash "dropdb {$user}; createdb {$user}", %(
+bash "dropdb {$user}; createdb {$user} && echo db {$user} created", %(
   description => "create test database - {$user}",
-  user => $user
-);
-
-bash "dropdb {$user}_test_db; createdb {$user}_test_db", %(
-  description => "create test database - {$user}_test_db",
   user => $user
 );
 
 bash "cd {$directory} && zef test .", %(
   description => "zef test",
   user => $user,
-  envvars => %( RED_DATABASE => "{$user}_test_db")
 );
 
