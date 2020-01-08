@@ -144,6 +144,7 @@ Reports available in `reports/` directory
 For example:
 
 * [red debian](https://github.com/melezhik/RakuDist/blob/master/reports/red-debian.txt)
+* [red debian with Postgresql](https://github.com/melezhik/RakuDist/blob/master/reports/red-with-pg-debian.txt)
 * [cro alpine](https://github.com/melezhik/RakuDist/blob/master/reports/cro-apline.txt)
 
 # Adding new modules
