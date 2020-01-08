@@ -1,4 +1,4 @@
-[scheck@sp6 red-with-pg]$ sparrowdo --no_sudo --docker=debian-rakudist --repo=http://repo.westus.cloudapp.azure.com
+$ sparrowdo --no_sudo --docker=debian-rakudist --repo=http://repo.westus.cloudapp.azure.com
 20:31:43 01/07/2020 [repository] index updated from http://repo.westus.cloudapp.azure.com/api/v1/index
 20:31:48 01/07/2020 [create user red_with_pg] Don't change user home as managehome set to 'no' OR homedir not set
 20:31:48 01/07/2020 [create user red_with_pg] user red_with_pg - nothing changed
