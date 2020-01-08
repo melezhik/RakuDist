@@ -74,7 +74,7 @@ file "/home/$user/.pgpass", %(
   owner => $user,
   group => $user ,
   mode => '0600',
-  content => '*:*:*:$user:123'
+  content => "*:*:*:$user:123"
 );
 
 task-run "files/tasks/set-pg-user-password/", %(
