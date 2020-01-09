@@ -23,8 +23,6 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
 
 bash "cd {$directory} && ls -l";
 
-zef "Test::META", %( notest => True );
-
 if os() eq 'alpine' {
 
   # this is needed for alpine rakudo installation
@@ -46,8 +44,8 @@ package-install "gnuplot"; # hopefully the package name is the same for all Linu
 zef $directory, %( 
   force => False,
   depsonly => True, 
-  notest => True, 
-  user => $user 
+  user => $user,
+  description => "Install module dependencies"
 );
 
 bash "cd {$directory} && zef test .", %(

@@ -23,8 +23,6 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
 
 bash "cd {$directory} && ls -l";
 
-zef "Test::META";
-
 if os() eq 'alpine' {
 
   # this is needed for alpine rakudo installation
@@ -40,17 +38,12 @@ if os() eq 'alpine' {
 
 }
 
-#package-install %(
-#  apline => "make gcc libc-dev openssl-dev",
-#  debian => "libssl-dev"
-#);
-
 
 zef $directory, %( 
   force => False,
   depsonly => True, 
-  notest => True, 
-  user => $user 
+  user => $user,
+  description => "Install module dependencies" 
 );
 
 bash "cd {$directory} && zef test . --verbose", %(

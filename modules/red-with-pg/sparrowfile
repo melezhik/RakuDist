@@ -24,8 +24,6 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
 
 bash "cd {$directory} && ls -l";
 
-zef "Test::META";
-
 if os() eq 'alpine' {
 
   # this is needed for alpine rakudo installation
@@ -68,8 +66,8 @@ my $dbnum = %state<dbnum>;
 zef $directory, %( 
   force => False,
   depsonly => True, 
-  notest => True, 
-  user => $user 
+  user => $user,
+  description => "Install module dependencies"
 );
 
 file "/home/$user/.pgpass", %(
