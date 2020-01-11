@@ -39,7 +39,17 @@ if os() eq 'alpine' {
 }
 
 
-package-install "gnuplot"; # hopefully the package name is the same for all Linux distros
+#package-install "gnuplot"; # hopefully the package name is the same for all Linux distros
+
+bash "perl6 --version", %(
+  description => "perl6 version",
+  user => $user
+);
+
+bash "zef --version", %(
+  description => "zef version",
+  user => $user
+);
 
 zef $directory, %( 
   force => False,
