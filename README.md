@@ -21,7 +21,7 @@ This allow to invoke tests both for:
 Examples:
 
 ```
-POST rakudist/api/Chart::Gnuplot # default test scenario, module Chart::Gnuplot`
+POST rakudist/api/Chart::Gnuplot # default test scenario, module Chart::Gnuplot
 POST rakudist/api/red-with-pg` # custom test scenario, modules/rest-with-pg 
 ```
 
