@@ -8,7 +8,7 @@ Warning: it's not implimented yet
 
 `curl -d '' http://repo.westus.cloudapp.azure.com/rakudist/api/$module_name`
 
-where `module_name` is one of the following:
+where `module_name` is a one of the following:
 
 * a name of a Raku module 
 * a name of a folder in `modules/` directory 
