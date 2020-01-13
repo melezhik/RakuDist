@@ -24,7 +24,7 @@ Examples:
 * POST `rakudist/api/red-with-pg` # custom test scenario, modules/rest-with-pg 
 
 
-# Runs tests manually, lowlevel 
+# Runs tests manually
 
 Install Sparrowdo
 
