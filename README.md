@@ -2,10 +2,27 @@
 
 Test Raku modules against different OS, Rakudo versions
 
-# Automatic tests
+# Run test via API
 
-I am working on tests get run automatically and reports get published to a public domain,
-so far module authors could run tests manually.
+Warning: it's not implimented yet
+
+`curl -d '' http://repo.westus.cloudapp.azure.com/rakudist/api/$module_name`
+
+where `module_name` is one of the following:
+
+* name of a folder in `modules/` directory 
+* name of Raku modules 
+
+This allow to invoke tests both for:
+
+* Raku modules ( default test scenarios )
+* Raku modules like projects ( custom test scenarios in `modules` directory )
+
+Examples:
+
+* POST `rakudist/api/red-with-pg` # custom test scenario, modules/rest-with-pg 
+* POST `rakudist/api/Chart::Gnuplot # default test scenario, module Chart::Gnuplot`
+
 
 # Runs tests manually
 
