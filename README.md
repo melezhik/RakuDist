@@ -10,21 +10,21 @@ Warning: it's not implimented yet
 
 where `module_name` is one of the following:
 
-* name of a folder in `modules/` directory 
-* name of Raku modules 
+* a name of a Raku module 
+* a name of a folder in `modules/` directory 
 
 This allow to invoke tests both for:
 
 * Raku modules ( default test scenarios )
-* Raku modules like projects ( custom test scenarios in `modules` directory )
+* Folder in `modules/` directory ( custom test scenarios  )
 
 Examples:
 
-* POST `rakudist/api/red-with-pg` # custom test scenario, modules/rest-with-pg 
 * POST `rakudist/api/Chart::Gnuplot # default test scenario, module Chart::Gnuplot`
+* POST `rakudist/api/red-with-pg` # custom test scenario, modules/rest-with-pg 
 
 
-# Runs tests manually
+# Runs tests manually, lowlevel 
 
 Install Sparrowdo
 
