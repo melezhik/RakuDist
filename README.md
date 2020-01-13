@@ -2,7 +2,7 @@
 
 Test Raku modules against different OS, Rakudo versions
 
-# Run test via API
+# Run tests via API
 
 Warning: it's not implimented yet
 
