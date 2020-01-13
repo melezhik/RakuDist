@@ -1,4 +1,4 @@
-regexp: ':dbname<red' (\d+) '>'
+regexp: 'host=localhost dbname=red'
 
 generator: <<CODE
 !perl6

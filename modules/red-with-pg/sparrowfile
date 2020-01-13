@@ -65,9 +65,17 @@ my $dbnum = %state<dbnum>;
 
 zef $directory, %( 
   force => False,
-  depsonly => True, 
+  depsonly => True,
+  notest => True, 
   user => $user,
   description => "Install module dependencies"
+);
+
+zef $directory, %( 
+  force => False,
+  depsonly => True, 
+  user => $user,
+  description => "Install module dependencies (testdeps)"
 );
 
 file "/home/$user/.pgpass", %(
