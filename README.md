@@ -23,7 +23,7 @@ Examples:
 ```
 POST `rakudist/api/Chart::Gnuplot # default test scenario, module Chart::Gnuplot`
 POST `rakudist/api/red-with-pg` # custom test scenario, modules/rest-with-pg 
-``
+```
 
 # Runs tests manually
 
