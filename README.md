@@ -4,14 +4,22 @@ Test Raku modules against different OS, Rakudo versions
 
 # Run tests via API
 
-Warning: it's not implimented yet
+Warning: API server has limited capacity, the throttling is enabled.
 
-`curl -d '' http://repo.westus.cloudapp.azure.com/rakudist/api/$module_name`
+`curl -d  os=$os http://repo.westus.cloudapp.azure.com/rakudist/api/run/$module_name`
 
-where `module_name` is a one of the following:
+post parameters:
+
+- `$module_name` 
+
+Is a one of the following:
 
 * a name of a Raku module 
 * a name of a folder in `modules/` directory 
+
+- `os` 
+
+Os name, is a one of the following `debian|alpine`
 
 This allow to invoke tests both for:
 
@@ -21,8 +29,8 @@ This allow to invoke tests both for:
 Examples:
 
 ```
-POST rakudist/api/Chart::Gnuplot # default test scenario, module Chart::Gnuplot
-POST rakudist/api/red-with-pg` # custom test scenario, modules/rest-with-pg 
+curl http://repo.westus.cloudapp.azure.com/rakudist/api/run/Date::Names -d os=debian # run default test for Date::Names module
+curl http://repo.westus.cloudapp.azure.com/rakudist/api/run/red -d os=debian # run custom test for modules/red 
 ```
 
 # Runs tests manually
@@ -95,13 +103,7 @@ Run sparrowdo
 
 # Available reports
 
-Reports available in `reports/` directory
-
-For example:
-
-* [red debian](https://github.com/melezhik/RakuDist/blob/master/reports/red-debian.txt)
-* [red debian with Postgresql](https://github.com/melezhik/RakuDist/blob/master/reports/red-with-pg-debian.txt)
-* [cro alpine](https://github.com/melezhik/RakuDist/blob/master/reports/cro-apline.txt)
+Follow this link - http://repo.westus.cloudapp.azure.com/rakudist/reports/
 
 # Adding new modules
 
