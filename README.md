@@ -57,6 +57,16 @@ Run sparrowdo
 
 `sparrowdo --bootstrap --no_sudo --docker=$container_name --repo=http://repo.westus.cloudapp.azure.com`
 
+# Available reports
+
+Follow this link - http://repo.westus.cloudapp.azure.com/rakudist/reports/
+
+# Adding new modules
+
+* Create a new folder in `modules/` directory
+* Write high-level scenario preparing configuration/environment for your module
+* See `modules/red` as an example
+
 # Example report
 
 ```
@@ -100,17 +110,6 @@ Run sparrowdo
 16:50:29 01/09/2020 [bash: zef test] [Kind] Result: PASS
 16:50:29 01/09/2020 [bash: zef test] ===> Testing [OK] for Kind:ver<0.1.0>
 ```
-
-# Available reports
-
-Follow this link - http://repo.westus.cloudapp.azure.com/rakudist/reports/
-
-# Adding new modules
-
-* Create a new folder in `modules/` directory
-* Write high-level scenario preparing configuration/environment for your module
-* See `modules/red` as an example
-
 
 # See also
 
