@@ -4,7 +4,7 @@ my $module = "Font::FreeType";
 
 
 package-install %(
-  apline => "freetype-dev",
+  apline => "freetype-dev make",
   debian => "libfreetype-dev"
 );
 
