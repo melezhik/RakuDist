@@ -39,7 +39,7 @@ if os() eq 'alpine' {
 }
 
 package-install %(
-  apline => "make gcc libc-dev openssl-dev",
+  alpine => "make gcc libc-dev openssl-dev",
   debian => "libssl-dev"
 );
 

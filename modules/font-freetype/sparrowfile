@@ -4,10 +4,11 @@ my $module = "Font::FreeType";
 
 
 package-install %(
-  apline => "freetype-dev make",
+  alpine => ('freetype-dev','make', 'gcc'),
   debian => "libfreetype-dev"
 );
 
+bash "make --version";
 
 user $user;
 
