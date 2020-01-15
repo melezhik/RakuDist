@@ -1,0 +1,22 @@
+directory "/home/scheck/projects/RakuDistAPI", %(
+  owner => "scheck",
+);
+
+bash "cp /usr/local/bin/carton /bin/";
+
+git-scm 'https://github.com/melezhik/RakuDist.git', %( 
+  to => '/home/scheck/projects/RakuDistAPI', 
+  user => "scheck", 
+  debug => False ,
+  branch => "master"
+);
+
+systemd-service "rkd-api", %(
+  user => "scheck",
+  workdir => "/home/scheck/projects/RakuDistAPI",
+  command => "/bin/bash --login -c 'cd /home/scheck/projects/RakuDistAPI && ./app.pl daemon --listen http://127.0.0.1:4001'"
+);
+
+service-enable "rkd-api";
+service-restart "rkd-api";
+
