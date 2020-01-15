@@ -4,7 +4,7 @@ Test Raku modules against different OS, Rakudo versions
 
 # Run tests via API
 
-Warning: API server has limited capacity, the throttling is enabled.
+Warning: API server has limited capacity, throttling is enabled.
 
 `curl -d  os=$os http://repo.westus.cloudapp.azure.com/rakudist/api/run/$module_name`
 
@@ -17,14 +17,14 @@ Is a one of the following:
 * a name of a Raku module 
 * a name of a folder in `modules/` directory 
 
-- `os` 
+- `$os` 
 
 Os name, is a one of the following `debian|alpine`
 
 This allow to invoke tests both for:
 
-* Raku modules ( default test scenarios )
-* Folder in `modules/` directory ( custom test scenarios  )
+* Raku modules ( [default](https://github.com/melezhik/RakuDist/tree/master/modules/default) test scenario )
+* Folder in `modules/` directory ( custom test scenario  )
 
 Examples:
 
@@ -65,7 +65,7 @@ Follow this link - http://repo.westus.cloudapp.azure.com/rakudist/reports/
 
 * Create a new folder in `modules/` directory
 * Write high-level scenario preparing configuration/environment for your module
-* See `modules/red` as an example
+* Check `modules/` as examples
 
 # Example report
 
