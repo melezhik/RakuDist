@@ -1,0 +1,48 @@
+my $user = config()<user>; 
+
+my $module = "Font::FreeType";
+
+
+package-install %(
+  apline => "freetype",
+  debian => "freetype"
+);
+
+
+user $user;
+
+bash "rm -rf /home/$user/.perl6", %(
+  description => "remove ~/.perl6 for user $user",
+  user => $user
+);
+
+
+if os() eq 'alpine' {
+
+  # this is needed for alpine rakudo installation
+  unless "/bin/zef".IO ~~ :e {
+    copy "/opt/rakudo-pkg/share/perl6/core/bin/zef", "/bin/zef"
+  }
+
+  # this is needed for alpine rakudo installation
+  unless "/bin/perl6".IO ~~ :e {
+    copy "/opt/rakudo-pkg/bin/perl6", "/bin/perl6"
+  }
+
+
+}
+
+zef $module, %(
+  force => False,
+  depsonly => True,
+  notest => True,
+  user => $user,
+  description => "Install $module dependencies"
+);
+
+zef $module, %(
+  force => False,
+  user => $user,
+  description => "Install $module"
+);
+
