@@ -5,7 +5,7 @@ my $module = "Font::FreeType";
 
 package-install %(
   alpine => ('freetype-dev','make', 'gcc', 'libc-dev'),
-  debian => "libfreetype-dev"
+  debian => "libfreetype6-dev"
 );
 
 bash "make --version";
