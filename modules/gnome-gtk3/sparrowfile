@@ -38,7 +38,7 @@ if os() eq 'alpine' {
 
 }
 
-package-install "libgtk-3-dev"; # probably will only works for debian so far
+package-install "libgtk-3-dev x11-xserver-utils"; # probably will only works for debian so far
 
 zef $directory, %( 
   force => False,
@@ -55,8 +55,9 @@ zef $directory, %(
   description => "Install test-depends dependencies"
 );
 
-bash "cd {$directory} && zef test .", %(
+bash "cd {$directory} && xhost + && zef test .", %(
   description => "zef test",
-  user => $user
+  user => $user,
+  envvars => %( DISPLAY => ':1' )
 );
 
