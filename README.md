@@ -28,10 +28,19 @@ This allow to invoke tests both for:
 
 Examples:
 
-```
-curl http://repo.westus.cloudapp.azure.com/rakudist/api/run/Date::Names -d os=debian # run default test for Date::Names module
-curl http://repo.westus.cloudapp.azure.com/rakudist/api/run/red -d os=debian # run custom test for modules/red 
-```
+
+* Run default test for `Date::Names` module
+
+`curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Date::Names`
+
+* Run custom test for `modules/red` 
+
+`curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/red `
+
+* Run default test for github project `edumentab/p6-app-moarvm-debug`
+
+`curl -d os=debian -d project=edumentab/p6-app-moarvm-debug http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github`
+
 
 # Runs tests manually
 
