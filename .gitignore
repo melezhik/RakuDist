@@ -1,3 +1,4 @@
 .cache
 .sparrowdo
 modules/default/conf
+modules/default-github/conf
