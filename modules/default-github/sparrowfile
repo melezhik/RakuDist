@@ -8,6 +8,8 @@ my $project = config()<project>;
 
 user $user;
 
+directory-delete $directory;
+
 directory $directory, %( 
   owner => $user,
   group => $user
