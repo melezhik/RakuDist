@@ -2,3 +2,4 @@
 .sparrowdo
 modules/default/conf
 modules/default-github/conf
+modules/default-cpan-with-whateverable/conf
