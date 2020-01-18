@@ -1,0 +1,23 @@
+my $rkd-v = config()<rakudo-version>;
+
+package-install ('wget', 'zstd');
+
+#directory-delete "/data/whateverable/";
+
+directory "/data/whateverable/";
+
+unless "/data/whateverable/{$rkd-v}".IO ~~ :f {
+
+  bash "cd /data/whateverable/ && wget -q https://whateverable.6lang.org/{$rkd-v}", %(
+    description => "download https://whateverable.6lang.org/{$rkd-v}"
+  )
+
+}
+
+bash "cd /data/whateverable/ && zstd -dqc -- $rkd-v | tar -x --absolute-names", %(
+    description => "unpack {$rkd-v}"
+);
+
+bash "/tmp/whateverable/rakudo-moar/{$rkd-v}/bin/perl6 --version", %(
+    description => "rakudo version"
+);
