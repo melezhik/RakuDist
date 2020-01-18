@@ -1,0 +1,25 @@
+my $user = config()<user>;
+my $module = config()<module>;
+my $rakudo-version = config()<rakudo-version>;
+
+user $user;
+
+bash "rm -rf /home/$user/.perl6", %(
+  description => "remove ~/.perl6 for user $user",
+  user => $user
+);
+
+
+my $path-to-raku = "/tmp/whateverable/rakudo-moar/$rakudo-version";
+my $path-to-zef = "/data/whateverable/zef-git/";
+
+bash "$path-to-raku/bin/perl6 -I $path-to-zef $path-to-zef/bin/zef install $module", %(
+  description => "Install $module",
+  envvars => %(
+    "PATH" => "{%*ENV<PATH>}:$path-to-raku/bin/"
+  ),
+  user => $user
+);
+
+
+
