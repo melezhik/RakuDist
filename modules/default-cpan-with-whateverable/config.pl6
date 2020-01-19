@@ -1,5 +1,5 @@
 %(
-  rakudo-version => "add2ec0d491218e59e6c7a517e37458e1a6c3daf",
-  module => "Kind",
+  rakudo-version => "40b13322c503808235d9fec782d3767eb8edb899",
+  module => "ADT",
   user => "whateverable-test"
 )

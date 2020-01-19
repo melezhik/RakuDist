@@ -13,11 +13,16 @@ bash "rm -rf /home/$user/.perl6", %(
 my $path-to-raku = "/tmp/whateverable/rakudo-moar/$rakudo-version";
 my $path-to-zef = "/data/whateverable/zef-git/";
 
+bash "$path-to-raku/bin/perl6 --version", %(
+  description => "rakudo version",
+);
+
 bash "$path-to-raku/bin/perl6 -I $path-to-zef $path-to-zef/bin/zef install $module", %(
   description => "Install $module",
   envvars => %(
     "PATH" => "{%*ENV<PATH>}:$path-to-raku/bin/"
   ),
+  debug => False,
   user => $user
 );
 
