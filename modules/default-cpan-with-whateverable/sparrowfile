@@ -29,6 +29,8 @@ bash "cd /data/whateverable/ && zstd -dqc -- $rakudo-version | tar -x --absolute
 );
 
 
+user $user;
+
 directory $path-to-zef, %(
   owner => $user
 );
@@ -43,12 +45,19 @@ git-scm "https://github.com/ugexe/zef.git", %(
 
 say "Start Raku module test, module {$module}";
 
-user $user;
 
-bash "rm -rf /home/$user/.perl6", %(
-  description => "remove ~/.perl6 for user $user",
-  user => $user
+directory-delete "/home/$user/.perl6";
+
+directory "/home/$user/.perl6", %(
+  owner => $user
 );
+
+directory-delete "/home/$user/.zef";
+
+directory "/home/$user/.zef", %(
+  owner => $user
+);
+
 
 bash "$path-to-raku/bin/perl6 --version", %(
   description => "rakudo version",
