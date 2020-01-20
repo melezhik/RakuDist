@@ -49,13 +49,15 @@ say "Start Raku module test, module {$module}";
 directory-delete "/home/$user/.perl6";
 
 directory "/home/$user/.perl6", %(
-  owner => $user
+  owner => $user,
+  group => $user
 );
 
 directory-delete "/home/$user/.zef";
 
 directory "/home/$user/.zef", %(
-  owner => $user
+  owner => $user,
+  group => $user
 );
 
 
