@@ -42,15 +42,21 @@ if os() eq 'alpine' {
 
 }
 
-zef $directory, %( 
-  force => False,
-  depsonly => True, 
+bash "cd {$directory} && zef --deps-only --/test install . --verbose", %(
+  description => "Install $project dependencies",
   user => $user,
-  description => "Install $project dependencies"
+  debug => True
+);
+
+bash "cd {$directory} && zef --deps-only install . --verbose", %(
+  description => "Install $project test-depends dependencies",
+  user => $user,
+  debug => True
 );
 
 bash "cd {$directory} && zef test . --verbose", %(
   description => "zef test",
-  user => $user
+  user => $user,
+  debug => True
 );
 
