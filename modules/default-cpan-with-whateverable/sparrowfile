@@ -46,6 +46,13 @@ git-scm "https://github.com/ugexe/zef.git", %(
 say "Start Raku module test, module {$module}";
 
 
+directory-delete "/home/$user/.perl6";
+
+directory "/home/$user/.perl6", %(
+  owner => $user,
+  group => $user
+);
+
 directory-delete "/home/$user/.raku";
 
 directory "/home/$user/.raku", %(
