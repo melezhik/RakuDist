@@ -84,11 +84,11 @@ For example:
 
 This is mostly useful for demonstration purposes and or when testing API it self.
 
-One can run tests for projects located in `modules/(https://github.com/melezhik/RakuDist/tree/master/modules/` directory:
+One can run tests for projects located in [modules](https://github.com/melezhik/RakuDist/tree/master/modules/) directory:
 
 POST  /rakudist/api/run/$project
 
-Where $project is a sub-folder within [modules[(https://github.com/melezhik/RakuDist/tree/master/modules/) directory
+Where $project is a sub-folder within [modules](https://github.com/melezhik/RakuDist/tree/master/modules/) directory
 
 For example, to run test for [modules/red-with-pg](https://github.com/melezhik/RakuDist/tree/master/modules/red-with-pg)  project:
 
