@@ -24,7 +24,7 @@ Required. Operation system (`alpine|debian`)
  
 Optional. A name of rakudo version commit, should be full SHA
 
-Caveats. Rakudo version option is available only for CPAN modules
+Caveats. Rakudo version option is available only for CPAN modules and on debian os.
 
 * sync_mode
 
