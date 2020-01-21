@@ -10,7 +10,7 @@ Warning: an API server has limited capacity, throttling is enabled.
 
 POST /rakudist/api/run/$module_name
 
-Post parameters:
+### Post parameters
 
 - `module_name` 
 
@@ -24,12 +24,11 @@ Required. Operation system (`alpine|debian`)
  
 Optional. A name of rakudo version commit, should be full SHA
 
-Examples:
+* sync_mode
 
+Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives result immediately )
 
-- sync_mode
-
-Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( give result immediately )
+### Examples:
 
 * Run test for `Date::Names` module
 
@@ -45,15 +44,27 @@ Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( give r
 `curl -d sync_mode=on -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind -D - > report.txt`
 
 
-Run tests in synchronous mode.
+### Run tests in synchronous mode.
 
-In synchronous mode tests are executed immediately without being placed in a queue. Please pay attention that RakuDist API server has limited capability,
-so don't expect a huge performance in synchronous mode.
+_By default_ tests run in asynchronous mode, so requests placed in a queue and executed later. One can track status of a test by a link returned by API:
+
+
+```
+curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind
+0 build(s) running
+Run default test for Kind on debian
+test launched, it takes a while
+see report at http://repo.westus.cloudapp.azure.com/rakudist/reports/Kind/debian/1579635731.txt
+```
+
+In synchronous mode tests are executed immediately without being placed in a queue. 
+
+Please pay attention that RakuDist API server has limited capability, so don't expect a huge performance in synchronous mode and try not to overload it (-; !
 
 
 ## Testing GitHub projects
 
-To test modules with source code taken from GitHub project use following notation:
+To test modules with a source code taken from GitHub project use a following notation:
 
 POST /rakudist/api/run/:github
 
@@ -77,16 +88,21 @@ One can run tests for projects located in `modules/(https://github.com/melezhik/
 
 POST  /rakudist/api/run/$project
 
-Where $project is sub-folder with `modules/(https://github.com/melezhik/RakuDist/tree/master/modules/` directory
+Where $project is a sub-folder within [modules[(https://github.com/melezhik/RakuDist/tree/master/modules/) directory
 
 For example, to run test for [modules/red-with-pg](https://github.com/melezhik/RakuDist/tree/master/modules/red-with-pg)  project:
 
 `curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/red-with-pg`
 
-
 # Available reports
 
-Follow this link - http://repo.westus.cloudapp.azure.com/rakudist/reports/ to see examples of test reports
+Follow this link http://repo.westus.cloudapp.azure.com/rakudist/reports/ to see examples of test reports
+
+# RakuDistAPI status
+
+Status page shows docker containers statues and current queue
+
+http://repo.westus.cloudapp.azure.com/rakudist/api/status
 
 # Low level API
 
