@@ -24,6 +24,8 @@ Required. Operation system (`alpine|debian`)
  
 Optional. A name of rakudo version commit, should be full SHA
 
+Caveats. Rakudo version option is available only for CPAN modules
+
 * sync_mode
 
 Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives result immediately )
