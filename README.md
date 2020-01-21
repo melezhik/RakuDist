@@ -137,10 +137,11 @@ Test scenarios are written on [Sparrow6 DSL](https://github.com/melezhik/Sparrow
 package-install "sqlite-libs";
 
 my $user = "red";
+my $module = "Red";
 
 user $user;
 
-zef "Red", %(
+zef $module, %(
   force => False,
   depsonly => True,
   notest => True,
