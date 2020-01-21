@@ -76,11 +76,10 @@ With project post parameter:
 
 For example:
 
-`curl -d project=melezhik/Tomty -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github`
+`curl -d project=melezhik/Tomty -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github`
 
 
 ## Testing projects in `modules/` folder
-
 
 This is mostly useful for demonstration purposes and or when testing API it self.
 
