@@ -39,11 +39,6 @@ Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives 
 `curl -d os=debian -d rakudo_version=40b13322c503808235d9fec782d3767eb8edb899 -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind`
 
 
-* Run test for `Tomty`, synchronous mode:
-
-`curl -d sync_mode=on -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind -D - > report.txt`
-
-
 ### Run tests in synchronous mode.
 
 _By default_ tests run in asynchronous mode, so requests placed in a queue and executed later. One can track status of a test by a link returned by API:
@@ -58,6 +53,15 @@ see report at http://repo.westus.cloudapp.azure.com/rakudist/reports/Kind/debian
 ```
 
 In synchronous mode tests are executed immediately without being placed in a queue. 
+
+Test report comes with body and test exicode (`0` for success ) is delivered through `X-RakuDist-ExitCode` header.
+
+Example.
+
+Run synchronous run test for `Tomty` module:
+
+`curl -d sync_mode=on -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind -D -
+
 
 Please pay attention that RakuDist API server has limited capability, so don't expect a huge performance in synchronous mode and try not to overload it (-; !
 
