@@ -36,8 +36,7 @@ Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives 
 
 * Run test for `Kind` module, rakudo version `40b13322c503808235d9fec782d3767eb8edb899`
 
-`curl -d os=debian -d rakudo_version=40b13322c503808235d9fec782d3767eb8edb899 -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind`
-
+`curl -d os=debian -d rakudo_version=40b13322c503808235d9fec782d3767eb8edb899 http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind`
 
 ### Run tests in synchronous mode.
 
@@ -60,11 +59,13 @@ Example.
 
 Run synchronous run test for `Tomty` module:
 
-`curl -d sync_mode=on -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind -D -
+`curl -d sync_mode=on -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind -D -`
 
+Caveats:
 
-Please pay attention that RakuDist API server has limited capability, so don't expect a huge performance in synchronous mode and try not to overload it (-; !
+* Sync mode is available only for CPAN modules
 
+* RakuDist API server has limited capability, so don't expect a huge performance in synchronous mode and try not to overload it (-; !
 
 ## Testing GitHub projects
 
