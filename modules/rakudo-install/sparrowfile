@@ -23,3 +23,22 @@ bash "zef --version", %(
   debug => True
 );
 
+
+bash "zef install --/test Kind --verbose", %( 
+  description => "install Kind",
+  user => "test123",
+  envvars => %( PATH => "{%*ENV<PATH>}:{$path}" ),
+);
+
+
+bash "perl6 -MKind -e 'say 10000'", %( 
+  description => "use Kind",
+  user => "test123",
+  envvars => %( PATH => "{%*ENV<PATH>}:{$path}" ),
+);
+
+
+bash "perl6 -MKind -e 'say 10000'", %( 
+  description => "use Kind with default Rakudo should fail",
+  user => "test123"
+);
