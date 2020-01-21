@@ -4,121 +4,141 @@ Test Raku modules against different OS, Rakudo versions
 
 # Run tests via API
 
-Warning: API server has limited capacity, throttling is enabled.
+Warning: an API server has limited capacity, throttling is enabled.
 
-`curl -d  os=$os http://repo.westus.cloudapp.azure.com/rakudist/api/run/$module_name`
+## Testing CPAN modules
 
-post parameters:
+POST /rakudist/api/run/$module_name
 
-- `$module_name` 
+Post parameters:
 
-Is a one of the following:
+- `module_name` 
 
-* a name of a Raku module 
-* a name of a folder in `modules/` directory 
+Required. Raku module name
 
-- `$os` 
+- `os` 
 
-Os name, is a one of the following `debian|alpine`
+Required. Operation system (`alpine|debian`)
 
-This allow to invoke tests both for:
-
-* Raku modules ( [default](https://github.com/melezhik/RakuDist/tree/master/modules/default) test scenario )
-* Folder in `modules/` directory ( custom test scenario  )
+- `rakudo-version`
+ 
+Optional. A name of rakudo version commit, should be full SHA
 
 Examples:
 
 
-* Run default test for `Date::Names` module
+- sync_mode
+
+Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( give result immediately )
+
+* Run test for `Date::Names` module
 
 `curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Date::Names`
 
-* Run custom test for `modules/red` 
+* Run test for `Kind` module, rakudo version `40b13322c503808235d9fec782d3767eb8edb899`
 
-`curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/red `
-
-* Run default test for github project `edumentab/p6-app-moarvm-debug`
-
-`curl -d os=debian -d project=edumentab/p6-app-moarvm-debug http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github`
+`curl -d os=debian -d rakudo_version=40b13322c503808235d9fec782d3767eb8edb899 -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind`
 
 
-# Runs tests manually
+* Run test for `Tomty`, synchronous mode:
 
-Install Sparrowdo
+`curl -d sync_mode=on -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind -D - > report.txt`
 
-`zef install --/test Sparrowdo`
 
-Pull docker images
+Run tests in synchronous mode.
 
-`docker pull debian`
+In synchronous mode tests are executed immediately without being placed in a queue. Please pay attention that RakuDist API server has limited capability,
+so don't expect a huge performance in synchronous mode.
 
-Run container
 
-`container_name='debian-rakudist' && docker run -d -t --rm --name $container_name debian`
+## Testing GitHub projects
 
-Run tests
+To test modules with source code taken from GitHub project use following notation:
 
-Cd to module dir
+POST /rakudist/api/run/:github
 
-`cd modules/red`
+With project post parameter:
 
-Run sparrowdo
+- `project`
 
-`sparrowdo --bootstrap --no_sudo --docker=$container_name --repo=http://repo.westus.cloudapp.azure.com`
+`author/guthub-project`
+
+For example:
+
+`curl -d project=melezhik/Tomty -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github`
+
+
+## Testing projects in `modules/` folder
+
+
+This is mostly useful for demonstration purposes and or when testing API it self.
+
+One can run tests for projects located in `modules/(https://github.com/melezhik/RakuDist/tree/master/modules/` directory:
+
+POST  /rakudist/api/run/$project
+
+Where $project is sub-folder with `modules/(https://github.com/melezhik/RakuDist/tree/master/modules/` directory
+
+For example, to run test for [modules/red-with-pg](https://github.com/melezhik/RakuDist/tree/master/modules/red-with-pg)  project:
+
+`curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/red-with-pg`
+
 
 # Available reports
 
-Follow this link - http://repo.westus.cloudapp.azure.com/rakudist/reports/
+Follow this link - http://repo.westus.cloudapp.azure.com/rakudist/reports/ to see examples of test reports
 
-# Adding new modules
+# Low level API
 
-* Create a new folder in `modules/` directory
-* Write high-level scenario preparing configuration/environment for your module
-* Check `modules/` as examples
+If one need to run custom scenarios and run them on premise infrastructure, use a following work-flow
+to run custom test scenarios on docker containers:
 
-# Example report
+## Install Sparrowdo
+
+`zef install --/test Sparrowdo`
+
+## Pull docker images
+
+`docker pull debian`
+
+## Run container
+
+`docker run -d -t --rm --name debian-rakudist debian`
+
+## Write test
+
+Test scenarios are written on [Sparrow6 DSL](https://github.com/melezhik/Sparrow6/blob/master/documentation/dsl.md)
+
+`cat sparrowfile`
 
 ```
-[melezhik@localhost kind]$ sparrowdo  --no_sudo --docker=debian-rakudist --repo=http://repo.westus.cloudapp.azure.com
-16:50:02 01/09/2020 [repository] index updated from http://repo.westus.cloudapp.azure.com/api/v1/index
-16:50:07 01/09/2020 [create user kind] uid=1006(kind) gid=1006(kind) groups=1006(kind)
-16:50:07 01/09/2020 [create user kind] user kind created
-[task check] stdout match <created> True
-16:50:11 01/09/2020 [create directory /data/test/kind] directory path: /data/test/kind
-16:50:11 01/09/2020 [create directory /data/test/kind] directory owner: <kind>
-16:50:11 01/09/2020 [create directory /data/test/kind] directory group: <kind>
-16:50:11 01/09/2020 [create directory /data/test/kind] directory access rights: drwxr-xr-x
-[task check] stdout match <owner: <kind>> True
-[task check] stdout match <group: <kind>> True
-16:50:15 01/09/2020 [bash: git checkout https://github.com/Kaiepi/p6-Kind.git] /data/test/kind
-16:50:15 01/09/2020 [bash: git checkout https://github.com/Kaiepi/p6-Kind.git] stderr: Cloning into '.'...
-16:50:17 01/09/2020 [bash: last commit] commit c08acf1e4a52491a3b09e19e129efc3092cef745
-16:50:17 01/09/2020 [bash: last commit] Author: Ben Davies <kaiepi@outlook.com>
-16:50:17 01/09/2020 [bash: last commit] Date:   Tue Dec 24 16:28:29 2019 -0400
-16:50:17 01/09/2020 [bash: last commit]
-16:50:17 01/09/2020 [bash: last commit]     Release v0.1.0
-16:50:17 01/09/2020 [bash: last commit]
-16:50:17 01/09/2020 [bash: last commit] M       CHANGELOG
-16:50:17 01/09/2020 [bash: last commit] M       META6.json
-16:50:17 01/09/2020 [bash: last commit] M       lib/Kind.pm6
-16:50:19 01/09/2020 [bash: cd /data/test/kind && ls -l] total 32
-16:50:19 01/09/2020 [bash: cd /data/test/kind && ls -l] -rw-r--r--. 1 kind kind  191 Jan  9 16:50 CHANGELOG
-16:50:19 01/09/2020 [bash: cd /data/test/kind && ls -l] -rw-r--r--. 1 kind kind 8902 Jan  9 16:50 LICENSE
-16:50:19 01/09/2020 [bash: cd /data/test/kind && ls -l] -rw-r--r--. 1 kind kind  408 Jan  9 16:50 META6.json
-16:50:19 01/09/2020 [bash: cd /data/test/kind && ls -l] -rw-r--r--. 1 kind kind 3230 Jan  9 16:50 README.md
-16:50:19 01/09/2020 [bash: cd /data/test/kind && ls -l] -rw-r--r--. 1 kind kind 3337 Jan  9 16:50 README.pod6
-16:50:19 01/09/2020 [bash: cd /data/test/kind && ls -l] -rw-r--r--. 1 kind kind  114 Jan  9 16:50 dist.ini
-16:50:20 01/09/2020 [bash: cd /data/test/kind && ls -l] drwxr-xr-x. 2 kind kind   22 Jan  9 16:50 lib
-16:50:20 01/09/2020 [bash: cd /data/test/kind && ls -l] drwxr-xr-x. 2 kind kind   23 Jan  9 16:50 t
-16:50:24 01/09/2020 [bash: Install module dependencies] stderr: All candidates are currently installed
-16:50:24 01/09/2020 [bash: Install module dependencies] <empty stdout>
-16:50:27 01/09/2020 [bash: zef test] ===> Testing: Kind:ver<0.1.0>
-16:50:29 01/09/2020 [bash: zef test] [Kind] t/01-kind.t .. ok
-16:50:29 01/09/2020 [bash: zef test] [Kind] All tests successful.
-16:50:29 01/09/2020 [bash: zef test] [Kind] Files=1, Tests=3,  2 wallclock secs ( 0.02 usr  0.00 sys +  2.68 cusr  0.21 csys =  2.91 CPU)
-16:50:29 01/09/2020 [bash: zef test] [Kind] Result: PASS
-16:50:29 01/09/2020 [bash: zef test] ===> Testing [OK] for Kind:ver<0.1.0>
+package-install "sqlite-libs";
+
+my $user = "red";
+
+user $user;
+
+zef "Red", %(
+  force => False,
+  depsonly => True,
+  notest => True,
+  user => $user,
+  description => "Install $module dependencies"
+);
+
+zef $module, %(
+  force => False,
+  user => $user,
+  description => "Install $module"
+);
+
 ```
+
+See various examples of test scenarios in `modules/` folder.
+
+## Run test
+
+`sparrowdo --bootstrap --no_sudo --docker=debian-rakudist --repo=http://repo.westus.cloudapp.azure.com`
 
 # See also
 
