@@ -25,6 +25,15 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
   description => "last commit"
 );
 
+my $dir = $*CWD;
+
+if "{$directory}/.rakudist/sparrowfile".IO ~~ :f {
+  say "Running custom scenario from {$directory}/.rakudist/sparrowfile ...";
+  chdir "{$directory}/.rakudist/";
+  EVALFILE "sparrowfile";
+  chdir $dir;
+}
+
 bash "cd {$directory} && ls -l";
 
 if os() eq 'alpine' {
