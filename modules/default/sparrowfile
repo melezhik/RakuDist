@@ -26,15 +26,7 @@ if os() eq 'alpine' {
 
 zef $module, %(
   force => False,
-  depsonly => True,
-  notest => True,
   user => $user,
-  description => "Install $module dependencies"
-);
-
-zef $module, %(
-  force => False,
-  user => $user,
-  description => "Install $module"
+  description => "install $module"
 );
 

@@ -16,6 +16,11 @@ directory $directory, %(
 
 );
 
+bash "rm -rf /home/$user/.perl6", %(
+  description => "remove ~/.perl6 for user $user",
+  user => $user
+);
+
 git-scm $scm, %( 
   to => $directory, 
   user => $user,
@@ -51,21 +56,8 @@ if os() eq 'alpine' {
 
 }
 
-bash "cd {$directory} && zef --deps-only --/test install . --verbose", %(
-  description => "Install $project dependencies",
-  user => $user,
-  debug => True
-);
-
-bash "cd {$directory} && zef --deps-only install . --verbose", %(
-  description => "Install $project test-depends dependencies",
-  user => $user,
-  debug => True
-);
-
-bash "cd {$directory} && zef test . --verbose", %(
-  description => "zef test",
-  user => $user,
-  debug => True
+bash "cd {$directory} && zef install .", %(
+  description => "zef install .",
+  user => $user
 );
 
