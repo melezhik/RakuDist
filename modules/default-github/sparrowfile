@@ -58,6 +58,7 @@ if os() eq 'alpine' {
 
 bash "cd {$directory} && zef install .", %(
   description => "zef install .",
-  user => $user
+  user => $user,
+  debug => True
 );
 

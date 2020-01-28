@@ -40,6 +40,7 @@ if "{%state<directory>}/.rakudist/sparrowfile".IO ~~ :f {
 
 bash "cd {%state<directory>} && zef install .", %(
   description => "zef install $module",
-  user => $user
+  user => $user,
+  debug => True
 );
 
