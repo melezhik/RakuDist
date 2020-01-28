@@ -24,9 +24,22 @@ if os() eq 'alpine' {
 
 }
 
-zef $module, %(
-  force => False,
+my %state = task-run 'zef fetch Kind', 'zef-fetch', %(
+  identity => $module,
   user => $user,
-  description => "install $module"
+);
+
+my $dir = $*CWD;
+
+if "{%state<directory>}/.rakudist/sparrowfile".IO ~~ :f {
+  # custom installation logic, for example external libraries
+  chdir "%state<directory>/.rakudist/";
+  EVALFILE "sparrowfile";
+  chdir $dir;
+}
+
+bash "cd {%state<directory>} && zef install .", %(
+  description => "zef install $module",
+  user => $user
 );
 
