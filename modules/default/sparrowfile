@@ -51,6 +51,30 @@ if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {
   }
 }
 
+bash "which perl6", %(
+  description => "which perl6",
+  user => $user,
+  debug => True
+);
+
+bash "which zef", %(
+  description => "which zef",
+  user => $user,
+  debug => True
+);
+
+bash "perl6 --version", %(
+  description => "perl6 version",
+  user => $user,
+  debug => True
+);
+
+bash "zef --version", %(
+  description => "zef version",
+  user => $user,
+  debug => True
+);
+
 bash "cd {%state<directory>} && zef install .", %(
   description => "zef install $module",
   user => $user,
