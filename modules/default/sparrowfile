@@ -32,10 +32,23 @@ my %state = task-run 'zef fetch Kind', 'zef-fetch', %(
 my $dir = $*CWD;
 
 if "{%state<directory>}/.rakudist/sparrowfile".IO ~~ :f {
+  say "execute custom scenario from .rakudist/sparrowfile";
   # custom installation logic, for example external libraries
   chdir "%state<directory>/.rakudist/";
   EVALFILE "sparrowfile";
   chdir $dir;
+}
+
+if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {
+  say "install Raku modules from .rakudist/depends.raku file";
+  # install Raku modules from depends.raku file
+  for "{%state<directory>}/.rakudist/depends.raku".IO.lines -> $line {
+    next unless $line ~~ /\S/;
+    zef $line, %(
+      user => $user,
+      notest => True,
+    );    
+  }
 }
 
 bash "cd {%state<directory>} && zef install .", %(

@@ -33,10 +33,23 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
 my $dir = $*CWD;
 
 if "{$directory}/.rakudist/sparrowfile".IO ~~ :f {
-  say "Running custom scenario from {$directory}/.rakudist/sparrowfile ...";
-  chdir "{$directory}/.rakudist/";
+  say "execute custom scenario from .rakudist/sparrowfile";
+  # custom installation logic, for example external libraries
+  chdir "$directory/.rakudist/";
   EVALFILE "sparrowfile";
   chdir $dir;
+}
+
+if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
+  say "install Raku modules from .rakudist/depends.raku file";
+  # install Raku modules from depends.raku file
+  for "{$directory}/.rakudist/depends.raku".IO.lines -> $line {
+    next unless $line ~~ /\S/;
+    zef $line, %(
+      user => $user,
+      notest => True,
+    );
+  }
 }
 
 bash "cd {$directory} && ls -l";
