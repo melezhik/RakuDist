@@ -1,3 +1,5 @@
+#exit(0);
+
 my $user = config()<user>;
 
 my $directory = "/data/test/{$user}";
@@ -45,9 +47,12 @@ if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
   # install Raku modules from depends.raku file
   for "{$directory}/.rakudist/depends.raku".IO.lines -> $line {
     next unless $line ~~ /\S/;
-    zef $line, %(
+    next if $line ~~ /^^ \s* '#' /;
+    my @params = $line.split(/\s+/);
+    my $module = @params.shift;
+    zef $module, %(
       user => $user,
-      notest => True,
+      notest => @params.Set{'notest'} ?? True !! False
     );
   }
 }

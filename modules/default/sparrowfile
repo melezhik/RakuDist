@@ -43,10 +43,13 @@ if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {
   say "install Raku modules from .rakudist/depends.raku file";
   # install Raku modules from depends.raku file
   for "{%state<directory>}/.rakudist/depends.raku".IO.lines -> $line {
+    next if $line ~~ /^^ \s* '#' /;
+    my @params = $line.split(/\s+/);
+    my $module = @params.shift;
     next unless $line ~~ /\S/;
-    zef $line, %(
+    zef $module, %(
       user => $user,
-      notest => True,
+      notest => @params.Set{'notest'} ?? True !! False
     );    
   }
 }
