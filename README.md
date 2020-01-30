@@ -2,6 +2,16 @@
 
 Test Raku modules against different OS, Rakudo versions
 
+# OS supported
+
+* debian
+* centos
+* alpine
+
+# Rakudo versions supported
+
+Any, see `rakudo-version` parameter in API section
+
 # Run tests via API
 
 Warning: an API server has limited capacity, throttling is enabled.
@@ -18,7 +28,7 @@ Required. Raku module name
 
 - `os` 
 
-Required. Operation system (`alpine|debian`)
+Required. Operation system (`alpine|debian|centos`)
 
 - `rakudo-version`
  
