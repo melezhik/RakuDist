@@ -29,14 +29,18 @@ my %state = task-run 'zef fetch Kind', 'zef-fetch', %(
   user => $user,
 );
 
-my $dir = $*CWD;
+#my $dir = $*CWD;
 
 if "{%state<directory>}/.rakudist/sparrowfile".IO ~~ :f {
   say "execute custom scenario from .rakudist/sparrowfile";
+  bash "rm -rf .rakudist/ && cp -rv {%state<directory>}/.rakudist .", %(
+    description => "copy rakudist scenario",
+    user => $user,
+  );
   # custom installation logic, for example external libraries
-  chdir "%state<directory>/.rakudist/";
-  EVALFILE "sparrowfile";
-  chdir $dir;
+  #chdir "%state<directory>/.rakudist/";
+  EVALFILE ".rakudist/sparrowfile";
+  #chdir $dir;
 }
 
 if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {

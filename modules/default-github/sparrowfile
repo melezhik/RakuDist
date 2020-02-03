@@ -36,6 +36,9 @@ my $dir = $*CWD;
 
 if "{$directory}/.rakudist/sparrowfile".IO ~~ :f {
   say "execute custom scenario from .rakudist/sparrowfile";
+  bash "mkdir -p {$directory}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>}  {$directory}/.rakudist/conf/", %(
+    description => "copy configuartion file",
+  );
   # custom installation logic, for example external libraries
   chdir "$directory/.rakudist/";
   EVALFILE "sparrowfile";
