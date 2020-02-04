@@ -87,3 +87,5 @@ bash "cd {%state<directory>} && zef install .", %(
   debug => True
 );
 
+
+say "RakuDist: OK";
