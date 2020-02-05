@@ -29,7 +29,7 @@ if test "$type" = "github"; then
 
   #echo "Run default test for github project $thing on $os"
 
-  echo "%( user => '$user', project => '$thing', scm => 'https://github.com/$thing' )" > conf/$id.pl6
+  echo "%( user => '$id', project => '$thing', scm => 'https://github.com/$thing' )" > conf/$id.pl6
 
   mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
 
