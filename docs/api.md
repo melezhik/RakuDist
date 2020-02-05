@@ -74,36 +74,6 @@ Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives 
 
 `curl -d os=debian -d rakudo_version=40b13322c503808235d9fec782d3767eb8edb899 http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind`
 
-### Run tests in synchronous mode.
-
-_By default_ tests run in asynchronous mode, so requests placed in a queue and executed later. 
-To track a test status use a token returned by request:
-
-
-```
-token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)
-curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status
-```
-To print out test report:
-
-`curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status`
-
-In synchronous mode tests are executed immediately without being placed in a queue. 
-
-Test report comes with body and test exicode (`0` for success ) is delivered through `X-RakuDist-ExitCode` header.
-
-Example.
-
-Run synchronous run test for `Tomty` module:
-
-`curl -d sync_mode=on -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind -D -`
-
-Caveats:
-
-* Sync mode is available only for CPAN modules
-
-* RakuDist API server has limited capability, so don't expect a huge performance in synchronous mode and try not to overload it (-; !
-
 ## Testing GitHub projects
 
 To test modules with a source code taken from GitHub project use a following notation:
@@ -134,6 +104,33 @@ Where $project is a sub-folder within [modules](https://github.com/melezhik/Raku
 For example, to run test for [modules/red-with-pg](https://github.com/melezhik/RakuDist/tree/master/modules/red-with-pg)  project:
 
 `curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/red-with-pg`
+
+# Run tests in synchronous mode.
+
+_By default_ tests run in asynchronous mode, so requests placed in a queue and executed later. 
+To track a test status use a token returned by request:
+
+```
+token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)
+curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status
+```
+To print out test report:
+
+`curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status`
+
+In synchronous mode tests are executed immediately without being placed in a queue. 
+
+Test report comes with body and test exicode (`0` for success ) is delivered through `X-RakuDist-ExitCode` header.
+
+Example. Run synchronous run test for `Tomty` module:
+
+`curl -d sync_mode=on -d os=debian -d sync_mode=on http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind -D -`
+
+Caveats:
+
+* Sync mode is available only for CPAN modules
+
+* RakuDist API server has limited capability, so don't expect a huge performance in synchronous mode and try not to overload it (-; !
 
 # Available reports
 
