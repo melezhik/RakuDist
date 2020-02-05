@@ -110,16 +110,17 @@ For example, to run test for [modules/red-with-pg](https://github.com/melezhik/R
 
 # Run tests in synchronous mode.
 
-_By default_ tests run in asynchronous mode, so requests placed in a queue and executed later. 
-To track a test status use a token returned by request:
+_By default_ tests run in asynchronous mode, so requests placed in a queue and executed later:
 
-```
-token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)
-curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status
-```
-To print out test report:
+`token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)`
 
-`curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status`
+To track a job status use a token returned by request:
+
+`status =$curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status)`
+
+To print out job report:
+
+`curl -L -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status`
 
 In synchronous mode tests are executed immediately without being placed in a queue. 
 
