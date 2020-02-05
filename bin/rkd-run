@@ -16,6 +16,8 @@ if test $numbuilds -ge 5; then
   exit 2
 fi
 
+user=$(perl6 -e 'my @a = roll "a".."z": 10; say @a.join: ""')
+
 if test "$type" = "github"; then 
 
   cd ~/projects/RakuDist/modules/default-github
@@ -29,7 +31,7 @@ if test "$type" = "github"; then
 
   #echo "Run default test for github project $thing on $os"
 
-  echo "%( user => '$id', project => '$thing', scm => 'https://github.com/$thing' )" > conf/$id.pl6
+  echo "%( user => '$user', project => '$thing', scm => 'https://github.com/$thing' )" > conf/$id.pl6
 
   mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
 
@@ -81,7 +83,7 @@ elif test $rakudo_version = "default"; then # default test for default rakudo ve
 
   #echo "Run default test for $thing on $os"
 
-  echo "%( user => '$id', module => '$thing' )" > conf/$id.pl6
+  echo "%( user => '$user', module => '$thing' )" > conf/$id.pl6
 
   mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
 
@@ -108,7 +110,7 @@ else # default test for certain rakudo version
     exit 2
   fi
 
-  echo "%( user => '$id', module => '$thing', rakudo-version  => '$rakudo_version' )" > conf/$id.pl6
+  echo "%( user => '$user', module => '$thing', rakudo-version  => '$rakudo_version' )" > conf/$id.pl6
 
   if test "$sync_mode" = "on"; then 
     #echo "You can replay this test using RakuDist - https://github.com/melezhik/RakuDist"
