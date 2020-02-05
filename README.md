@@ -26,10 +26,10 @@ POST $token /rakudist/api/job/status
 
 Return - status:
 
-* `running` - job is being executed
-* `success` - test succeeded
-* `fail` - test failed
-* `unknown` - could not get test status
+* `running` - a job is being executed
+* `success` - a job succeeded
+* `fail` - a job failed
+* `unknown` - could not get a job status
 
 Automation example:
 
