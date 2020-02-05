@@ -26,7 +26,7 @@ Return - status:
 
 # Automation example
 
-```
+```shell
 token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)
 echo $token
 while true; do
