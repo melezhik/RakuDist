@@ -83,3 +83,6 @@ bash "$path-to-raku/bin/perl6 -I $path-to-zef $path-to-zef/bin/zef install $modu
 
 
 
+say "===";
+say "RakuDist: OK";
+

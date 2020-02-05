@@ -83,3 +83,6 @@ bash "cd {$directory} && zef install .", %(
   debug => True
 );
 
+say "===";
+say "RakuDist: OK";
+
