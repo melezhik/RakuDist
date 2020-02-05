@@ -80,15 +80,13 @@ Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives 
 
 ### Run tests in synchronous mode.
 
-_By default_ tests run in asynchronous mode, so requests placed in a queue and executed later. One can track status of a test by a link returned by API:
+_By default_ tests run in asynchronous mode, so requests placed in a queue and executed later. 
+To track a test status use a token returned by request:
 
 
 ```
-curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind
-0 build(s) running
-Run default test for Kind on debian
-test launched, it takes a while
-see report at http://repo.westus.cloudapp.azure.com/rakudist/reports/Kind/debian/1579635731.txt
+token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)
+curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status
 ```
 
 In synchronous mode tests are executed immediately without being placed in a queue. 
