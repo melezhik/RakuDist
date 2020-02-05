@@ -42,6 +42,7 @@ while true; do
   fi
 done
 echo "test: $status"
+curl -s -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/job/report
 ```
 
 ## Testing CPAN modules
@@ -88,6 +89,9 @@ To track a test status use a token returned by request:
 token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)
 curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status
 ```
+To print out test report:
+
+`curl -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status`
 
 In synchronous mode tests are executed immediately without being placed in a queue. 
 
