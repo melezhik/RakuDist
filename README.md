@@ -18,7 +18,7 @@ Warning: an API server has limited capacity, throttling is enabled.
 
 POST /rakudist/api/run/$module_name
 
-Return - token:
+Return - token. Use the token to track test execution
 
 Get test status:
 
