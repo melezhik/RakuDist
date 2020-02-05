@@ -10,7 +10,7 @@ Test Raku modules against different OS, Rakudo versions
 
 ## Rakudo versions supported
 
-Any, see `rakudo-version` parameter in API section
+Any, see `rakudo-version` parameter in API documentation.
 
 # HTTP API
 
