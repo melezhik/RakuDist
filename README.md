@@ -14,8 +14,21 @@ Any, see `rakudo-version` parameter in API section
 
 # Run tests via API
 
+Run RakuDist using public API
+
 Follow [docs/api.md](https://github.com/melezhik/RakuDist/blob/master/docs/api.md) 
 
+# Low level API
+
+Run RakuDist using Docker and Sparrowdo.
+
+Follow [docs/low.md](https://github.com/melezhik/RakuDist/blob/master/docs/low.md) 
+
+# RakuDist DSL
+
+Use [Sparrow6 DSL](https://github.com/melezhik/Sparrow6/blob/master/documentation/dsl.md) to extend test scenarios
+
+Follow [RakuDist Update – Raku Modules Custom Installation](https://sparrowdo.wordpress.com/2020/01/28/rakudist-update-raku-modules-installation-customization/) post
 
 # See also
 
