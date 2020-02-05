@@ -22,8 +22,6 @@ if test "$type" = "github"; then
 
   cd ~/projects/RakuDist/modules/default-github
 
-  user=`perl -e '$a=shift; $os = shift; $a=~s/.*?\///; $a=~s/\W/-/g; print "gh-",lc($a)' $thing $os`
-
   if ps ax | grep sparrowdo | grep -q "\--prefix=$id \--"; then
     echo "already in queue"
     exit 2
