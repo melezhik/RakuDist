@@ -16,6 +16,34 @@ Any, see `rakudo-version` parameter in API section
 
 Warning: an API server has limited capacity, throttling is enabled.
 
+POST /rakudist/api/run/$module_name
+
+Return - token:
+
+Get test status:
+
+POST $token /rakudist/api/job/status
+
+Return - status:
+
+* `running` - job is being executed
+* `success` - test succeeded
+* `fail` - test failed
+* `unknown` - could not get test status
+
+Automation example:
+
+```
+token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)
+while true; do
+  status=$(curl -s -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/job/status)
+  if test $status != "running"; then
+    break
+  fi
+done
+echo "test: $status"
+```
+
 ## Testing CPAN modules
 
 POST /rakudist/api/run/$module_name
