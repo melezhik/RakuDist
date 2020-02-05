@@ -2,17 +2,17 @@
 
 Test Raku modules against different OS, Rakudo versions
 
-# OS supported
+## OS supported
 
 * debian
 * centos
 * alpine
 
-# Rakudo versions supported
+## Rakudo versions supported
 
 Any, see `rakudo-version` parameter in API section
 
-# Run tests via API
+# HTTP API
 
 Run RakuDist using public API
 
