@@ -80,7 +80,7 @@ To test modules with a source code taken from GitHub project use a following not
 
 POST /rakudist/api/run/:github
 
-With project post parameter:
+Post parameters
 
 - `project`
 
