@@ -1,0 +1,24 @@
+directory "/home/scheck/projects/RakuDist", %(
+  owner => "scheck",
+);
+
+bash "cp /usr/local/bin/carton /bin/";
+
+git-scm 'https://github.com/melezhik/RakuDist.git', %( 
+  to => '/home/scheck/projects/RakuDist', 
+  user => "scheck", 
+  debug => False ,
+  branch => "master"
+);
+
+bash "cp -v /home/scheck/projects/RakuDist/bin/rkd-run /usr/bin/";
+
+systemd-service "rkd-api", %(
+  user => "scheck",
+  workdir => "/home/scheck/projects/RakuDist",
+  command => "/bin/bash --login -c 'cd /home/scheck/projects/RakuDist && ./app.pl prefork -m production --heartbeat-timeout 800 -i 800 -p -w 5 -c 1  --listen http://127.0.0.1:4000'"
+);
+
+service-enable "rkd-api";
+service-restart "rkd-api";
+
