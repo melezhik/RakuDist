@@ -103,7 +103,9 @@ post '/rakudist/api/job/status' => sub {
 
   my $token = $c->param('token');
 
-  my ($id, $docker_id) = split /:/, $token;
+  $token =~ /(\d+?):(\S+)/;
+
+  my $id = $1; my $docker_id = $2;
 
   `ps ax | grep sparrowdo | grep -q "\\--prefix=$id \\--"`;
   
