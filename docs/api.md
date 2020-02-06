@@ -24,7 +24,23 @@ Return - status:
 * `unknown` - could not get a job status
 
 
-# Automation example
+# Travis integration example
+
+To test github project named $project on certain `$os`, just use RakuDist helper:
+
+`curl http://repo.westus.cloudapp.azure.com/rakudist/api/run/$os/$author/$project -s | bash`
+
+For example to test `https://github.com/melezhik/sparrowdo` project on debian:
+
+```yaml
+language: minimal
+
+script:
+  - curl http://repo.westus.cloudapp.azure.com/rakudist/api/run/debian/melezhik/sparrowdo -s | bash
+```
+
+
+# Shell script example
 
 ```shell
 token=$(curl -s -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind)

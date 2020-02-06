@@ -142,6 +142,48 @@ post '/rakudist/api/job/report' => sub {
 
 };
 
+get '/rakudist/api/run/:os/:author/:project/' => sub {
+
+  my $c = shift;
+
+  my $os = $c->param('os');
+
+  my $author = $c->param('author');
+
+  my $project = $c->stash('project');
+
+  
+  my $cmd = <<'HERE';
+
+  token=$(curl -s -d os=%os% -d project=%a%/%p% http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github)
+  while true; do
+    status=$(curl -s -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/status)
+    sleep 5
+    echo -n .
+    if [ $status != "running" ]; then
+      break
+    fi
+  done
+  echo
+  echo "test: $status"
+  curl -L -s -d token=$token http://repo.westus.cloudapp.azure.com/rakudist/api/job/report
+  if [ $status != "success" ]; then
+    exit 1
+  fi
+  
+
+HERE
+
+  $cmd=~s/%os%/$os/;
+
+  $cmd=~s/%a%/$author/;
+
+  $cmd=~s/%p%/$project/;
+
+  $c->render(text => $cmd);
+
+};
+
 app->start;
 
 
