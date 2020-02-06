@@ -26,7 +26,7 @@ Return - status:
 
 # Travis integration example
 
-To test github project named $project on certain `$os`, just use RakuDist helper:
+To test a github project named `$project` on certain `$os`, just use RakuDist helper:
 
 `curl http://repo.westus.cloudapp.azure.com/rakudist/api/run/$os/$author/$project -s | bash`
 
@@ -79,7 +79,7 @@ Optional. A name of rakudo version commit, should be full SHA
 
 Caveats. Rakudo version option is available only for CPAN modules and on debian os.
 
-* sync_mode
+* `sync_mode`
 
 Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives result immediately )
 
