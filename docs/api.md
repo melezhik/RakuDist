@@ -105,9 +105,15 @@ Post parameters
 
 `author/project`
 
-For example to test `melezhik/Tomty` on GitHub:
+For example:
+
+To test `melezhik/Tomty` on GitHub:
 
 `curl -d project=melezhik/Tomty -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github`
+
+To test `uzluisf/raku-pretty-table` on GitLab:
+
+`curl -d os=centos -d project=uzluisf/raku-pretty-table http://repo.westus.cloudapp.azure.com/rakudist/api/run/:gitlab`
 
 ## Testing projects in `modules/` folder
 
