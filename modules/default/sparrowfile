@@ -3,6 +3,10 @@ my $module = config()<module>;
 
 user $user;
 
+bash "cat files/bash_profile >> /home/$user/.bash_profile", %(
+  description => "patch user $user .bash_profile file"
+);
+
 bash "rm -rf /home/$user/.perl6", %(
   description => "remove ~/.perl6 for user $user",
   user => $user

@@ -10,6 +10,10 @@ my $project = config()<project>;
 
 user $user;
 
+bash "cat files/bash_profile >> /home/$user/.bash_profile", %(
+  description => "patch user $user .bash_profile file"
+); 
+
 directory-delete $directory;
 
 directory $directory, %( 
@@ -18,8 +22,13 @@ directory $directory, %(
 
 );
 
-bash "rm -rf /home/$user/.perl6", %(
-  description => "remove ~/.perl6 for user $user",
+bash "rm -rf /home/$user/.perl6/*", %(
+  description => "clean ~/.perl6 for user $user",
+  user => $user
+);
+
+bash "rm -rf /home/$user/.raku/*", %(
+  description => "clean ~/.raku for user $user",
   user => $user
 );
 
@@ -31,6 +40,7 @@ git-scm $scm, %(
 bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
   description => "last commit"
 );
+
 
 my $dir = $*CWD;
 
