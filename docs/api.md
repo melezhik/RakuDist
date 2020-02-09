@@ -93,22 +93,21 @@ Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives 
 
 `curl -d os=debian -d rakudo_version=40b13322c503808235d9fec782d3767eb8edb899 http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind`
 
-## Testing GitHub projects
+## Testing GitHub/GitLab projects
 
-To test modules with a source code taken from GitHub project use a following notation:
+To test modules with a source code taken from GitHub/GitLab project use a following notation:
 
-POST /rakudist/api/run/:github
+POST /rakudist/api/run/:(github|gitlab)
 
 Post parameters
 
 - `project`
 
-`author/guthub-project`
+`author/project`
 
-For example:
+For example to test `melezhik/Tomty` on GitHub:
 
 `curl -d project=melezhik/Tomty -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github`
-
 
 ## Testing projects in `modules/` folder
 

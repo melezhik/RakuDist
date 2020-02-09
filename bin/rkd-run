@@ -18,7 +18,7 @@ fi
 
 user=$(perl6 -e 'my @a = roll "a".."z": 10; say @a.join: ""')
 
-if test "$type" = "github"; then 
+if test "$type" = "github" || test "$type" = "gitlab" ; then 
 
   cd ~/projects/RakuDist/modules/default-github
 
@@ -27,21 +27,15 @@ if test "$type" = "github"; then
     exit 2
   fi
 
-  #echo "Run default test for github project $thing on $os"
-
-  echo "%( user => '$user', project => '$thing', scm => 'https://github.com/$thing' )" > conf/$id.pl6
+  echo "%( user => '$user', project => '$thing', scm => 'https://$type.com/$thing.git' )" > conf/$id.pl6
 
   mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
 
-  echo "Run default test for $thing on $os" > /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
+  echo "Run default test for $type project $thing on $os" > /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
   echo "You can replay this test using RakuDist - https://github.com/melezhik/RakuDist" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
   echo "===" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
 
   sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com --conf=conf/$id.pl6 >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt 2>&1 &
-
-  #echo "test launched, it takes a while"
-
-  #echo "see report at http://repo.westus.cloudapp.azure.com/rakudist/reports/$thing/$os/$id.txt"
 
   echo "$id:$thing/$os"
 

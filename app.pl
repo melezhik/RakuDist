@@ -47,12 +47,20 @@ post '/rakudist/api/run/:thing' => sub {
   my $project = $c->param('project');
   my $rakudo_version = $c->param('rakudo_version') || "default";
   my $sync_mode = $c->param('sync_mode') || "off";
-  my $type = ($thing eq ":github") ? "github" : "basic";
+
+  my $type = "basic";
+
+  if ($thing eq ":github") {
+    $type = "github"
+  } elsif ($thing eq ":gitlab") {
+    $type = "gitlab"
+  }
+
   my $verbose = $c->param('verbose') || 0;
 
   my $thing_to_run;
 
-  if ($type eq 'github' ){
+  if ($type eq 'github' or $type eq 'gitlab'){
 
     unless ($project=~/^\S+\/\S+$/) {
       return $c->render(text => "bad project param", status => 400)
