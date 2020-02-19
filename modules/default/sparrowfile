@@ -40,7 +40,7 @@ if os() eq 'alpine' {
 
 }
 
-my %state = task-run "zef fetch {$module}", $module, %(
+my %state = task-run "zef fetch {$module}", "zef-fetch", %(
   identity => $module,
   user => $user,
 );
