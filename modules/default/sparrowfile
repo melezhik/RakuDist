@@ -23,42 +23,6 @@ my $path = module-run 'Rakudo::Install', %(
   rakudo-version => $rakudo-version,
 );
 
-file "/home/$user/.rakudoenv.bash", %(
-  content => "export PATH=$path:~/.perl6/bin:~/.raku/bin/:\$PATH",
-  owner => $user,
-  group => $user
-);
-
-bash "cat /home/$user/.rakudoenv.bash >> /home/$user/.bash_profile", %(
-  description => "patch user $user .bash_profile with rakudo env"
-);
-
-file-delete "/home/$user/.rakudoenv.bash";
-
-bash "which perl6", %(
-  description => "which perl6",
-  user => $user,
-  debug => True
-);
-
-bash "which zef", %(
-  description => "which zef",
-  user => $user,
-  debug => True
-);
-
-bash "perl6 --version", %(
-  description => "perl6 version",
-  user => $user,
-  debug => True
-);
-
-bash "zef --version", %(
-  description => "zef version",
-  user => $user,
-  debug => True
-);
-
 # ------------------------------------------- INSTALL Module -------------------------------------------------------- #
 
 if os() eq 'alpine' {
