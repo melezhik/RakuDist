@@ -52,7 +52,7 @@ my %state = task-run "zef fetch {$module}", "zef-fetch", %(
 my $dir = $*CWD;
 
 if "{%state<directory>}/.rakudist/sparrowfile".IO ~~ :f {
-  say "execute custom scenario from .rakudist/sparrowfile";
+  say "*** execute custom scenario from .rakudist/sparrowfile ***";
   bash "mkdir -p {%state<directory>}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>} {%state<directory>}/.rakudist/conf/", %(
     description => "copy configuartion file",
   );
@@ -63,7 +63,7 @@ if "{%state<directory>}/.rakudist/sparrowfile".IO ~~ :f {
 }
 
 if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {
-  say "install Raku modules from .rakudist/depends.raku file";
+  say "*** install Raku modules from .rakudist/depends.raku file ***";
   # install Raku modules from depends.raku file
   for "{%state<directory>}/.rakudist/depends.raku".IO.lines -> $line {
     next if $line ~~ /^^ \s* '#' /;
