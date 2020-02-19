@@ -1,2 +1,2 @@
-package-install "procps";
+package-install "procps wget zstd";
 
