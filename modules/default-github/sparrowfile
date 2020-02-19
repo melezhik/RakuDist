@@ -12,6 +12,8 @@ my $rakudo-version = config()<rakudo_version>;
 
 # ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
+say "<<< PREPARE Environment >>>";
+
 user $user;
 
 bash "rm -rf /home/$user/.perl6/*", %(
@@ -33,6 +35,7 @@ module-run 'Rakudo::Install', %(
 
 # ------------------------------------------- INSTALL Module -------------------------------------------------------- #
 
+say "<<< CHECKOUT Source Code >>>";
 
 directory-delete $directory;
 
@@ -51,6 +54,7 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
   description => "last commit"
 );
 
+say "<<< INSTALL Module >>>";
 
 my $dir = $*CWD;
 
@@ -100,7 +104,7 @@ if os() eq 'alpine' {
 bash "cd {$directory} && zef install .", %(
   description => "zef install .",
   user => $user,
-  debug => True
+  debug => False
 );
 
 

@@ -4,6 +4,8 @@ my $rakudo-version = config()<rakudo_version>;
 
 # ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
+say "<<< PREPARE Environment >>>";
+
 user $user;
 
 bash "rm -rf /home/$user/.perl6/*", %(
@@ -24,6 +26,8 @@ module-run 'Rakudo::Install', %(
 );
 
 # ------------------------------------------- INSTALL Module -------------------------------------------------------- #
+
+say "<<< INSTALL Module >>>";
 
 if os() eq 'alpine' {
 
@@ -77,7 +81,7 @@ if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {
 bash "cd {%state<directory>} && zef install .", %(
   description => "zef install $module",
   user => $user,
-  debug => True
+  debug => False
 );
 
 
