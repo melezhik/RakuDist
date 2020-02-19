@@ -16,9 +16,9 @@ bash "rm -rf /home/$user/.raku/*", %(
   user => $user
 );
 
-zef "https://github.com/melezhik/sparrow6-rakudo-install.git";
+zef "https://github.com/melezhik/sparrow6-rakudo-install.git", %( force => True );
 
-my $path = module-run 'Rakudo::Install', %(
+module-run 'Rakudo::Install', %(
   user => $user,
   rakudo-version => $rakudo-version,
 );
@@ -40,7 +40,7 @@ if os() eq 'alpine' {
 
 }
 
-my %state = task-run "zef fetch {$module}", "$module", %(
+my %state = task-run "zef fetch {$module}", $module, %(
   identity => $module,
   user => $user,
 );

@@ -24,7 +24,7 @@ bash "rm -rf /home/$user/.raku/*", %(
   user => $user
 );
 
-zef "https://github.com/melezhik/sparrow6-rakudo-install.git";
+zef "https://github.com/melezhik/sparrow6-rakudo-install.git", %( force => True );
 
 module-run 'Rakudo::Install', %(
   user => $user,
