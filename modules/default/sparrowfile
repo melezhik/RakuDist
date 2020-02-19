@@ -1,17 +1,65 @@
 my $user = config()<user>;
 my $module = config()<module>;
+my $rakudo-version = config()<rakudo_version>;
+
+# ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
 user $user;
 
-bash "cat files/bash_profile >> /home/$user/.bash_profile", %(
-  description => "patch user $user .bash_profile file"
-);
-
-bash "rm -rf /home/$user/.perl6", %(
-  description => "remove ~/.perl6 for user $user",
+bash "rm -rf /home/$user/.perl6/*", %(
+  description => "clean ~/.perl6 for user $user",
   user => $user
 );
 
+bash "rm -rf /home/$user/.raku/*", %(
+  description => "clean ~/.raku for user $user",
+  user => $user
+);
+
+zef "https://github.com/melezhik/sparrow6-rakudo-install.git";
+
+my $path = module-run 'Rakudo::Install', %(
+  user => $user,
+  rakudo-version => $rakudo-version,
+);
+
+file "/home/$user/.rakudoenv.bash", %(
+  content => "export PATH=$path:~/.perl6/bin:~/.raku/bin/:\$PATH",
+  owner => $user,
+  group => $user
+);
+
+bash "cat /home/$user/.rakudoenv.bash >> /home/$user/.bash_profile", %(
+  description => "patch user $user .bash_profile with rakudo env"
+);
+
+file-delete "/home/$user/.rakudoenv.bash";
+
+bash "which perl6", %(
+  description => "which perl6",
+  user => $user,
+  debug => True
+);
+
+bash "which zef", %(
+  description => "which zef",
+  user => $user,
+  debug => True
+);
+
+bash "perl6 --version", %(
+  description => "perl6 version",
+  user => $user,
+  debug => True
+);
+
+bash "zef --version", %(
+  description => "zef version",
+  user => $user,
+  debug => True
+);
+
+# ------------------------------------------- INSTALL Module -------------------------------------------------------- #
 
 if os() eq 'alpine' {
 
@@ -28,7 +76,7 @@ if os() eq 'alpine' {
 
 }
 
-my %state = task-run 'zef fetch Kind', 'zef-fetch', %(
+my %state = task-run "zef fetch {$module}", "$module", %(
   identity => $module,
   user => $user,
 );
@@ -61,29 +109,6 @@ if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {
   }
 }
 
-bash "which perl6", %(
-  description => "which perl6",
-  user => $user,
-  debug => True
-);
-
-bash "which zef", %(
-  description => "which zef",
-  user => $user,
-  debug => True
-);
-
-bash "perl6 --version", %(
-  description => "perl6 version",
-  user => $user,
-  debug => True
-);
-
-bash "zef --version", %(
-  description => "zef version",
-  user => $user,
-  debug => True
-);
 
 bash "cd {%state<directory>} && zef install .", %(
   description => "zef install $module",

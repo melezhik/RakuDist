@@ -1,2 +1,0 @@
-
-export PATH=~/.perl6/bin:~/.raku/bin/:$PATH

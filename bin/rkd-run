@@ -9,8 +9,6 @@ id=$6
 
 numbuilds=`ps ax | grep 'sparrowdo --no_sudo' | grep -v grep | wc -l`
 
-#echo $numbuilds 'build(s)' running
-
 if test $numbuilds -ge 5; then
   echo too many builds are running
   exit 2
@@ -27,7 +25,7 @@ if test "$type" = "github" || test "$type" = "gitlab" ; then
     exit 2
   fi
 
-  echo "%( user => '$user', project => '$thing', scm => 'https://$type.com/$thing.git' )" > conf/$id.pl6
+  echo "%( user => '$user', project => '$thing', scm => 'https://$type.com/$thing.git', rakudo_version => '$rakudo_version' )" > conf/$id.pl6
 
   mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
 
@@ -48,8 +46,6 @@ elif test -d ~/projects/RakuDist/modules/$thing; then
     exit 2
   fi
 
-  #echo "Run custom test for $thing on $os"
-
   mkdir -p /usr/share/repo/rakudist/reports/$thing/$os
 
   echo "Run custom test for $thing on $os" > /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
@@ -58,13 +54,9 @@ elif test -d ~/projects/RakuDist/modules/$thing; then
 
   sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt 2>&1 &
 
-  #echo "test launched, it takes a while"
-
-  #echo "see report at http://repo.westus.cloudapp.azure.com/rakudist/reports/$thing/$os/$id.txt"
-
   echo "$id:$thing/$os"
 
-elif test $rakudo_version = "default"; then # default test for default rakudo version
+else # default test for certain rakudo version
 
   cd ~/projects/RakuDist/modules/default
 
@@ -73,9 +65,8 @@ elif test $rakudo_version = "default"; then # default test for default rakudo ve
     exit 2
   fi
 
-  #echo "Run default test for $thing on $os"
 
-  echo "%( user => '$user', module => '$thing' )" > conf/$id.pl6
+  echo "%( user => '$user', module => '$thing', rakudo_version => '$rakudo_version' )" > conf/$id.pl6
 
   mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
 
@@ -85,40 +76,8 @@ elif test $rakudo_version = "default"; then # default test for default rakudo ve
 
   sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com --conf=conf/$id.pl6 >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt &
 
-  #echo "test launched, it takes a while"
-
-  #echo "see report at http://repo.westus.cloudapp.azure.com/rakudist/reports/$thing/$os/$id.txt"
-
   echo "$id:$thing/$os"
 
-else # default test for certain rakudo version
-
-  #echo "Run default test for $thing on $os. Rakudo version $rakudo_version"
-
-  cd ~/projects/RakuDist/modules/default-cpan-with-whateverable
-
-  if ps ax | grep sparrowdo | grep -q "\--prefix=$id \--"; then
-    echo "already in queue"
-    exit 2
-  fi
-
-  echo "%( user => '$user', module => '$thing', rakudo-version  => '$rakudo_version' )" > conf/$id.pl6
-
-  if test "$sync_mode" = "on"; then 
-    #echo "You can replay this test using RakuDist - https://github.com/melezhik/RakuDist"
-    #echo "==="
-    sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com --conf=conf/$id.pl6 2>&1
-  else
-    mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
-    echo "Run default test for $thing on $os. Rakudo version $rakudo_version" > /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-    echo "You can replay this test using RakuDist - https://github.com/melezhik/RakuDist" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-    echo "===" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-    #echo "test launched, it takes a while"
-    #echo "see report at http://repo.westus.cloudapp.azure.com/rakudist/reports/$thing/$os/$id.txt"
-    sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com --conf=conf/$id.pl6 >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt 2>&1 &
-  fi
-
-  echo "$id:$thing/$os"
 
 fi
 
