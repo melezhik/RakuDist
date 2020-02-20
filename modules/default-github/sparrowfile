@@ -120,14 +120,18 @@ if "{$directory}/.rakudist/smokefile".IO ~~ :f {
 }
 
 if "{$directory}/.rakudist/.tomty".IO ~~ :d {
-  say "*** run tomty tests from .rakudist/.tomty ***";
+  say "***  Tomty tests found at .rakudist/.tomty, installing Tomty ***";
+  zef "Tomty", %(
+    notest => True,
+    user => config()<user>,
+  );
+  say "*** Run tomty tests from .rakudist/.tomty ***";
   bash "tomty --all --verbose", %(
     description => "tomty test",
     user => config()<user>,
     envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
     cwd => "{$directory}/.rakudist"
   );
-  # post deployment checks
 }
 
 say "===";
