@@ -109,7 +109,7 @@ bash "cd {$directory} && zef install .", %(
 
 
 if "{$directory}/.rakudist/smokefile".IO ~~ :f {
-  say "*** execute smoke scenario from .rakudist/smokefile ***";
+  say "*** execute smoke test scenario from .rakudist/smokefile ***";
   bash "mkdir -p {$directory}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>}  {$directory}/.rakudist/conf/", %(
     description => "copy configuartion file",
   );
@@ -121,7 +121,7 @@ if "{$directory}/.rakudist/smokefile".IO ~~ :f {
 
 if "{$directory}/.rakudist/.tomty".IO ~~ :d {
   say "*** run tomty tests from .rakudist/.tomty ***";
-  bash "tomty --all -show-failed", %(
+  bash "tomty --all --verbose", %(
     description => "tomty test",
     user => config()<user>,
     envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
