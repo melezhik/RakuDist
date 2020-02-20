@@ -1,2 +1,1 @@
 bash "echo hello world";
-zef "Tomty", %( notest => True );

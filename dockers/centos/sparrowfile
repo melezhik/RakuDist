@@ -1,3 +1,2 @@
 task-run "files/disable-gpg-check";
 package-install "glibc-langpack-en which";
-zef "Tomty", %( notest => True );
