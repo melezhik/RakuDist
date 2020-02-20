@@ -1,2 +1,2 @@
 package-install "procps wget zstd";
-
+zef "Tomty", %( notest => True );

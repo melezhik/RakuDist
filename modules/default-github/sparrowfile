@@ -119,6 +119,17 @@ if "{$directory}/.rakudist/smokefile".IO ~~ :f {
   chdir $dir;
 }
 
+if "{$directory}/.rakudist/.tomty".IO ~~ :d {
+  say "*** run tomty tests from .rakudist/.tomty ***";
+  bash "tomty --all -show-failed", %(
+    description => "tomty test",
+    user => config()<user>,
+    envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
+    cwd => "{$directory}/.rakudist"
+  );
+  # post deployment checks
+}
+
 say "===";
 say "RakuDist: OK";
 
