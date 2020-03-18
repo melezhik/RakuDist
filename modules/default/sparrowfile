@@ -95,24 +95,26 @@ if "{%state<directory>}/.rakudist/smokefile".IO ~~ :f {
   chdir $dir;
 }
 
-if "{%state<directory>}/.rakudist/.tomty".IO ~~ :d {
+run-tomty-tests("{%state<directory>}") if "{%state<directory>}/.tomty".IO ~~ :d;
+run-tomty-tests("{%state<directory>}/.rakudist") if "{%state<directory>}/.rakudist/.tomty".IO ~~ :d;
 
-  say "***  Tomty tests found at .rakudist/.tomty, installing Tomty ***";
+say "===";
+say "RakuDist: OK";
+
+sub run-tomty-tests ( $path ) {
+
+  say "***  Tomty tests found at $path/.tomty, installing Tomty ***";
   zef "Tomty", %(
     notest => True,
     user => config()<user>,
   );
-
-  say "*** Run tomty tests from .rakudist/.tomty ***";
+  say "*** Run tomty tests from $path/.tomty ***";
   bash "tomty --all --verbose", %(
     description => "tomty test",
     user => config()<user>,
     envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
-    cwd => "{%state<directory>}/.rakudist"
+    cwd => $path
   );
-  # post deployment checks
+
 }
 
-
-say "===";
-say "RakuDist: OK";

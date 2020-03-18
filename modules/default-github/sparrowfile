@@ -119,21 +119,26 @@ if "{$directory}/.rakudist/smokefile".IO ~~ :f {
   chdir $dir;
 }
 
-if "{$directory}/.rakudist/.tomty".IO ~~ :d {
-  say "***  Tomty tests found at .rakudist/.tomty, installing Tomty ***";
-  zef "Tomty", %(
-    notest => True,
-    user => config()<user>,
-  );
-  say "*** Run tomty tests from .rakudist/.tomty ***";
-  bash "tomty --all --verbose", %(
-    description => "tomty test",
-    user => config()<user>,
-    envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
-    cwd => "{$directory}/.rakudist"
-  );
-}
+run-tomty-tests("{$directory}") if "{$directory}/.tomty".IO ~~ :d;
+run-tomty-tests("{$directory}/.rakudist") if "{$directory}/.rakudist/.tomty".IO ~~ :d;
 
 say "===";
 say "RakuDist: OK";
 
+
+sub run-tomty-tests ( $path ) {
+
+  say "***  Tomty tests found at $path/.tomty, installing Tomty ***";
+  zef "Tomty", %(
+    notest => True,
+    user => config()<user>,
+  );
+  say "*** Run tomty tests from $path/.tomty ***";
+  bash "tomty --all --verbose", %(
+    description => "tomty test",
+    user => config()<user>,
+    envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
+    cwd => $path
+  );
+
+}
