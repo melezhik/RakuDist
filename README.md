@@ -8,7 +8,7 @@ Test Raku modules against different OS, Rakudo versions
 * centos
 * alpine
 
-* ***Centos and Alpine OS are temporarily unavailable when test through HTTP API***, my tiny Azure subscription limits
+\* ***Centos and Alpine OS are temporarily unavailable when test through HTTP API***, my tiny Azure subscription limits
 VM size, if you're interested in a donation, please let me know! 
 
 ## Rakudo versions supported
