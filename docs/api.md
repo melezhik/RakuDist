@@ -73,7 +73,7 @@ Required. Raku module name
 
 Required. Operation system (`alpine|debian|centos`)
 
-- `rakudo-version`
+- `rakudo_version`
  
 Optional. A name of rakudo version commit, should be full SHA
 
