@@ -13,7 +13,7 @@ VM size, if you're interested in a donation, please let me know!
 
 ## Rakudo versions supported
 
-Any, see `rakudo-version` parameter in API documentation.
+Any, see `rakudo_version` parameter in API documentation.
 
 # HTTP API
 
