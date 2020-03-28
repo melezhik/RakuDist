@@ -1,2 +1,2 @@
 task-run "files/disable-gpg-check";
-#package-install "glibc-langpack-en which  epel-release";
+package-install "glibc-langpack-en which  epel-release";
