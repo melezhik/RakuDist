@@ -77,7 +77,7 @@ Required. Operation system (`alpine|debian|centos`)
  
 Optional. A name of rakudo version commit, should be full SHA
 
-Caveats. Rakudo version option is available only for debian os.
+Caveats. Rakudo version option is available only for CentOS os.
 
 * `sync_mode`
 
@@ -91,7 +91,7 @@ Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives 
 
 * Run test for `Kind` module, rakudo version `40b13322c503808235d9fec782d3767eb8edb899`
 
-`curl -d os=debian -d rakudo_version=40b13322c503808235d9fec782d3767eb8edb899 http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind`
+`curl -d os=CentOS -d rakudo_version=40b13322c503808235d9fec782d3767eb8edb899 http://repo.westus.cloudapp.azure.com/rakudist/api/run/Kind`
 
 ## Testing GitHub/GitLab projects
 
