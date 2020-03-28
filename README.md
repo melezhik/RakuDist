@@ -4,12 +4,12 @@ Test Raku modules against different OS, Rakudo versions
 
 ## OS supported (*)
 
-* debian
-* centos
-* alpine
+* Debian
+* CentOS
+* Alpine
 
-\* ***Centos and Alpine OS are temporarily unavailable when test through HTTP API***, my tiny Azure subscription limits
-VM size, if you're interested in a donation, please let me know! 
+\* ***Only CentOS and Debian OS are now available when test through HTTP API***, my tiny Azure subscription limits
+number of docker container running simultaneously, if you're interested in a donation, please let me know! 
 
 ## Rakudo versions supported
 
