@@ -134,7 +134,7 @@ sub run-tomty-tests ( $path ) {
     user => config()<user>,
   );
   say "*** Run tomty tests from $path/.tomty ***";
-  bash "tomty --all --verbose", %(
+  bash "tomty --all --show-failed", %(
     description => "tomty test",
     user => config()<user>,
     envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
