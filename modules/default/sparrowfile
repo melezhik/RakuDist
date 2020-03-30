@@ -51,6 +51,16 @@ my %state = task-run "zef fetch {$module}", "zef-fetch", %(
 
 my $dir = $*CWD;
 
+my $patch-dir = "{%*ENV<HOME>}/patches/$module";
+
+if "{$patch-dir}/sparrowfile".IO ~~ :f {
+  say "*** execute patch from {$patch-dir}/sparrowfile ***";
+  # post deployment checks
+  chdir $patch-dir;
+  EVALFILE "sparrowfile";
+  chdir $dir;
+}
+
 if "{%state<directory>}/.rakudist/sparrowfile".IO ~~ :f {
   say "*** execute custom scenario from .rakudist/sparrowfile ***";
   bash "mkdir -p {%state<directory>}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>} {%state<directory>}/.rakudist/conf/", %(
@@ -83,6 +93,7 @@ bash "cd {%state<directory>} && zef install .", %(
   user => $user,
   debug => False
 );
+
 
 if "{%state<directory>}/.rakudist/smokefile".IO ~~ :f {
   say "*** execute smoke test scenario from .rakudist/smokefile ***";
