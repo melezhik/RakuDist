@@ -1,7 +1,7 @@
 my $user = config()<user>;
 my $module = config()<module>;
 my $rakudo-version = config()<rakudo_version>;
-my $patch-dir = "{%*ENV<HOME>}/projects/RakuDist/patches/$module";
+my $patch-dir = "files/patches/$module";
 
 # ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
