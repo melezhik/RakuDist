@@ -51,7 +51,7 @@ my %state = task-run "zef fetch {$module}", "zef-fetch", %(
 
 my $dir = $*CWD;
 
-my $patch-dir = "{%*ENV<HOME>}/patches/$module";
+my $patch-dir = "{%*ENV<HOME>}/projects/RakuDist/patches/$module";
 
 if "{$patch-dir}/sparrowfile".IO ~~ :f {
   say "*** execute patch from {$patch-dir}/sparrowfile ***";
