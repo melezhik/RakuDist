@@ -1,6 +1,7 @@
 my $user = config()<user>;
 my $module = config()<module>;
 my $rakudo-version = config()<rakudo_version>;
+my $patch-dir = "{%*ENV<HOME>}/projects/RakuDist/patches/$module";
 
 # ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
@@ -51,7 +52,7 @@ my %state = task-run "zef fetch {$module}", "zef-fetch", %(
 
 my $dir = $*CWD;
 
-my $patch-dir = "{%*ENV<HOME>}/projects/RakuDist/patches/$module";
+say "*** patch dir: {$patch-dir} ***"
 
 if "{$patch-dir}/sparrowfile".IO ~~ :f {
   say "*** execute patch from {$patch-dir}/sparrowfile ***";
