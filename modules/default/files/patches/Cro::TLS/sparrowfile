@@ -1,0 +1,8 @@
+#!perl6
+
+package-install %(
+  alpine => qqw{make gcc libressl-dev libc-dev},
+  centos => qqw{gcc openssl openssl-devel},
+  debian => qqw{make gcc libssl-dev},
+);
+
