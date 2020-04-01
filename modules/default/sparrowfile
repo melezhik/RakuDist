@@ -52,7 +52,6 @@ my %state = task-run "zef fetch {$module}", "zef-fetch", %(
 
 my $dir = $*CWD;
 
-
 if "{$patch-dir}/sparrowfile".IO ~~ :f {
   say "*** patch dir: {$patch-dir}, patch found ***";
   say "*** execute patch from {$patch-dir}/sparrowfile ***";

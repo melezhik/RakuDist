@@ -10,6 +10,8 @@ my $project = config()<project>;
 
 my $rakudo-version = config()<rakudo_version>;
 
+my $patch-dir = "files/patches/$project";
+
 # ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
 say "<<< PREPARE Environment >>>";
@@ -57,6 +59,32 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
 say "<<< INSTALL Module >>>";
 
 my $dir = $*CWD;
+
+if "{$patch-dir}/sparrowfile".IO ~~ :f {
+  say "*** patch dir: {$patch-dir}, patch found ***";
+  say "*** execute patch from {$patch-dir}/sparrowfile ***";
+  # post deployment checks
+  chdir $patch-dir;
+  EVALFILE "sparrowfile";
+  chdir $dir;
+} else {
+  say "*** patch dir: {$patch-dir}, no patch found ***";
+}
+
+if "{$patch-dir}/depends.raku".IO ~~ :f {
+  say "*** install Raku modules from {$patch-dir}/depends.raku file ***";
+  # install Raku modules from depends.raku file
+  for "{$patch-dir}/depends.raku".IO.lines -> $line {
+    next if $line ~~ /^^ \s* '#' /;
+    my @params = $line.split(/\s+/);
+    my $module = @params.shift;
+    next unless $line ~~ /\S/;
+    zef $module, %(
+      user => $user,
+      notest => @params.Set{'notest'} ?? True !! False
+    );
+  }
+}
 
 if "{$directory}/.rakudist/sparrowfile".IO ~~ :f {
   say "*** execute custom scenario from .rakudist/sparrowfile ***";
