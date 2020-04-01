@@ -160,8 +160,9 @@ run-tomty-tests("{$directory}/.rakudist") if "{$directory}/.rakudist/.tomty".IO 
 if "{$patch-dir}/.tomty".IO ~~ :d {
 
   directory-delete "{$directory}/tmp/";
+  directory-create "{$directory}/tmp/.tomty/";
 
-  bash "cp -r {$patch-dir}/.tomty {$directory}/tmp/ && chown -R $user {$directory}/tmp/", %(
+  bash "cp -rv {$patch-dir}/.tomty/* {$directory}/tmp/.tomty && chown -R $user {$directory}/tmp/", %(
     description => "copy {$patch-dir}/.tomty to {$directory}/tmp/",
   );
 
@@ -181,7 +182,7 @@ sub run-tomty-tests ( $path ) {
     user => config()<user>,
   );
   say "*** Run tomty tests from $path/.tomty ***";
-  bash "tomty --init && tomty --all --show-failed", %(
+  bash "tomty --init && tomty --all --show-failed 2>&1", %(
     description => "tomty test",
     user => config()<user>,
     envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
