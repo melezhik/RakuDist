@@ -5,5 +5,5 @@ file 'capitals.csv', %(
 );
 
 bash "pt --csv capitals.csv", %(
-  debug => $True
+  debug => True
 );
