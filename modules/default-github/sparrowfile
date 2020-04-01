@@ -52,6 +52,12 @@ git-scm $scm, %(
   user => $user,
 );
 
+bash "cd {$directory} && git submodule update --init", %(
+  description => "checkout git submodules",
+  user => $user,
+  debug => False
+);
+
 bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
   description => "last commit"
 );
