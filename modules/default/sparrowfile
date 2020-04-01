@@ -1,7 +1,8 @@
 my $user = config()<user>;
 my $module = config()<module>;
 my $rakudo-version = config()<rakudo_version>;
-my $patch-dir = "files/patches/$module";
+my $dir = $*CWD;
+my $patch-dir = "$dir/files/patches/$module";
 
 # ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
@@ -50,7 +51,6 @@ my %state = task-run "zef fetch {$module}", "zef-fetch", %(
   user => $user,
 );
 
-my $dir = $*CWD;
 
 if "{$patch-dir}/sparrowfile".IO ~~ :f {
   say "*** patch dir: {$patch-dir}, patch found ***";
@@ -125,7 +125,18 @@ if "{%state<directory>}/.rakudist/smokefile".IO ~~ :f {
 
 run-tomty-tests("{%state<directory>}") if "{%state<directory>}/.tomty".IO ~~ :d;
 run-tomty-tests("{%state<directory>}/.rakudist") if "{%state<directory>}/.rakudist/.tomty".IO ~~ :d;
-run-tomty-tests("{$dir}/{$patch-dir}") if "{$patch-dir}/.tomty".IO ~~ :d;
+
+if "{$patch-dir}/.tomty".IO ~~ :d {
+
+  directory-delete "{$directory}/tmp/";
+
+  bash "cp -r {$patch-dir}/.tomty {$directory}/tmp/ && chown -R $user {$directory}/tmp/", %(
+    description => "copy {$patch-dir}/.tomty to {$directory}/tmp/",
+  );
+
+  run-tomty-tests("{$directory}/tmp");
+
+}
 
 say "===";
 say "RakuDist: OK";
