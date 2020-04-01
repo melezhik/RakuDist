@@ -155,7 +155,7 @@ if "{$directory}/.rakudist/smokefile".IO ~~ :f {
 
 run-tomty-tests("{$directory}") if "{$directory}/.tomty".IO ~~ :d;
 run-tomty-tests("{$directory}/.rakudist") if "{$directory}/.rakudist/.tomty".IO ~~ :d;
-run-tomty-tests("{$patch-dir}") if "{$patch-dir}/.tomty".IO ~~ :d;
+run-tomty-tests("{$dir}/{$patch-dir}") if "{$patch-dir}/.tomty".IO ~~ :d;
 
 say "===";
 say "RakuDist: OK";
