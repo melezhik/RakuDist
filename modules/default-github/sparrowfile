@@ -162,7 +162,7 @@ if "{$patch-dir}/.tomty".IO ~~ :d {
   directory-delete "{$directory}/tmp/";
   directory-create "{$directory}/tmp/.tomty/";
 
-  bash "cp -rv {$patch-dir}/.tomty/* {$directory}/tmp/.tomty && chown -R $user {$directory}/tmp/", %(
+  bash "cp -r {$patch-dir}/.tomty/* {$directory}/tmp/.tomty && chown -R $user {$directory}/tmp/", %(
     description => "copy {$patch-dir}/.tomty to {$directory}/tmp/",
   );
 
