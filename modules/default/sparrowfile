@@ -51,6 +51,7 @@ my %state = task-run "zef fetch {$module}", "zef-fetch", %(
   user => $user,
 );
 
+my $directory = %state<directory>;
 
 if "{$patch-dir}/sparrowfile".IO ~~ :f {
   say "*** patch dir: {$patch-dir}, patch found ***";
@@ -78,21 +79,21 @@ if "{$patch-dir}/depends.raku".IO ~~ :f {
   }
 }
 
-if "{%state<directory>}/.rakudist/sparrowfile".IO ~~ :f {
+if "{$directory}/.rakudist/sparrowfile".IO ~~ :f {
   say "*** execute custom scenario from .rakudist/sparrowfile ***";
-  bash "mkdir -p {%state<directory>}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>} {%state<directory>}/.rakudist/conf/", %(
+  bash "mkdir -p {$directory}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>} {$directory}/.rakudist/conf/", %(
     description => "copy configuartion file",
   );
   # custom installation logic, for example external libraries
-  chdir "{%state<directory>}/.rakudist/";
+  chdir "{$directory}/.rakudist/";
   EVALFILE "sparrowfile";
   chdir $dir;
 }
 
-if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {
+if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
   say "*** install Raku modules from .rakudist/depends.raku file ***";
   # install Raku modules from depends.raku file
-  for "{%state<directory>}/.rakudist/depends.raku".IO.lines -> $line {
+  for "{$directory}/.rakudist/depends.raku".IO.lines -> $line {
     next if $line ~~ /^^ \s* '#' /;
     my @params = $line.split(/\s+/);
     my $module = @params.shift;
@@ -105,26 +106,26 @@ if "{%state<directory>}/.rakudist/depends.raku".IO ~~ :f {
 }
 
 
-bash "cd {%state<directory>} && zef install .", %(
+bash "cd {$directory} && zef install .", %(
   description => "zef install $module",
   user => $user,
   debug => False
 );
 
 
-if "{%state<directory>}/.rakudist/smokefile".IO ~~ :f {
+if "{$directory}/.rakudist/smokefile".IO ~~ :f {
   say "*** execute smoke test scenario from .rakudist/smokefile ***";
-  bash "mkdir -p {%state<directory>}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>}  {%state<directory>}/.rakudist/conf/", %(
+  bash "mkdir -p {$directory}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>}  {$directory}/.rakudist/conf/", %(
     description => "copy configuartion file",
   );
   # post deployment checks
-  chdir "%state<directory>/.rakudist/";
+  chdir "$directory/.rakudist/";
   EVALFILE "smokefile";
   chdir $dir;
 }
 
-run-tomty-tests("{%state<directory>}") if "{%state<directory>}/.tomty".IO ~~ :d;
-run-tomty-tests("{%state<directory>}/.rakudist") if "{%state<directory>}/.rakudist/.tomty".IO ~~ :d;
+run-tomty-tests("{$directory}") if "{$directory}/.tomty".IO ~~ :d;
+run-tomty-tests("{$directory}/.rakudist") if "{$directory}/.rakudist/.tomty".IO ~~ :d;
 
 if "{$patch-dir}/.tomty".IO ~~ :d {
 
