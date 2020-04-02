@@ -159,6 +159,8 @@ run-tomty-tests("{$directory}/.rakudist") if "{$directory}/.rakudist/.tomty".IO 
 
 if "{$patch-dir}/.tomty".IO ~~ :d {
 
+  say "***  Tomty tests found at {$patch-dir}/.tomty ***";
+
   directory-delete "{$directory}/tmp/";
   directory-create "{$directory}/tmp/.tomty/";
 
@@ -176,7 +178,6 @@ say "RakuDist: OK";
 
 sub run-tomty-tests ( $path ) {
 
-  say "***  Tomty tests found at $path/.tomty, installing Tomty ***";
   zef "Tomty", %(
     notest => True,
     user => config()<user>,
