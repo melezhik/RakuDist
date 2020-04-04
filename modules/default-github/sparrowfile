@@ -162,10 +162,9 @@ if "{$patch-dir}/.tomty".IO ~~ :d {
   say "***  Tomty tests found at {$patch-dir}/.tomty ***";
 
   directory-delete "{$directory}/tmp/";
-  directory-create "{$directory}/tmp/.tomty/";
 
-  bash "cp -r {$patch-dir}/.tomty/* {$directory}/tmp/.tomty && chown -R $user {$directory}/tmp/", %(
-    description => "copy {$patch-dir}/.tomty to {$directory}/tmp/",
+  bash "cp -r {$patch-dir} {$directory}/tmp && chown -R $user {$directory}/tmp", %(
+    description => "copy {$patch-dir} to {$directory}/tmp/",
   );
 
   run-tomty-tests("{$directory}/tmp"); 
