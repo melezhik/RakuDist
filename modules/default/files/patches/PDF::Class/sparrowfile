@@ -1,0 +1,5 @@
+package-install %(
+  alpine => qqw{gcc make libressl-dev wget},
+  centos => qqw{gcc openssl openssl-devel wget},
+  debian => qqw{gcc make libssl-dev wget},
+);
