@@ -1,5 +1,6 @@
 set -e
-wget http://www.stillhq.com/pdfdb/000432/data.pdf
-pdf-toc.raku data.pdf
+
+wget https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
+pdf-toc.raku dummy.pdf
 
 
