@@ -36,8 +36,14 @@ get '/rakudist' => sub {
   my $c = shift;
 
   open my $fh, "$ENV{HOME}/.rakudist_history";
+
+  my @records = <$fh>;
+
+  close $fh;
+
   my @history;
-  while (my $i = <$fh>) {
+
+  for my $i(reverse @records) {
     chomp $i;
     next unless $i =~ /\S+/;
     my ($thing_to_run,$os,$type,$rakudo_version,$sync_mode,$id,$token) = split /\s+/, $i;
@@ -51,12 +57,11 @@ get '/rakudist' => sub {
       "<td>$rakudo_version</td>\n",
       "</tr><br>\n"
   }
-  close $fh;
 
   return $c->render(
     text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS<hr>\n".
     "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n<tr><th>Module</th><th>Result</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
-    (join "", @history).
+    (join "", (@history)).
     "</table>"
   );
 
