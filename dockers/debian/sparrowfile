@@ -1,1 +1,1 @@
-package-install "procps wget zstd";
+package-install "procps wget zstd gcc";

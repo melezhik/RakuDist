@@ -1,0 +1,3 @@
+#!perl6
+
+package-install "python36 gcc";
