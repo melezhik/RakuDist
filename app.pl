@@ -54,7 +54,7 @@ get '/rakudist' => sub {
 
   return $c->render(
     text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS<hr>\n".
-    "Recent runs:\n<br><br>\n<table border=1 cellpadding=4 cellspacing=4>\n<tr><th>Module</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
+    "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n<tr><th>Module</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
     (join "", @history).
     "</table>"
   );
