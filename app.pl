@@ -35,23 +35,28 @@ get '/rakudist' => sub {
 
   my $c = shift;
 
+  open my $fh, "$ENV{HOME}/.rakudist_history";
+  my @history;
+  while (my $i = <$fh>) {
+    chomp $i;
+    next unless $i =~ /\S+/;
+    my ($thing_to_run,$os,$type,$rakudo_version,$sync_mode,$id,$out) = split /\s+/, $i;
+    push @history, 
+      "<tr><td><a href=\"/rakudist/reports/$thing_to_run/$os/$id.txt\" target=\"_blank\">$thing_to_run</a></td>\n",
+      "<td>",
+      (scalar localtime($id)),
+      "</td>\n",
+      "<td>$os</td>\n",
+      "<td>$rakudo_version</td>\n",
+      "</tr><br>\n"
+  }
+  close $fh;
 
   return $c->render(
-    text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS<hr>".
-    "Recent runs:<br><br>".
-    (
-      join "<br>", map {
-
-        my $token = $_;
-
-        $token =~ /(\d+?):(\S+)/;
-
-        my $id = $1; my $docker_id = $2;
-
-        "<a href=\"/rakudist/reports/$docker_id/$id.txt\">$docker_id</a>"
-
-      } @recent
-    )
+    text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS<hr>\n".
+    "Recent runs:\n<br><br>\n<table border=1 cellpadding=4 cellspacing=4>\n<tr><th>Module</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
+    (join "", @history).
+    "</table>"
   );
 
 };
@@ -117,7 +122,9 @@ post '/rakudist/api/run/:thing' => sub {
   } else {
     if ($exit_code == 0){
       $c->render(text => $out);
-      push @recent, $out;
+      open my $fh, ">>", "$ENV{HOME}/.rakudist_history";
+      print $fh "$thing_to_run $os $type $rakudo_version $sync_mode $id $out\n";
+      close $fh;
     } else {
       $c->render(text => $out, status => 500)
     }
