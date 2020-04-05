@@ -2,6 +2,8 @@
 
 use Mojolicious::Lite;
 
+my @recent;
+
 get '/rakudist/api/status' => sub {
 
   my $c = shift;
@@ -33,7 +35,24 @@ get '/rakudist' => sub {
 
   my $c = shift;
 
-  return $c->render(text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS");
+
+  return $c->render(
+    text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS<hr>".
+    "Recent runs:<br><br>".
+    (
+      join "<br>", map {
+
+        my $token = $_;
+
+        $token =~ /(\d+?):(\S+)/;
+
+        my $id = $1; my $docker_id = $2;
+
+        "<a href=\"/rakudist/reports/$docker_id/$id.txt\">$docker_id</a>"
+
+      } @recent
+    )
+  );
 
 };
 
@@ -98,6 +117,7 @@ post '/rakudist/api/run/:thing' => sub {
   } else {
     if ($exit_code == 0){
       $c->render(text => $out);
+      push @recent, $out;
     } else {
       $c->render(text => $out, status => 500)
     }
