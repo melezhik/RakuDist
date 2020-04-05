@@ -40,9 +40,10 @@ get '/rakudist' => sub {
   while (my $i = <$fh>) {
     chomp $i;
     next unless $i =~ /\S+/;
-    my ($thing_to_run,$os,$type,$rakudo_version,$sync_mode,$id,$out) = split /\s+/, $i;
+    my ($thing_to_run,$os,$type,$rakudo_version,$sync_mode,$id,$token) = split /\s+/, $i;
     push @history, 
       "<tr><td><a href=\"/rakudist/reports/$thing_to_run/$os/$id.txt\" target=\"_blank\">$thing_to_run</a></td>\n",
+      "<td>",job_status($token),"</td>",
       "<td>",
       (scalar localtime($id)),
       "</td>\n",
@@ -54,7 +55,7 @@ get '/rakudist' => sub {
 
   return $c->render(
     text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS<hr>\n".
-    "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n<tr><th>Module</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
+    "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n<tr><th>Module</th><th>Result</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
     (join "", @history).
     "</table>"
   );
@@ -138,31 +139,7 @@ post '/rakudist/api/job/status' => sub {
 
   my $token = $c->param('token');
 
-  $token =~ /(\d+?):(\S+)/;
-
-  my $id = $1; my $docker_id = $2;
-
-  `ps ax | grep sparrowdo | grep -q "\\--prefix=$id \\--"`;
-  
-  my $exit_code = $?;
-
-  if ($exit_code == 0){
-    $c->render(text => "running");
-  } else {
-      if ( open(my $fh, "<", "/usr/share/repo/rakudist/reports/$docker_id/$id.txt")) {
-        my $report = join "", <$fh>;
-        close $fh;
-        if ($report =~ /RakuDist: OK/){
-         $c->render(text => "success" );
-       } else {
-          $c->render(text => "fail" );
-        }
-      } else {
-        $c->render(text => "unknown");
-      }
-  }
-
-
+  $c->render(text => job_status($token));
 };
 
 post '/rakudist/api/job/report' => sub {
@@ -222,6 +199,37 @@ HERE
 };
 
 app->start;
+
+sub job_status {
+
+  my $token = shift;
+
+  $token =~ /(\d+?):(\S+)/;
+
+  my $id = $1; my $docker_id = $2;
+
+  `ps ax | grep sparrowdo | grep -q "\\--prefix=$id \\--"`;
+  
+  my $exit_code = $?;
+
+  if ($exit_code == 0){
+    return "running"
+  } else {
+      if ( open(my $fh, "<", "/usr/share/repo/rakudist/reports/$docker_id/$id.txt")) {
+        my $report = join "", <$fh>;
+        close $fh;
+        if ($report =~ /RakuDist: OK/){
+         return "success"
+       } else {
+          return "fail"
+        }
+      } else {
+        return "unknown"
+      }
+  }
+
+
+};
 
 
  
