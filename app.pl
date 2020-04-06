@@ -60,6 +60,7 @@ get '/rakudist' => sub {
 
   return $c->render(
     text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS<hr>\n".
+    "<a href=\"/rakudist/api/status\" target=\"_blank\">status</a><hr>".
     "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n<tr><th>Module</th><th>Result</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
     (join "", (@history)).
     "</table>"
