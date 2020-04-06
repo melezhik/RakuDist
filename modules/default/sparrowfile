@@ -25,6 +25,7 @@ zef "https://github.com/melezhik/sparrow6-rakudo-install.git", %( force => True 
 module-run 'Rakudo::Install', %(
   user => $user,
   rakudo-version => $rakudo-version,
+  skip-install-dependencies => True
 );
 
 # ------------------------------------------- INSTALL Module -------------------------------------------------------- #
