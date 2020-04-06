@@ -1,3 +1,3 @@
 task-run "files/disable-gpg-check";
-package-install "glibc-langpack-en which  epel-release gcc";
+package-install "glibc-langpack-en which epel-release gcc openssl openssl-devel";
 task-run "files/disable-gpg-check";

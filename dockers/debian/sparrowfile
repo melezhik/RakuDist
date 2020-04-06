@@ -1,1 +1,1 @@
-package-install "procps wget zstd gcc";
+package-install "procps wget zstd gcc make gcc libssl-dev";

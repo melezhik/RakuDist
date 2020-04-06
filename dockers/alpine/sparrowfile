@@ -1,2 +1,2 @@
 bash "echo hello world";
-package-install "gcc";
+package-install "make gcc libressl-dev libc-dev";
