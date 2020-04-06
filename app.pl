@@ -62,6 +62,11 @@ get '/rakudist' => sub {
     text => "Welcome to the RakuDist © - Raku Modules Distributions Test API.<hr>\n".
     "<a href=\"https://github.com/melezhik/RakuDist\" target=\"_blank\">github</a> | ".
     "<a href=\"/rakudist/api/status\" target=\"_blank\">status</a><hr>".
+    "to run test against default version: <code> curl -d os=centos http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
+    "to run test against certain version: <code> curl -d os=centos -d rakudo_version=\$full_sha_commit http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
+    "to run test against certain os: <code> curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
+    "to run test against git/gitlab: <code> curl -d os=centos -d project=\$author/\$project http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github</code><br>\n".
+    "<hr>\n".
     "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n<tr><th>Module</th><th>Result</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
     (join "", (@history)).
     "</table>"
