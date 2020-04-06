@@ -2,3 +2,4 @@ task-run "files/disable-gpg-check";
 package-install "epel-release";
 task-run "files/disable-gpg-check";
 package-install "glibc-langpack-en which gcc openssl openssl-devel wget zstd";
+zef "https://github.com/melezhik/sparrow6-rakudo-install.git", %( force => True );
