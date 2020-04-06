@@ -55,11 +55,12 @@ get '/rakudist' => sub {
       "</td>\n",
       "<td>$os</td>\n",
       "<td>$rakudo_version</td>\n",
-      "</tr><br>\n"
+      "</tr>\n"
   }
 
   return $c->render(
-    text => "Welcome to RakuDist - easy way to test your Raku modules distributions across different OS<hr>\n".
+    text => "Welcome to the RakuDist © - Raku Modules Distributions Test API.<hr>\n".
+    "<a href=\"https://github.com/melezhik/RakuDist\" target=\"_blank\">github</a> | ".
     "<a href=\"/rakudist/api/status\" target=\"_blank\">status</a><hr>".
     "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n<tr><th>Module</th><th>Result</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
     (join "", (@history)).
