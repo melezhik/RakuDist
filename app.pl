@@ -54,7 +54,7 @@ get '/rakudist' => sub {
       (scalar localtime($id)),
       "</td>\n",
       "<td>$os</td>\n",
-      "<td>$rakudo_version</td>\n",
+      ($rakudo_version eq "default" ? "<td>$rakudo_version</td>\n" : "<td> <a href=\"https://github.com/rakudo/rakudo/commit/$rakudo_version\" target=\"_blank\">$rakudo_version</a></td>\n" ),
       "</tr>\n"
   }
 
