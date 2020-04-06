@@ -1,3 +1,3 @@
 bash "echo hello world";
-package-install "make gcc libressl-dev libc-dev tar wget zstd";
+package-install "make gcc libressl-dev libc-dev tar wget zstd which";
 zef "https://github.com/melezhik/sparrow6-rakudo-install.git", %( force => True );
