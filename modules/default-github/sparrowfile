@@ -14,6 +14,22 @@ my $dir = $*CWD;
 
 my $patch-dir = "{$dir}/files/patches/$project";
 
+# Alpine patch
+
+if os() eq 'alpine' {
+
+  # this is needed for alpine rakudo installation
+  unless "/bin/zef".IO ~~ :e {
+    copy "/opt/rakudo-pkg/share/perl6/core/bin/zef", "/bin/zef"
+  }
+
+  # this is needed for alpine rakudo installation
+  unless "/bin/perl6".IO ~~ :e {
+    copy "/opt/rakudo-pkg/bin/perl6", "/bin/perl6"
+  }
+
+}
+
 # ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
 say "<<< PREPARE Environment >>>";
@@ -119,21 +135,6 @@ if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
 }
 
 bash "cd {$directory} && ls -l";
-
-if os() eq 'alpine' {
-
-  # this is needed for alpine rakudo installation
-  unless "/bin/zef".IO ~~ :e {
-    copy "/opt/rakudo-pkg/share/perl6/core/bin/zef", "/bin/zef"
-  }
-
-  # this is needed for alpine rakudo installation
-  unless "/bin/perl6".IO ~~ :e {
-    copy "/opt/rakudo-pkg/bin/perl6", "/bin/perl6"
-  }
-
-
-}
 
 bash "cd {$directory} && zef install .", %(
   description => "zef install .",

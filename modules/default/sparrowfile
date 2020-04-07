@@ -4,6 +4,22 @@ my $rakudo-version = config()<rakudo_version>;
 my $dir = $*CWD;
 my $patch-dir = "$dir/files/patches/$module";
 
+# Alpine patch
+
+if os() eq 'alpine' {
+
+  # this is needed for alpine rakudo installation
+  unless "/bin/zef".IO ~~ :e {
+    copy "/opt/rakudo-pkg/share/perl6/core/bin/zef", "/bin/zef"
+  }
+
+  # this is needed for alpine rakudo installation
+  unless "/bin/perl6".IO ~~ :e {
+    copy "/opt/rakudo-pkg/bin/perl6", "/bin/perl6"
+  }
+
+}
+
 # ------------------------------------------- INSTALL Rakudo -------------------------------------------------------- #
 
 say "<<< PREPARE Environment >>>";
@@ -29,21 +45,6 @@ module-run 'Rakudo::Install', %(
 # ------------------------------------------- INSTALL Module -------------------------------------------------------- #
 
 say "<<< INSTALL Module >>>";
-
-if os() eq 'alpine' {
-
-  # this is needed for alpine rakudo installation
-  unless "/bin/zef".IO ~~ :e {
-    copy "/opt/rakudo-pkg/share/perl6/core/bin/zef", "/bin/zef"
-  }
-
-  # this is needed for alpine rakudo installation
-  unless "/bin/perl6".IO ~~ :e {
-    copy "/opt/rakudo-pkg/bin/perl6", "/bin/perl6"
-  }
-
-
-}
 
 my %state = task-run "zef fetch {$module}", "zef-fetch", %(
   identity => $module,
