@@ -8,9 +8,6 @@ Test Raku modules against different OS, Rakudo versions
 * CentOS
 * Alpine
 
-\* ***Only CentOS and Debian OS are now available when test through HTTP API***, my tiny Azure subscription limits
-number of docker container running simultaneously, if you're interested in a donation, please let me know! 
-
 ## Rakudo versions supported
 
 Any, see `rakudo_version` parameter in API documentation.

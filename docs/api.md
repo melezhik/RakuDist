@@ -77,8 +77,6 @@ Required. Operation system (`alpine|debian|centos`)
  
 Optional. A name of rakudo version commit, should be full SHA
 
-Caveats. Rakudo version option is available only for CentOS/Debian os.
-
 * `sync_mode`
 
 Optional. (`on|off`), if sync mode is `on` run test in synchronous mode ( gives result immediately )
