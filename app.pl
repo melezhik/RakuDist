@@ -47,14 +47,15 @@ get '/rakudist' => sub {
     chomp $i;
     next unless $i =~ /\S+/;
     my ($thing_to_run,$os,$type,$rakudo_version,$sync_mode,$id,$token) = split /\s+/, $i;
+    my $status = job_status($token);
     push @history, 
       "<tr><td><a href=\"/rakudist/reports/$thing_to_run/$os/$id.txt\" target=\"_blank\">$thing_to_run</a></td>\n",
-      "<td>",job_status($token),"</td>",
+      "<td>",$status->{status},"</td>",
       "<td>",
       (scalar localtime($id)),
       "</td>\n",
       "<td>$os</td>\n",
-      ($rakudo_version eq "default" ? "<td>$rakudo_version</td>\n" : "<td> <a href=\"https://github.com/rakudo/rakudo/commit/$rakudo_version\" target=\"_blank\">$rakudo_version</a></td>\n" ),
+      ($rakudo_version eq "default" ? "<td>".($status->{version}||"default")."</td>\n" : "<td> <a href=\"https://github.com/rakudo/rakudo/commit/$rakudo_version\" target=\"_blank\">$rakudo_version</a></td>\n" ),
       "</tr>\n"
   }
 
@@ -151,7 +152,8 @@ post '/rakudist/api/job/status' => sub {
 
   my $token = $c->param('token');
 
-  $c->render(text => job_status($token));
+  $c->render(text => job_status($token)->{status});
+
 };
 
 post '/rakudist/api/job/report' => sub {
@@ -225,18 +227,30 @@ sub job_status {
   my $exit_code = $?;
 
   if ($exit_code == 0){
-    return "running"
+
+      if ( open(my $fh, "<", "/usr/share/repo/rakudist/reports/$docker_id/$id.txt")) {
+
+        my $report = join "", <$fh>;
+
+        close $fh;
+
+        return $report =~ /perl6\s+version\]\s+(.*)/ ? { status => "running", version => $1 } : { status => "running" } 
+
+      } else {
+        return { status => "running" }
+      }
   } else {
       if ( open(my $fh, "<", "/usr/share/repo/rakudist/reports/$docker_id/$id.txt")) {
         my $report = join "", <$fh>;
         close $fh;
         if ($report =~ /RakuDist: OK/){
-         return "success"
-       } else {
-          return "fail"
+         return $report =~ /perl6\s+version\]\s+(.*)/ ? { status => "success", version => $1 } : { status => "success" } 
+         } else {
+         $report =~ /perl6\s+version\]\s+(.*)/; 
+         return $report =~ /perl6\s+version\]\s+(.*)/ ? { status => "fail", version => $1 } : { status => "fail" } 
         }
       } else {
-        return "unknown"
+        return { status => "unknown" }
       }
   }
 
