@@ -64,7 +64,7 @@ get '/rakudist' => sub {
   return $c->render(
     text => "Welcome to the RakuDist © - Raku Modules Distributions Test API.<hr>\n".
     "<a href=\"https://github.com/melezhik/RakuDist\" target=\"_blank\">github</a> | \n".
-    "<a href=\"/rakudist/api/status\" target=\"_blank\">status</a> | \n".
+    "<a href=\"/rakudist/api/status\" target=\"_blank\">status</a><hr>\n".
     "OS supported: Debian/Centos/Alpine<hr>\n".
     "to run test against a default version: <code> curl -d os=centos http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
     "to run test against a certain version: <code> curl -d os=centos -d rakudo_version=\$full_sha_commit http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
