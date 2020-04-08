@@ -48,6 +48,7 @@ get '/rakudist' => sub {
     next unless $i =~ /\S+/;
     my ($thing_to_run,$os,$type,$rakudo_version,$sync_mode,$id,$token) = split /\s+/, $i;
     my $status = job_status($token);
+    (my $rakudo_version_short = $rakudo_version) =~s/(\S\S\S\S\S\S\S\S).*/$1/; 
     push @history, 
       "<tr><td><a href=\"/rakudist/reports/$thing_to_run/$os/$id.txt\" target=\"_blank\">$thing_to_run</a></td>\n",
       "<td>",$status->{status},"</td>",
@@ -55,7 +56,8 @@ get '/rakudist' => sub {
       (scalar localtime($id)),
       "</td>\n",
       "<td>$os</td>\n",
-      ($rakudo_version eq "default" ? "<td>".($status->{version}||"default")."</td>\n" : "<td> <a href=\"https://github.com/rakudo/rakudo/commit/$rakudo_version\" target=\"_blank\">$rakudo_version</a></td>\n" ),
+      "<td>".($status->{version}||"unknown")."</td>\n",
+      ($rakudo_version eq "default" ? "<td>NA</td>\n" : "<td> <a href=\"https://github.com/rakudo/rakudo/commit/$rakudo_version\" target=\"_blank\">$rakudo_version_short</a></td>\n" ),
       "</tr>\n"
   }
 
@@ -68,7 +70,14 @@ get '/rakudist' => sub {
     "to run test against a certain os: <code> curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
     "to run test against git/gitlab: <code> curl -d os=centos -d project=\$author/\$project http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github</code><br>\n".
     "<hr>\n".
-    "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n<tr><th>Module</th><th>Result</th><th>Date</th><th>OS</th><th>Rakudo Version</th></tr>\n".
+    "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n".
+    "<tr><th>Module</th>".
+    "<th>Result</th>".
+    "<th>Date</th>".
+    "<th>OS</th>".
+    "<th>Rakudo Version</th>".
+    "<th>GH commit</th>".
+    "</tr>\n".
     (join "", (@history)).
     "</table>"
   );
@@ -137,7 +146,7 @@ post '/rakudist/api/run/:thing' => sub {
     if ($exit_code == 0){
       $c->render(text => $out);
       open my $fh, ">>", "$ENV{HOME}/.rakudist_history";
-      print $fh "$thing_to_run $os $type $rakudo_version $sync_mode $id $out\n";
+      print $fh "$thing_to_run $os $type $rakudo_version $sync_mode $id $out";
       close $fh;
     } else {
       $c->render(text => $out, status => 500)
