@@ -43,7 +43,7 @@ get '/rakudist' => sub {
 
   my @history;
 
-  for my $i(reverse @records) {
+  for my $i((reverse @records)[0..99]) {
     chomp $i;
     next unless $i =~ /\S+/;
     my ($thing_to_run,$os,$type,$rakudo_version,$sync_mode,$id,$token) = split /\s+/, $i;
@@ -71,7 +71,7 @@ get '/rakudist' => sub {
     "to run test against a certain os: <code> curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
     "to run test against git/gitlab: <code> curl -d os=centos -d project=\$author/\$project http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github</code><br>\n".
     "<hr>\n".
-    "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent runs</caption>\n".
+    "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent 100 runs</caption>\n".
     "<tr><th>Module</th>".
     "<th>Result</th>".
     "<th>Date</th>".
