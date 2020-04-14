@@ -1,0 +1,5 @@
+package-install %(
+  alpine => "gtk+3.0-dev",
+  debian => "libgtk-3-dev",
+  centos => "gtk3-devel"
+);
