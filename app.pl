@@ -50,8 +50,9 @@ get '/rakudist' => sub {
     my $status = job_status($token);
     (my $rakudo_version_short = $rakudo_version) =~s/(\S\S\S\S\S\S\S\S).*/$1/; 
     push @history, 
-      "<tr><td><a href=\"/rakudist/reports/$thing_to_run/$os/$id.txt\" target=\"_blank\">$thing_to_run</a></td>\n",
-      "<td>",$status->{status},"</td>",
+      "<tr>",
+      "<td><b>$thing_to_run</b></td>\n",
+      "<td><a href=\"/rakudist/reports/$thing_to_run/$os/$id.txt\" target=\"_blank\">",$status->{status},"</a></td>\n",
       "<td>",
       (scalar localtime($id)),
       "</td>\n",
