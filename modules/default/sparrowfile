@@ -106,7 +106,7 @@ if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
 }
 
 
-bash "cd {$directory} && zef install .", %(
+bash "cd {$directory} && zef install . --verbose --/prove --/tap-harness", %(
   description => "zef install $module",
   user => $user,
   debug => False
