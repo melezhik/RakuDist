@@ -1,0 +1,4 @@
+package-install %(
+  debian => "libxml2-dev",
+  centos => "libxml2-devel"
+);
