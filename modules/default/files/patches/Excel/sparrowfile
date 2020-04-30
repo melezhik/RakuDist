@@ -1,3 +1,4 @@
 package-install  %(
-  ubuntu => "libperl-dev"
+  ubuntu => "libperl-dev",
+  debian => "libperl-dev",
 );
