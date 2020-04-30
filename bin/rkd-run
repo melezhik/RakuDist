@@ -74,14 +74,7 @@ else # default test for certain rakudo version
   echo "You can replay this test using RakuDist - https://github.com/melezhik/RakuDist" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
   echo "===" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
 
-  ( \
-    echo -n "{ cwd =>  '"; echo -n ~/projects/RakuDist/modules/default; \
-    echo  -n "', conf => '"; \
-    echo -n conf/$id.pl6; \
-    echo "' }" \
-  ) > ~/projects/RakuDist/sparky/$os/.triggers/start_$id.pl6  
-  
-  #sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com --conf=conf/$id.pl6 >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt 2>&1 &
+  sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com --conf=conf/$id.pl6 >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt 2>&1 &
 
   echo "$id:$thing/$os"
 

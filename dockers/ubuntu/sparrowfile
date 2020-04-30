@@ -1,0 +1,2 @@
+package-install "procps wget zstd gcc make gcc libssl-dev";
+zef "https://github.com/melezhik/sparrow6-rakudo-install.git", %( force => True );

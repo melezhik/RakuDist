@@ -22,6 +22,10 @@ get '/rakudist/api/status' => sub {
 
   $out .= `docker exec -i debian-rakudist ps uax`;
 
+  $out .= "\nubuntu-rakudist\n";
+
+  $out .= `docker exec -i ubuntu-rakudist ps uax`;
+
   $out .= "\ncentos-rakudist\n";
 
   $out .= `docker exec -i centos-rakudist ps uax`;
@@ -66,7 +70,7 @@ get '/rakudist' => sub {
     text => "Welcome to the RakuDist © - Raku Modules Distributions Test API.<hr>\n".
     "<a href=\"https://github.com/melezhik/RakuDist\" target=\"_blank\">github</a> | \n".
     "<a href=\"/rakudist/api/status\" target=\"_blank\">status</a><hr>\n".
-    "OS supported: Debian/Centos/Alpine<hr>\n".
+    "OS supported: Debian/Centos/Alpine/Ubuntu<hr>\n".
     "to run test against a default version: <code> curl -d os=centos http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
     "to run test against a certain version: <code> curl -d os=centos -d rakudo_version=\$full_sha_commit http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
     "to run test against a certain os: <code> curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
@@ -131,7 +135,7 @@ post '/rakudist/api/run/:thing' => sub {
     return $c->render(text => "bad project param", status => 400)
   }
 
-  unless ($os=~/^(alpine|debian|centos)+$/) {
+  unless ($os=~/^(alpine|debian|centos|ubuntu)+$/) {
     return $c->render(text => "bad os param", status => 400)
   }
 
