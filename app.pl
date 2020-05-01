@@ -97,6 +97,7 @@ post '/rakudist/api/run/:thing' => sub {
 
   my $thing = $c->stash('thing');
   my $os = $c->param('os');
+  my $sparky = $c->param('sparky');
   my $project = $c->param('project');
   my $rakudo_version = $c->param('rakudo_version') || "default"; # "abae9bb4a6b130d413b72a0952e2edd67a304aab";
   my $sync_mode = $c->param('sync_mode') || "off";
@@ -141,7 +142,13 @@ post '/rakudist/api/run/:thing' => sub {
 
   my $id = time();
 
-  my $out = `/usr/bin/rkd-run $thing_to_run $os $type $rakudo_version $sync_mode $id`;
+  my $out;
+
+  if ($sparky){
+    $out = `/usr/bin/rkd-run-sparky $thing_to_run $os $type $rakudo_version $sync_mode $id`;
+ } else {
+    $out = `/usr/bin/rkd-run $thing_to_run $os $type $rakudo_version $sync_mode $id`;
+  }
 
   my $exit_code = $?;
 
@@ -150,10 +157,14 @@ post '/rakudist/api/run/:thing' => sub {
     $c->render(text => $out);
   } else {
     if ($exit_code == 0){
-      $c->render(text => $out);
-      open my $fh, ">>", "$ENV{HOME}/.rakudist_history";
-      print $fh "$thing_to_run $os $type $rakudo_version $sync_mode $id $out";
-      close $fh;
+      if ($sparky){
+        $c->render(text => "build is queued to Sparky");
+      } else {
+        $c->render(text => $out);
+        open my $fh, ">>", "$ENV{HOME}/.rakudist_history";
+        print $fh "$thing_to_run $os $type $rakudo_version $sync_mode $id $out";
+        close $fh;
+      }
     } else {
       $c->render(text => $out, status => 500)
     }
