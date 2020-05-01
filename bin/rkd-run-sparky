@@ -17,7 +17,7 @@ if test "$type" = "github" || test "$type" = "gitlab" ; then
 
   ( \
     echo -n "{ cwd =>  '"; \
-    echo -n ~/projects/RakuDist/modules/default-github; \
+    echo -n $PWD; \
     echo  -n "', conf => '"; \
     echo -n conf/$id.pl6; \
     echo -n "', description => '"; \
@@ -31,7 +31,7 @@ elif test -d ~/projects/RakuDist/modules/$thing; then
 
   ( \
     echo -n "{ cwd =>  '"; \
-    echo -n ~/projects/RakuDist/modules/default-github; \
+    echo -n $PWD; \
     echo  -n "', conf => '"; \
     echo -n conf/$id.pl6; \
     echo -n "', description => '"; \
@@ -48,7 +48,7 @@ else # default test for certain rakudo version
 
   ( \
     echo -n "{ cwd =>  '"; \
-    echo -n ~/projects/RakuDist/modules/default; \
+    echo -n $PWD; \
     echo  -n "', conf => '"; \
     echo -n conf/$id.pl6; \
     echo -n "', description => '"; \
