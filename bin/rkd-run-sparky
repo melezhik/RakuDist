@@ -7,72 +7,44 @@ rakudo_version=$4
 sync_mode=$5
 id=$6
 
-numbuilds=`ps ax | grep 'sparrowdo --no_sudo' | grep -v grep | wc -l`
-
-if test $numbuilds -ge 5; then
-  echo too many builds are running
-  exit 2
-fi
-
 user=$(perl6 -e 'my @a = roll "a".."z": 10; say @a.join: ""')
 
 if test "$type" = "github" || test "$type" = "gitlab" ; then 
 
   cd ~/projects/RakuDist/modules/default-github
 
-  if ps ax | grep sparrowdo | grep -q "\--prefix=$id \--"; then
-    echo "already in queue"
-    exit 2
-  fi
-
   echo "%( user => '$user', project => '$thing', scm => 'https://$type.com/$thing.git', rakudo_version => '$rakudo_version' )" > conf/$id.pl6
 
-  mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
-
-  echo "Run default test for $type project $thing on $os" > /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-  echo "You can replay this test using RakuDist - https://github.com/melezhik/RakuDist" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-  echo "===" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-
-  sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com --conf=conf/$id.pl6 >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt 2>&1 &
-
-  echo "$id:$thing/$os"
+  ( \
+    echo -n "{ cwd =>  '"; \
+    echo -n ~/projects/RakuDist/modules/default-github; \
+    echo  -n "', conf => '"; \
+    echo -n conf/$id.pl6; \
+    echo -n "', description => '"; \
+    echo -n "$type project $thing RakuDist test, $rakudo_version Rakudo version"; \
+    echo "' }" \
+  ) > ~/projects/RakuDist/sparky/$os/.triggers/start_$id.pl6  
 
 elif test -d ~/projects/RakuDist/modules/$thing; then
 
   cd ~/projects/RakuDist/modules/$thing
 
-  if ps ax | grep sparrowdo | grep -q "\--prefix=$id \--"; then
-    echo "already in queue"
-    exit 2
-  fi
+  ( \
+    echo -n "{ cwd =>  '"; \
+    echo -n ~/projects/RakuDist/modules/default-github; \
+    echo  -n "', conf => '"; \
+    echo -n conf/$id.pl6; \
+    echo -n "', description => '"; \
+    echo -n "local project $thing RakuDist test, default Rakudo version"; \
+    echo "' }" \
+  ) > ~/projects/RakuDist/sparky/$os/.triggers/start_$id.pl6  
 
-  mkdir -p /usr/share/repo/rakudist/reports/$thing/$os
-
-  echo "Run custom test for $thing on $os" > /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-  echo "You can replay this test using RakuDist - https://github.com/melezhik/RakuDist" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-  echo "===" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-
-  sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt 2>&1 &
-
-  echo "$id:$thing/$os"
 
 else # default test for certain rakudo version
 
   cd ~/projects/RakuDist/modules/default
 
-  if ps ax | grep sparrowdo | grep -q "\--prefix=$id \--"; then
-    echo "already in queue"
-    exit 2
-  fi
-
-
   echo "%( user => '$user', module => '$thing', rakudo_version => '$rakudo_version' )" > conf/$id.pl6
-
-  mkdir -p /usr/share/repo/rakudist/reports/$thing/$os/
-
-  echo "Run default test for $thing on $os" > /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-  echo "You can replay this test using RakuDist - https://github.com/melezhik/RakuDist" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
-  echo "===" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
 
   ( \
     echo -n "{ cwd =>  '"; \
@@ -80,14 +52,21 @@ else # default test for certain rakudo version
     echo  -n "', conf => '"; \
     echo -n conf/$id.pl6; \
     echo -n "', description => '"; \
-    echo -n "$thing module RakuDist test, default Rakudo version"; \
+    echo -n "$thing module RakuDist test, $rakudo_version Rakudo version"; \
     echo "' }" \
   ) > ~/projects/RakuDist/sparky/$os/.triggers/start_$id.pl6  
-  
-  #sparrowdo --no_sudo --docker=$os-rakudist --prefix=$id --repo=http://repo.westus.cloudapp.azure.com --conf=conf/$id.pl6 >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt 2>&1 &
-
-  echo "$id:$thing/$os"
-
 
 fi
+
+#( \
+#  echo -n "{ cwd =>  '"; \
+#  echo -n $PWD; \
+#  echo  -n "', conf => '"; \
+#  echo -n $conf; \
+#  echo -n "', description => '"; \
+#  echo -n $desc; \
+#  echo "' }" \
+#) > ~/projects/RakuDist/sparky/$os/.triggers/start_$id.pl6  
+
+
 
