@@ -75,9 +75,12 @@ else # default test for certain rakudo version
   echo "===" >> /usr/share/repo/rakudist/reports/$thing/$os/$id.txt
 
   ( \
-    echo -n "{ cwd =>  '"; echo -n ~/projects/RakuDist/modules/default; \
+    echo -n "{ cwd =>  '"; \
+    echo -n ~/projects/RakuDist/modules/default; \
     echo  -n "', conf => '"; \
     echo -n conf/$id.pl6; \
+    echo -n "', description => '"; \
+    echo -n "$thing module RakuDist test, default Rakudo version"; \
     echo "' }" \
   ) > ~/projects/RakuDist/sparky/$os/.triggers/start_$id.pl6  
   
