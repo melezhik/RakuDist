@@ -97,7 +97,7 @@ post '/rakudist/api/run/:thing' => sub {
 
   my $thing = $c->stash('thing');
   my $os = $c->param('os');
-  my $sparky = $c->param('sparky');
+  my $sparky = 1;
   my $project = $c->param('project');
   my $rakudo_version = $c->param('rakudo_version') || "default"; # "abae9bb4a6b130d413b72a0952e2edd67a304aab";
   my $sync_mode = $c->param('sync_mode') || "off";
