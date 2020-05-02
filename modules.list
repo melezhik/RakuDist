@@ -1,0 +1,62 @@
+AI::FANN  libfann-dev
+App::OrgSleep libimage-magick-perl
+Archive::Libarchive libarchive13
+Archive::Libarchive::Raw  libarchive13
+Audio::Encode::LameMP3  libmp3lame0
+Audio::Libshout libshout3
+Audio::OggVorbis  libogg-dev libvorbis-dev
+Audio::Taglib::Simple libtagc0-dev
+Cairo libcairo2-dev
+CommonMark  libcmark0
+Compress::Brotli  libbrotli-dev
+Compress::Snappy  libsnappy-dev
+Cro::ZeroMQ 
+DB::Pg  
+DBDish::ODBC  libodbc1
+Desktop::Notify libnotify4
+Device::Velleman::K8055 libusb-dev
+Digest::MurmurHash3 
+Digest::xxHash  
+Email::Notmuch  libnotmuch-dev
+Font::FreeType  libfreetype6
+GD  libgd-dev
+GDBM  libgdbm-dev
+GTK::V3 libgtk-3-dev
+GLFW  libglfw3
+Games::BubbleBreaker  libsdl1.2-dev
+Gumbo libgumbo-dev
+HTML::Canvas  fonts-liberation
+IUP 
+Image::Libexif  libexif12
+Image::QRCode libqrencode3
+Image::Resize libgd-dev
+Imlib2  libimlib2-dev
+Inline::Perl5 libperl-dev
+JavaScript::SpiderMonkey  
+Jupyter::Kernel libzmq3-dev python-jupyter-core python3-jupyter-core
+LMDB  liblmdb-dev
+LibCurl libcurl4-openssl-dev
+LibGit2 libgit2-dev
+LibYAML libyaml-dev
+MagickWand  libmagickwand-dev
+Math::Primesieve  libprimesieve-dev
+MsgPack libmsgpack-dev
+Net::Curl libcurl4-openssl-dev
+Net::LibIDN libidn11-dev
+Net::LibIDN2  libidn2-dev
+Net::ZMQ  libzmq3-dev
+OpenCV  libopencv-dev g++
+Parse::STDF libstdf
+Perl6 Snowball Binding  
+Readline  libreadline7
+SDL libsdl1.2-dev libsdl-mixer1.2-dev libsdl-image1.2-dev
+SSH::LibSSH libssh-dev
+SSL libssl-dev
+TCC libtcc-dev
+TOML  golang-toml-dev
+TagLibC libtagc0-dev
+Text::Markdown::Discount  libmarkdown2-dev
+TinyCC  libtcc-dev
+Tika  jre-default
+TXN 
+TXN::Parser 
