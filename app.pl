@@ -39,53 +39,17 @@ get '/rakudist' => sub {
 
   my $c = shift;
 
-  open my $fh, "$ENV{HOME}/.rakudist_history";
-
-  my @records = <$fh>;
-
-  close $fh;
-
-  my @history;
-
-  for my $i((reverse @records)[0..99]) {
-    chomp $i;
-    next unless $i =~ /\S+/;
-    my ($thing_to_run,$os,$type,$rakudo_version,$sync_mode,$id,$token) = split /\s+/, $i;
-    my $status = job_status($token);
-    (my $rakudo_version_short = $rakudo_version) =~s/(\S\S\S\S\S\S\S\S).*/$1/; 
-    push @history, 
-      "<tr>",
-      "<td><b>$thing_to_run</b></td>\n",
-      "<td><a href=\"/rakudist/reports/$thing_to_run/$os/$id.txt\" target=\"_blank\">",$status->{status},"</a></td>\n",
-      "<td>",
-      (scalar localtime($id)),
-      "</td>\n",
-      "<td>$os</td>\n",
-      "<td>".($status->{version}||"unknown")."</td>\n",
-      ($rakudo_version eq "default" ? "<td>NA</td>\n" : "<td> <a href=\"https://github.com/rakudo/rakudo/commit/$rakudo_version\" target=\"_blank\">$rakudo_version_short</a></td>\n" ),
-      "</tr>\n"
-  }
 
   return $c->render(
     text => "Welcome to the RakuDist © - Raku Modules Distributions Test API.<hr>\n".
     "<a href=\"https://github.com/melezhik/RakuDist\" target=\"_blank\">github</a> | \n".
     "<a href=\"/rakudist/api/status\" target=\"_blank\">status</a><hr>\n".
     "OS supported: Debian/Centos/Alpine/Ubuntu<hr>\n".
-    "to run test against a default version: <code> curl -d os=centos http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
-    "to run test against a certain version: <code> curl -d os=centos -d rakudo_version=\$full_sha_commit http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
-    "to run test against a certain os: <code> curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</code><br>\n".
-    "to run test against git/gitlab: <code> curl -d os=centos -d project=\$author/\$project http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github</code><br>\n".
-    "<hr>\n".
-    "<table border=1 cellpadding=4 cellspacing=4>\n<caption>Recent 100 runs</caption>\n".
-    "<tr><th>Module</th>".
-    "<th>Result</th>".
-    "<th>Date</th>".
-    "<th>OS</th>".
-    "<th>Rakudo Version</th>".
-    "<th>GH commit</th>".
-    "</tr>\n".
-    (join "", (@history)).
-    "</table>"
+    "to run test against a default version: <pre>curl -d os=centos http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</pre><br>\n".
+    "to run test against a certain version: <pre> curl -d os=centos -d rakudo_version=\$full_sha_commit http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</pre><br>\n".
+    "to run test against a certain os: <pre> curl -d os=debian http://repo.westus.cloudapp.azure.com/rakudist/api/run/\$module_name</pre><br>\n".
+    "to run test against git/gitlab: <pre> curl -d os=centos -d project=\$author/\$project http://repo.westus.cloudapp.azure.com/rakudist/api/run/:github</pre><br>\n".
+    "<hr>Go to <a href=\"http://repo.westus.cloudapp.azure.com/sparky/builds\">http://repo.westus.cloudapp.azure.com/sparky/builds</a> to see current builds.\n"
   );
 
 };
