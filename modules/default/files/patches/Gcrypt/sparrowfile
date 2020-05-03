@@ -1,5 +1,6 @@
 package-install  %(
   centos => "libgcrypt",
-  debian => "libgcrypt-dev",
+  debian => "libgcrypt11-dev",
+  ubuntu => "libgcrypt11-dev",
 )
 
