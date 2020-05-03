@@ -7,7 +7,7 @@ Audio::Libshout libshout3
 Audio::OggVorbis  libogg-dev libvorbis-dev
 Audio::Taglib::Simple libtagc0-dev
 Cairo libcairo2-dev
-CommonMark  libcmark0
+  CommonMark  libcmark0
 Compress::Brotli  libbrotli-dev
 Compress::Snappy  libsnappy-dev
 Cro::ZeroMQ 
