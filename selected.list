@@ -14,8 +14,6 @@ Excel
 Excel::Text::Template
 Gcrypt
 Geo::Hash
-:github
-:gitlab
 Grid
 Hash::Merge
 Inline::Perl5
