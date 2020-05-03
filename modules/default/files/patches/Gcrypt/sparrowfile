@@ -1,2 +1,5 @@
-package-install "libgcrypt";
+package-install  %(
+  centos => "libgcrypt",
+  debian => "libgcrypt-dev",
+)
 
