@@ -1,11 +1,9 @@
-App::MoarVM::Debug
 ArrayHash
 Array::Shaped::Console
 AttrX::Mooish
 Auth::SASL
 BitEnum
 Cro::Core
-Cro::LDAP
 Data::Dump
 Data::Record
 Excel
@@ -22,9 +20,6 @@ Kind
 LibXML
 List::MoreUtils
 Matrix::Client
-Ming
-MinG
-PDF::Class
 POSIX::getaddrinfo
 Red
 Regex::FuzzyToken
