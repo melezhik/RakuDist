@@ -1,11 +1,9 @@
 App::MoarVM::Debug
 ArrayHash
-Array::Hash
 Array::Shaped::Console
 AttrX::Mooish
 Auth::SASL
 BitEnum
-CKind
 Cro::Core
 Cro::LDAP
 Data::Dump
