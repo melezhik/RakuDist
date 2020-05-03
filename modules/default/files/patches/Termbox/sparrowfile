@@ -1,3 +1,7 @@
 #!perl6
 
-package-install "python36 gcc";
+package-install %(
+  centos => "python36 gcc",
+  debian => "python gcc",
+  ubuntu => "python gcc",
+)
