@@ -104,7 +104,7 @@ post '/rakudist/api/run/:thing' => sub {
     return $c->render(text => "bad os param", status => 400)
   }
 
-  my $id = localtime();
+  my $id = time();
 
   sleep(1);
 
