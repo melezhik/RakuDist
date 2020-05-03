@@ -17,7 +17,6 @@ Interval
 IO::Path::XDG
 JSON::Fast
 Kind
-LibXML
 List::MoreUtils
 Matrix::Client
 POSIX::getaddrinfo
