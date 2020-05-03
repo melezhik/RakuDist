@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use Mojolicious::Lite;
+use Data::UUID;
 
 my @recent;
 
@@ -104,7 +105,7 @@ post '/rakudist/api/run/:thing' => sub {
     return $c->render(text => "bad os param", status => 400)
   }
 
-  my $id = time();
+  my $id = Data::UUID->new->to_string;
 
   my $out;
 

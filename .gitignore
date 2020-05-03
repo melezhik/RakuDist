@@ -5,3 +5,5 @@ modules/default-github/conf
 modules/default-cpan-with-whateverable/conf
 db.sqlite3
 .reports
+.triggers
+
