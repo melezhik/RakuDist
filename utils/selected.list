@@ -8,7 +8,6 @@ Data::Dump
 Data::Record
 Excel
 Excel::Text::Template
-Gcrypt
 Geo::Hash
 Grid
 Hash::Merge
@@ -20,7 +19,6 @@ Kind
 List::MoreUtils
 Matrix::Client
 POSIX::getaddrinfo
-Red
 Regex::FuzzyToken
 String::Fields
 String::Fields 
