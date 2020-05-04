@@ -1,0 +1,4 @@
+cro: 1
+id: rakudist
+name: RakuDist
+entrypoint: app.raku
