@@ -6,7 +6,7 @@ sub queue-build ( %params ) is export {
 
   my $thing = %params<thing>;
   my $os = %params<os>;
-  my $rakudo_version = %params<rakudo_version>;
+  my $rakudo_version = %params<rakudo_version> || "default";
   
   my $user = ('a' .. 'z').pick(10).join('');
 
@@ -44,7 +44,7 @@ sub queue-build ( %params ) is export {
      )";
   
   # local project
-  } elsif "{%*ENV<HOME>}/projects/RakuDist/modules/$thing".IO ~~ :d {
+  } elsif $type eq "local" {
   
     $dir = "{%*ENV<HOME>}/projects/RakuDist/modules/$thing";
     $description = "local project $thing RakuDist test, default Rakudo version";
@@ -65,12 +65,13 @@ sub queue-build ( %params ) is export {
   
   }
   
-  spurt "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6", "{ 
+  spurt "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6", "%( 
     cwd =>  '$dir',
-    conf => '$conf',
+    conf => '$config',
     description => '$description',
-  }";
+  )";
 
-  say "queue build: ", "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6".IO.slurp;  
+  say "queue build: {%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6:", 
+      "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6".IO.slurp;  
 
 }

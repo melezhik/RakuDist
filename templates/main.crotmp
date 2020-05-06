@@ -11,11 +11,27 @@
 <body>
   <div class="container">
     <div class="notification">
+
+      <?.is-queued>
+        <article class="message is-success">
+          <div class="message-header">
+            <p>Build is queued</p>
+            <button class="delete" aria-label="delete"></button>
+          </div>
+          <div class="message-body">
+            Build is successfully queued. See "Queue" or "Recent Builds" to track it.
+          </div>
+        </article>
+      </?>
+      
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item" href=".">
               Home
+            </a>
+            <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/queue" target="_blank">
+              Queue
             </a>
             <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/builds" target="_blank">
               Recent Builds

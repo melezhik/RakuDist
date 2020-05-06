@@ -19,14 +19,16 @@ my $application = route {
           rakudo_version => $rakudo_version,
           os => $os 
         );
-        
+
         template 'templates/main.crotmp', %( 
           thing => $thing, 
           rakudo_version => $rakudo_version,
-          os => $os 
+          os => $os,
+          is-queued => True
         )
-      }
       
+      }
+    
     }
 
 
