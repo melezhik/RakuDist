@@ -2,7 +2,7 @@ use v6;
 
 unit module RakuDist;
 
-sub plugin-search ( %params ) is export {
+sub queue-build ( %params ) is export {
 
   my $thing = %params<thing>;
   my $os = %params<os>;
