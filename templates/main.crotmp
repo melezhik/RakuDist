@@ -64,6 +64,7 @@
               <div class="control">
                 <input class="input" type="text" name="rakudo_version" placeholder="Full SHA" value="<.rakudo_version>">
               </div>
+              <p class="help">optional</p>
             </div>
             <div class="field">
               <label class="label">OS</label>
