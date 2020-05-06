@@ -39,9 +39,9 @@
         <div class="panel-block">
           <form action="queue" method="post">
             <div class="field">
-              <label class="label">Module | GitHub Project | GitLab Project</label>
+              <label class="label">Module | GitHub/GitLab Project</label>
               <div class="control">
-                <input class="input" type="text" name="thing" placeholder="Module Name or GitHub project URL" value=<.thing>>
+                <input class="input" type="text" name="thing" placeholder="Module Name or GitHub/GitLab project URL" value=<.thing>>
               </div>
             <div class="field">
               <label class="label">Rakudo Version</label>
