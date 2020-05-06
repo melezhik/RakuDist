@@ -1,6 +1,7 @@
 use Cro::HTTP::Router;
 use Cro::HTTP::Server;
 use Cro::WebApp::Template;
+use RakuDist;
 
 my $application = route {
 
@@ -12,11 +13,18 @@ my $application = route {
     post -> 'queue', :%params {
 
       request-body -> (:$thing, :$os, :$rakudo_version) {
-          template 'templates/main.crotmp', %( 
-            thing => $thing, 
-            rakudo_version => $rakudo_version,
-            os => $os 
-          )
+        
+        queue-build %(
+          thing => $thing, 
+          rakudo_version => $rakudo_version,
+          os => $os 
+        );
+        
+        template 'templates/main.crotmp', %( 
+          thing => $thing, 
+          rakudo_version => $rakudo_version,
+          os => $os 
+        )
       }
       
     }
