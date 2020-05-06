@@ -9,6 +9,18 @@ my $application = route {
       template 'templates/main.crotmp', %()
     }
 
+    post -> 'queue', :%params {
+
+      request-body -> (:$thing, :$os, :$rakudo_version) {
+          template 'templates/main.crotmp', %( 
+            thing => $thing, 
+            rakudo_version => $rakudo_version,
+            os => $os 
+          )
+      }
+      
+    }
+
 
 }
 

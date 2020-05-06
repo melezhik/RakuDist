@@ -12,59 +12,23 @@
   <div class="container">
     <div class="notification">
       <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href=".">
-            <img src="https://raw.githubusercontent.com/melezhik/RakuDist/master/images/logo.png" width="90">
-          </a>
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item" href="https://github.com/melezhik/RakuDist" target="_blank">
-              GitHub
+            <a class="navbar-item" href=".">
+              Home
             </a>
-      
             <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/builds" target="_blank">
               Recent Builds
             </a>
-      
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                More
-              </a>
-      
-              <div class="navbar-dropdown">
-                <a class="navbar-item" href="https://modules.raku.org/" target="_blank">
-                  Modules.raku.org
-                </a>
-                <a class="navbar-item">
-                  Donate
-                </a>
-                <a class="navbar-item" href="mailto:melezhik@gmail.com">
-                  Contact
-                </a>
-                <hr class="navbar-divider">
-                <a class="navbar-item" href="https://github.com/melezhik/RakuDist/issues" target="_blank">
-                  Report an issue
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <a class="button is-light">
-                  Log in
-                </a>
-              </div>
-            </div>
+            <a class="navbar-item" href="doc">
+              API
+            </a>
+            <a class="navbar-item" href="https://modules.raku.org/" target="_blank">
+              Raku Modules
+            </a>
+            <a class="navbar-item" href="https://github.com/rakudo/rakudo/commits" target="_blank">
+              Rakudo Commits
+            </a>
           </div>
         </div>
       </nav>
@@ -73,36 +37,38 @@
           RakuDist © - Raku Modules Distributions Test API.
         </p>
         <div class="panel-block">
-          <div class="field">
-            <label class="label">Module | GitHub Project | GitLab Project</label>
-            <div class="control">
-              <input class="input" type="text" placeholder="Module name">
+          <form action="queue" method="post">
+            <div class="field">
+              <label class="label">Module | GitHub Project | GitLab Project</label>
+              <div class="control">
+                <input class="input" type="text" name="thing" placeholder="Module Name or GitHub project URL" value=<.thing>>
+              </div>
+            <div class="field">
+              <label class="label">Rakudo Version</label>
+              <div class="control">
+                <input class="input" type="text" name="rakudo_version" placeholder="Full SHA" value="<.rakudo_version>">
+              </div>
             </div>
-          <div class="field">
-            <label class="label">Rakudo Version</label>
-            <div class="control">
-              <input class="input" type="text" placeholder="Full SHA">
+            <div class="field">
+              <label class="label">OS</label>
+              <div class="control">
+                <div class="select">
+                  <select name="os">
+                    <option selected>debian</option>
+                    <option>centos</option>
+                    <option>ubuntu</option>
+                    <option>alpine</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <label class="label">OS</label>
-            <div class="control">
-              <div class="select">
-                <select>
-                  <option selected>debian</option>
-                  <option>centos</option>
-                  <option>ubuntu</option>
-                  <option>alpine</option>
-                </select>
+            <div class="field is-grouped">
+              <div class="control">
+                <button class="button is-link">Submit</button>
               </div>
             </div>
           </div>
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link">Submit</button>
-            </div>
-          </div>
-        </div>
+        </form>
       </nav>
     </div>
   </div>
