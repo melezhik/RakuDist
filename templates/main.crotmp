@@ -12,6 +12,18 @@
   <div class="container">
     <div class="notification">
 
+      <?.is-error>
+        <article class="message is-danger">
+          <div class="message-header">
+            <p>Input parameters error</p>
+            <button class="delete" aria-label="delete"></button>
+          </div>
+          <div class="message-body">
+            One of the input parameters ( module|URL, rakudo_version, os) is not valid.
+          </div>
+        </article>
+      </?>
+
       <?.is-queued>
         <article class="message is-success">
           <div class="message-header">

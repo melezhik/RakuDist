@@ -13,19 +13,35 @@ my $application = route {
     post -> 'queue', :%params {
 
       request-body -> (:$thing, :$os, :$rakudo_version) {
-        
-        queue-build %(
-          thing => $thing, 
-          rakudo_version => $rakudo_version,
-          os => $os 
-        );
 
-        template 'templates/main.crotmp', %( 
-          thing => $thing, 
-          rakudo_version => $rakudo_version,
-          os => $os,
-          is-queued => True
-        )
+        if  $thing ~~! /^^ \s* <[ \/ \: \w \d  \_ \- \. ]>+ \s* $$/ 
+            or ($rakudo_version || "default")  ~~! /^^ \s* <[ a .. z  \d ]>+ \s* $$ / 
+            or $os ~~! /^^ \s* 'debian' || 'centos' || 'ubuntu' || 'alpine'  \s* $$ /  {
+
+          template 'templates/main.crotmp', %( 
+            thing => $thing, 
+            rakudo_version => $rakudo_version,
+            os => $os,
+            is-error => True
+          )
+
+        } else {
+
+          queue-build %(
+            thing => $thing, 
+            rakudo_version => $rakudo_version,
+            os => $os 
+          );
+  
+          template 'templates/main.crotmp', %( 
+            thing => $thing, 
+            rakudo_version => $rakudo_version,
+            os => $os,
+            is-queued => True
+          )
+  
+        }
+        
       
       }
     
