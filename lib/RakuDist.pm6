@@ -36,12 +36,12 @@ sub queue-build ( %params ) is export {
     $description = "$type project $thing RakuDist test, $rakudo_version Rakudo version";
     $config = "conf/$id.pl6";
   
-    spurt "%( 
+    spurt "$dir/$config", "%( 
         user => '$user', 
         project => '$thing', 
         scm => 'https://$type.com/$thing.git', 
         rakudo_version => '$rakudo_version' 
-     )", "$dir/$config"
+     )";
   
   # local project
   } elsif "{%*ENV<HOME>}/projects/RakuDist/modules/$thing".IO ~~ :d {
@@ -57,19 +57,20 @@ sub queue-build ( %params ) is export {
     $description = "$thing module RakuDist test, $rakudo_version Rakudo version";
     $config = "conf/$id.pl6";
   
-    spurt "%( 
+    spurt "$dir/$config", "%( 
       user => '$user', 
       module => '$thing', 
       rakudo_version => '$rakudo_version' 
-     )", "$dir/$config";
+     )";
   
   }
   
-  spurt "{ 
+  spurt "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6", "{ 
     cwd =>  '$dir',
     conf => '$conf',
     description => '$description',
-  }", "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6"
-  
+  }";
+
+  say "queue build: ", "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6".IO.slurp;  
 
 }
