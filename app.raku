@@ -12,7 +12,7 @@ my $application = route {
 
     post -> 'queue', :%params {
 
-      request-body -> (:$thing, :$os, :$rakudo_version, :$client ) {
+      request-body -> (:$thing, :$os = "debian", :$rakudo_version = "default", :$client = "cli" ) {
 
         if  $thing ~~! /^^ \s* <[ \/ \: \w \d  \_ \- \. ]>+ \s* $$/ 
             or ($rakudo_version || "default")  ~~! /^^ \s* <[ a .. z  \d ]>+ \s* $$ / 

@@ -42,14 +42,14 @@
             <a class="navbar-item" href=".">
               Home
             </a>
-            <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/queue" target="_blank">
-              Queue
+            <a class="navbar-item" href="about">
+              About
             </a>
             <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/builds" target="_blank">
               Recent Builds
             </a>
-            <a class="navbar-item" href="doc">
-              API
+            <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/queue" target="_blank">
+              Queue
             </a>
             <a class="navbar-item" href="https://modules.raku.org/" target="_blank">
               Raku Modules
