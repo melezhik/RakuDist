@@ -36,7 +36,7 @@ my $application = route {
 
         } else {
 
-          queue-build %(
+          my $trigger = queue-build %(
             thing => $thing, 
             rakudo_version => $rakudo_version,
             os => $os 
@@ -53,7 +53,7 @@ my $application = route {
   
           } else {
 
-            content 'text/plain', 'build queued';
+            content 'text/plain', "$os/$trigger";
 
           }
   
