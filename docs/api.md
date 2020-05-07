@@ -65,11 +65,11 @@ Use this base URL to track build statuses - `http://repo.westus.cloudapp.azure.c
 
 Status:
 
-* `queued` - a build is queued
-* `running` - a build is being executed
-* `success` - a build succeeded
-* `fail` - a build failed
-* `unknown` - could not get a build status
+* -2  `queued` - a build is queued
+* 0   `running` - a build is being executed
+* 1   `success` - a build succeeded
+* -1  `fail` - a build failed
+* ""  (empty value) `unknown` - could not get a build status
 
 # Travis integration example
 
