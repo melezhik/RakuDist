@@ -2,7 +2,7 @@
 
 Test Raku modules against different OS, Rakudo versions
 
-## OS supported (*)
+## OS supported
 
 * Debian
 * CentOS
