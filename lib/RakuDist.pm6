@@ -74,6 +74,6 @@ sub queue-build ( %params ) is export {
   say "queue build: {%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6:", 
       "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6".IO.slurp;  
 
-  return "$id.pl6"
+  return $id
 
 }
