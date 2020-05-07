@@ -59,7 +59,7 @@ http://repo.westus.cloudapp.azure.com/rakudist2/queue
 
 Use this base URL to track build statuses - `http://repo.westus.cloudapp.azure.com/sparky/`
 
-`GET /status/key/$token`
+`GET /status/$token`
 
 ## Return 
 
