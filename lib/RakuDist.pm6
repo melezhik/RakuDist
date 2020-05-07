@@ -8,9 +8,9 @@ sub queue-build ( %params ) is export {
   my $os = %params<os>;
   my $rakudo_version = %params<rakudo_version> || "default";
   
-  my $user = ('a' .. 'z').pick(10).join('');
+  my $user = ('a' .. 'z').pick(20).join('');
 
-  my $id = "{$user}.{DateTime.now}";
+  my $id = "{$user}{$*PID}";
 
   my $type;
   
