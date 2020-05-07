@@ -48,9 +48,13 @@ Token. Use this token to track a build execution.
 
 # Track build status
 
-`GET http://repo.westus.cloudapp.azure.com/sparky/builds/key/$token/status`
+Use this base URL to track build statues - `http://repo.westus.cloudapp.azure.com/sparky/`
 
-Return - status:
+`GET builds/key/$token/status`
+
+## Return 
+
+Status:
 
 * `queued` - a build is queued
 * `running` - a build is being executed
