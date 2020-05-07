@@ -6,6 +6,7 @@ Test Raku modules against different OS, Rakudo versions
 
 * Debian
 * CentOS
+* Ubuntu
 * Alpine
 
 ## Rakudo versions supported
