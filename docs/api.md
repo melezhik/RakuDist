@@ -28,9 +28,9 @@ thing=https://github.com/Kaiepi/p6-Kind # Github project
 
 ```
 
-`os`
+- `os`
 
-One of `debian|centos|ubuntu|alpine`
+One of: `debian|centos|ubuntu|alpine`
 
 - `rakudo_version`
 
