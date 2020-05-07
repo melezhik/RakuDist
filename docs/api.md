@@ -4,6 +4,10 @@ API allows to run Raku distributions tests through public API
 
 Warning: an API server has limited capacity, throttling is enabled.
 
+# Base API URL
+
+Use this base URL to interact with API - `http://repo.westus.cloudapp.azure.com/rakudist2`
+
 # Queue build
 
 `POST /rakudist2/queue`
@@ -22,11 +26,13 @@ thing=Kind # Module Kind
 
 thing=https://github.com/Kaiepi/p6-Kind # Github project 
 
+```
+
 `os`
 
 One of `debian|centos|ubuntu|alpine`
 
-- rakudo_version
+- `rakudo_version`
 
 Full SHA for rakudo source commit. Optional.
 
@@ -38,11 +44,9 @@ rakudo_version= ef90599e2b6fde85385633b373b706b89d546763
 
 ## Return 
 
-Token. Use this token to track build execution.
+Token. Use this token to track a build execution.
 
 # Track build status
-
-And polls test status and results, as test job runs in asynchronous mode:
 
 `GET http://repo.westus.cloudapp.azure.com/sparky/builds/key/$token/status`
 
@@ -53,7 +57,6 @@ Return - status:
 * `success` - a build succeeded
 * `fail` - a build failed
 * `unknown` - could not get a build status
-
 
 # Travis integration example
 
