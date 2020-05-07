@@ -39,12 +39,21 @@ Full SHA for rakudo source commit. Optional.
 For example:
 
 ```
-rakudo_version= ef90599e2b6fde85385633b373b706b89d546763
+rakudo_version=ef90599e2b6fde85385633b373b706b89d546763
 ```
 
 ## Return 
 
 Token. Use this token to track a build execution.
+
+## Example of curl request
+
+```shell
+curl -d thing=https://github.com/Kaiepi/p6-Kind \
+-d os=centos \
+-d rakudo_version=ef90599e2b6fde85385633b373b706b89d546763 \
+http://repo.westus.cloudapp.azure.com/rakudist2/queue
+```
 
 # Track build status
 
