@@ -65,13 +65,13 @@ sub queue-build ( %params ) is export {
   
   }
   
-  spurt "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6", "%( 
+  spurt "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id", "%( 
     cwd =>  '$dir',
     conf => '$config',
     description => '$description',
   )";
 
-  say "queue build: {%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id.pl6:", 
+  say "queue build: {%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id:", 
       "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id".IO.slurp;  
 
   return $id
