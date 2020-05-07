@@ -42,12 +42,20 @@ my $application = route {
             os => $os 
           );
   
-          template 'templates/main.crotmp', %( 
-            thing => $thing, 
-            rakudo_version => $rakudo_version,
-            os => $os,
-            is-queued => True
-          )
+          if $client eq "webui" {
+
+            template 'templates/main.crotmp', %( 
+              thing => $thing, 
+              rakudo_version => $rakudo_version,
+              os => $os,
+              is-queued => True
+            )
+  
+          } else {
+
+            content 'text/plain', 'build queued';
+
+          }
   
         }
         
