@@ -12,18 +12,27 @@ my $application = route {
 
     post -> 'queue', :%params {
 
-      request-body -> (:$thing, :$os, :$rakudo_version) {
+      request-body -> (:$thing, :$os, :$rakudo_version, :$client ) {
 
         if  $thing ~~! /^^ \s* <[ \/ \: \w \d  \_ \- \. ]>+ \s* $$/ 
             or ($rakudo_version || "default")  ~~! /^^ \s* <[ a .. z  \d ]>+ \s* $$ / 
             or $os ~~! /^^ \s* 'debian' || 'centos' || 'ubuntu' || 'alpine'  \s* $$ /  {
 
-          template 'templates/main.crotmp', %( 
-            thing => $thing, 
-            rakudo_version => $rakudo_version,
-            os => $os,
-            is-error => True
-          )
+          if $client eq "webui" {
+
+            template 'templates/main.crotmp', %( 
+              thing => $thing, 
+              rakudo_version => $rakudo_version,
+              os => $os,
+              is-error => True
+            )
+
+          } else {
+
+            bad-request 'text/plain', 'Bad input parameters';
+
+          }
+
 
         } else {
 

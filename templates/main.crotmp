@@ -66,6 +66,7 @@
         </p>
         <div class="panel-block">
           <form action="queue" method="post">
+            <input name="client" value="webui" type="hidden">
             <div class="field">
               <label class="label">Module | GitHub/GitLab Project</label>
               <div class="control">
