@@ -26,18 +26,20 @@ sub queue-build ( %params ) is export {
   }
 
 
-  my $dir;
   my $description;
-  my $config;
+
+  my $effective-dir = "{%*ENV<HOME>}/projects/RakuDist/.cache/{$user}";
+
+  mkdir $effective-dir;
 
   # github/gitlab project
   if ( $type eq "github" or $type eq "gitlab" ) {
 
-    $dir = "{%*ENV<HOME>}/projects/RakuDist/modules/default-github";
-    $description = "$type project $thing RakuDist test, $rakudo_version Rakudo version";
-    $config = "conf/$id.pl6";
+    shell "cp -r {%*ENV<HOME>}/projects/RakuDist/modules/default-github/* $effective-dir";
 
-    spurt "$dir/$config", "%(
+    $description = "$type project $thing RakuDist test, $rakudo_version Rakudo version";
+
+    spurt "$effective-dir/config.pl6", "%(
         user => '$user',
         project => '$thing',
         scm => 'https://$type.com/$thing',
@@ -45,20 +47,22 @@ sub queue-build ( %params ) is export {
      )";
 
   # local project
+
   } elsif $type eq "local" {
 
-    $dir = "{%*ENV<HOME>}/projects/RakuDist/modules/$thing";
+
+    shell "cp -r {%*ENV<HOME>}/projects/RakuDist/modules/$thing/* $effective-dir";
+
     $description = "local project $thing RakuDist test, default Rakudo version";
-    $config = "config.pl6";
 
   # CPAN module
   } else {
 
-    $dir = "{%*ENV<HOME>}/projects/RakuDist/modules/default";
-    $description = "$thing module RakuDist test, $rakudo_version Rakudo version";
-    $config = "conf/$id.pl6";
+    shell "cp -r {%*ENV<HOME>}/projects/RakuDist/modules/default/* $effective-dir";
 
-    spurt "$dir/$config", "%(
+    $description = "$thing module RakuDist test, $rakudo_version Rakudo version";
+
+    spurt "$effective-dir/config.pl6", "%(
       user => '$user',
       module => '$thing',
       rakudo_version => '$rakudo_version'
@@ -67,9 +71,11 @@ sub queue-build ( %params ) is export {
   }
 
   mkdir "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/";
+
+
   spurt "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id", "%(
-    cwd =>  '$dir',
-    conf => '$config',
+    cwd =>  '$effective-dir',
+    conf => 'config.pl6',
     description => '$description',
   )";
 

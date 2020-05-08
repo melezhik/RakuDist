@@ -5,3 +5,4 @@ entrypoint: app.raku
 ignore:
   - sparky/
   - modules/
+  - .cache
