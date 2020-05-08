@@ -21,14 +21,17 @@ Either a Raku module name or GitHub/GitLab project URL. Required.
 Examples:
 
 ```
+# Module Kind
+thing=Kind 
 
-thing=Kind # Module Kind
-
-thing=https://github.com/Kaiepi/p6-Kind # Github project 
+# Github project
+thing=https://github.com/Kaiepi/p6-Kind  
 
 ```
 
 - `os`
+
+Docker container OS. Optional
 
 One of: `debian|centos|ubuntu|alpine`
 
@@ -44,7 +47,7 @@ rakudo_version=ef90599e2b6fde85385633b373b706b89d546763
 
 ## Return 
 
-Token. Use this token to track a build execution.
+Token. Use a token to track a build execution.
 
 ## Example of curl request
 
