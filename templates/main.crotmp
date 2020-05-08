@@ -42,8 +42,8 @@
             <a class="navbar-item" href=".">
               Home
             </a>
-            <a class="navbar-item" href="about">
-              About
+            <a class="navbar-item" href="https://github.com/melezhik/RakuDist/blob/master/docs/api.md" target="_blank">
+              API
             </a>
             <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/builds" target="_blank">
               Recent Builds
