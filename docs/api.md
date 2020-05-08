@@ -65,19 +65,21 @@ Use this base URL to track build statuses - `http://repo.westus.cloudapp.azure.c
 
 Status:
 
-* -2  `queued` - a build is queued
-* 0   `running` - a build is being executed
-* 1   `success` - a build succeeded
-* -1  `fail` - a build failed
-* ""  (empty value) `unknown` - could not get a build status
+| http status | body | descritpion |
+| ------------| ---- | ----------- |
+| 200         | -2   | build queued |
+| 200         | -1   | build failed |
+| 200         | 0    | build is running |
+| 404         |  ""  | build not found |
+
 
 # Bash automation example
 
 ```bash
-token=$(curl -s -d thing=Kind http://repo.westus.cloudapp.azure.com/rakudist2/queue)
+token=$(curl -sf -d thing=Kind http://repo.westus.cloudapp.azure.com/rakudist2/queue)
 echo $token
 while true; do
-  status=$(curl -s http://repo.westus.cloudapp.azure.com/sparky/status/$token)
+  status=$(curl -sf http://repo.westus.cloudapp.azure.com/sparky/status/$token)
   sleep 5
   echo $status
   if test -z "$status" || test "$status" -eq "1" || test "$status" -eq "-1"; then
