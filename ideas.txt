@@ -69,3 +69,10 @@ AlexDaniel 11:26:28
 текст добавить куда-нибудь сюда: https://docs.raku.org/language/modules#Distributing_modules
 melezhik 11:29:28
 да, я вас понял ... хорошая мысль
+
+а блин
+это не те SHA я думаю
+AlexDaniel 11:40:55
+git show-ref --tags -d
+AlexDaniel 11:43:09
+во https://gist.github.com/AlexDaniel/eaf621bddde354f0ad3fd6da3305da79
