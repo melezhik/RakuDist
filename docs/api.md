@@ -63,7 +63,7 @@ Use this base URL to track build statuses - `http://repo.westus.cloudapp.azure.c
 
 ## Return 
 
-Status:
+Build Status:
 
 | http status | body | descritpion |
 | ------------| ---- | ----------- |
