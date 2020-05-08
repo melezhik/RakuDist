@@ -1,6 +1,7 @@
 use v6;
 
 unit module RakuDist;
+use YAMLish;
 
 sub queue-build ( %params ) is export {
 
@@ -78,3 +79,16 @@ sub queue-build ( %params ) is export {
   return $id
 
 }
+
+sub get-webui-conf is export {
+
+  my $conf-file = %*ENV<HOME> ~ '/rakudist-web.yaml';
+
+  my %conf = $conf-file.IO ~~ :f ?? load-yaml($conf-file.IO.slurp) !! Hash.new;
+
+  warn "rakudist web conf loaded: ", $conf-file;
+
+  %conf;
+
+}
+

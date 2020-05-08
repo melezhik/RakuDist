@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RakuDist © - Raku Modules Distributions Test API</title>
-    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/cyborg/bulmaswatch.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/<.theme>/bulmaswatch.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
 
@@ -60,7 +60,7 @@
           </div>
         </div>
       </nav>
-      <nav class="panel">
+      <nav class="panel is-primary">
         <p class="panel-heading">
           RakuDist © - Raku Modules Distributions Test API.
         </p>

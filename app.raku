@@ -7,10 +7,32 @@ my $application = route {
 
 
     get -> {
-      template 'templates/main.crotmp', %()
+
+      my %conf = get-webui-conf();
+    
+      my $theme ;
+    
+      if %conf<ui> && %conf<ui><theme> {
+        $theme = %conf<ui><theme>
+      } else {
+        $theme = "cosmo";
+      }
+    
+      template 'templates/main.crotmp', %( theme => $theme )
+
     }
 
     post -> 'queue', :%params {
+
+      my %conf = get-webui-conf();
+    
+      my $theme ;
+    
+      if %conf<ui> && %conf<ui><theme> {
+        $theme = %conf<ui><theme>
+      } else {
+        $theme = "cosmo";
+      }
 
       request-body -> (:$thing, :$os = "debian", :$rakudo_version = "default", :$client = "cli" ) {
 
@@ -24,7 +46,8 @@ my $application = route {
               thing => $thing, 
               rakudo_version => $rakudo_version,
               os => $os,
-              is-error => True
+              is-error => True,
+              theme => $theme
             )
 
           } else {
@@ -48,7 +71,8 @@ my $application = route {
               thing => $thing, 
               rakudo_version => $rakudo_version,
               os => $os,
-              is-queued => True
+              is-queued => True,
+              theme => $theme
             )
   
           } else {
