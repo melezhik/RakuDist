@@ -1,4 +1,4 @@
-crontab: "2 * * * *"
+#crontab: "* * * * *"
 sparrowdo:
   no_sudo: true
   no_index_update: false
