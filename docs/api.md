@@ -59,6 +59,8 @@ http://repo.westus.cloudapp.azure.com/rakudist2/queue
 
 Use this base URL to track build statuses - `http://repo.westus.cloudapp.azure.com/sparky/`
 
+## Get build status
+
 `GET /status/$token`
 
 ## Return 
@@ -73,7 +75,12 @@ Build Status:
 | 404         |  ""  | build not found |
 
 
-# Bash automation example
+# Get build report
+
+`GET /report/raw/$token`
+
+
+## Bash automation example
 
 ```bash
 token=$(curl -sf -d thing=Kind http://repo.westus.cloudapp.azure.com/rakudist2/queue)
@@ -86,7 +93,9 @@ while true; do
     break
   fi
 done
-echo "result: $status"
+echo "status: $status"
+report=$(curl -sf http://repo.westus.cloudapp.azure.com/sparky/report/raw/$token)
+echo "report: $report"
 ```
 
 # Travis integration example
