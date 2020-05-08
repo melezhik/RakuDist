@@ -4,7 +4,5 @@ sparrowdo:
   no_index_update: false
   bootstrap: false
   format: default
-  repo: http://repo.westus.cloudapp.azure.com
 disabled: false
-keep_builds: 2
-#downstream: hello-world
+keep_builds: 5
