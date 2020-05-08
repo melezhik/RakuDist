@@ -40,7 +40,7 @@ sub queue-build ( %params ) is export {
     spurt "$dir/$config", "%(
         user => '$user',
         project => '$thing',
-        scm => 'https://$type.com/$thing.git',
+        scm => 'https://$type.com/$thing',
         rakudo_version => '$rakudo_version'
      )";
 
