@@ -3,6 +3,7 @@ Array::Shaped::Console
 AttrX::Mooish
 Auth::SASL
 BitEnum
+Concurrent::PChannel
 Cro::Core
 Data::Dump
 Data::Record
