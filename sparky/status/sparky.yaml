@@ -7,5 +7,5 @@ sparrowdo:
   format: default
   repo: http://repo.westus.cloudapp.azure.com
 disabled: false
-keep_builds: 24
+keep_builds: 1
 #downstream: hello-world
