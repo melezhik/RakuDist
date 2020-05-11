@@ -105,7 +105,7 @@ echo "report: $report"
 
 To test a GitHub project named `$project` on certain `$os`, just use RakuDist helper:
 
-`curl http://repo.westus.cloudapp.azure.com/rakudist2/travis/run/$os/$author/$project -s | bash`
+`curl -d thing=$thing http://repo.westus.cloudapp.azure.com/rakudist2/ci -s | bash`
 
 For example to test `https://github.com/melezhik/sparrowdo` project on debian:
 
@@ -113,7 +113,7 @@ For example to test `https://github.com/melezhik/sparrowdo` project on debian:
 language: minimal
 
 script:
-  - curl http://repo.westus.cloudapp.azure.com/rakudist2/travis/run/debian/melezhik/sparrowdo -s | bash
+  - curl -d thing=https://github.com/melezhik/sparrowdo http://repo.westus.cloudapp.azure.com/rakudist2/ci -s | bash
 ```
 
 # Available reports

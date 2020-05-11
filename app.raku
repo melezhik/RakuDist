@@ -22,6 +22,40 @@ my $application = route {
 
     }
 
+    post -> 'ci', :%params {
+
+      request-body -> (:$thing) {
+
+        my $shell = q:to/END/;
+        set -e
+        token=$(curl -sf -d thing=%thing% http://repo.westus.cloudapp.azure.com/rakudist2/queue)
+        echo $token
+        while true; do
+          status=$(curl -sf http://repo.westus.cloudapp.azure.com/sparky/status/$token)
+          sleep 5
+          echo $status
+          if test "$status" -eq "1" || test "$status" -eq "-1"; then
+            break
+          fi
+        done
+        echo "status: $status"
+        report=$(curl -sf http://repo.westus.cloudapp.azure.com/sparky/report/raw/$token)
+        echo "report: $report"
+  
+        if test "$status" -eq "-1"; then
+          exit 1
+        fi
+  
+        END
+  
+        $shell.=subst("%thing%",$thing);
+  
+        content 'text/plain', $shell;
+  
+      }
+
+    }
+
     post -> 'queue', :%params {
 
       my %conf = get-webui-conf();
