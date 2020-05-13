@@ -85,7 +85,7 @@ END
         "2019.03" => "47e34445f48430ade9f19bf76631b7d6adea5d84",
         "2018.12" => "eb08bd11eb9caed6bd5e6e7739c43f6f23b53216",
         "2018.11" => "e32ff7eecb94de88c3e4c7031380a3cb1e0dae45",
-  
+        "2015.12" => "ec386e5ff54a6e8028e74092d1a41cfccdc531d2"
       );
 
       request-body -> (:$thing, :$os = "debian", :$rakudo_version? = "default", :$client = "cli" ) {
