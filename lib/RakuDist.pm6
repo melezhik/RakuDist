@@ -8,6 +8,7 @@ sub queue-build ( %params ) is export {
   my $thing = %params<thing>;
   my $os = %params<os>;
   my $rakudo_version = %params<rakudo_version> || "default";
+  my $rakudo-version-mnemonic = %params<rakudo-version-mnemonic>;
 
   my $user = ('a' .. 'z').pick(20).join('');
 
@@ -37,7 +38,7 @@ sub queue-build ( %params ) is export {
 
     shell "cp -r {%*ENV<HOME>}/projects/RakuDist/modules/default-github/* $effective-dir";
 
-    $description = "$type project $thing RakuDist test, $rakudo_version Rakudo version";
+    $description = "$type project $thing RakuDist test, $rakudo-version-mnemonic Rakudo version";
 
     spurt "$effective-dir/config.pl6", "%(
         user => '$user',
@@ -60,7 +61,7 @@ sub queue-build ( %params ) is export {
 
     shell "cp -r {%*ENV<HOME>}/projects/RakuDist/modules/default/* $effective-dir";
 
-    $description = "$thing module RakuDist test, $rakudo_version Rakudo version";
+    $description = "$thing module RakuDist test, $rakudo-version-mnemonic Rakudo version";
 
     spurt "$effective-dir/config.pl6", "%(
       user => '$user',

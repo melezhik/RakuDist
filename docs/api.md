@@ -37,12 +37,12 @@ One of: `debian|centos|ubuntu|alpine`
 
 - `rakudo_version`
 
-Full SHA for rakudo source commit. Optional.
+Rakudo version. Optional.
 
 For example:
 
 ```
-rakudo_version=ef90599e2b6fde85385633b373b706b89d546763
+rakudo_version=2020.05.1
 ```
 
 ## Return 
@@ -54,7 +54,7 @@ Token. Use a token to track a build execution.
 ```shell
 curl -d thing=https://github.com/Kaiepi/p6-Kind \
 -d os=centos \
--d rakudo_version=ef90599e2b6fde85385633b373b706b89d546763 \
+-d rakudo_version=2020.05.1 \
 http://repo.westus.cloudapp.azure.com/rakudist2/queue
 ```
 

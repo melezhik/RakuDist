@@ -75,9 +75,23 @@
             <div class="field">
               <label class="label">Rakudo Version</label>
               <div class="control">
-                <input class="input" type="text" name="rakudo_version" placeholder="Full SHA" value="<.rakudo_version>">
+                <div class="select is-multiple">
+                  <select multiple size="10" name="rakudo_version">
+                    <option selected>2020.05.1</option>
+                    <option>2020.05</option>
+                    <option>2020.02.1</option>
+                    <option>2020.02</option>
+                    <option>2020.01</option>
+                    <option>2019.11</option>
+                    <option>2019.07.01</option>
+                    <option>2019.07</option>
+                    <option>2019.03.01</option>
+                    <option>2019.03</option>
+                    <option>2018.12</option>
+                    <option>2018.11</option>
+                  </select>
+                </div>
               </div>
-              <p class="help">optional</p>
             </div>
             <div class="field">
               <label class="label">OS</label>
