@@ -88,7 +88,7 @@ END
   
       );
 
-      request-body -> (:$thing, :$os = "debian", :@rakudo_version = ("default"), :$client = "cli" ) {
+      request-body -> (:$thing, :$os = "debian", :$rakudo_version? = "default", :$client = "cli" ) {
 
         if  $thing ~~! /^^ \s* <[ \/ \: \w \d  \_ \- \. ]>+ \s* $$/ 
             or $os ~~! /^^ \s* 'debian' || 'centos' || 'ubuntu' || 'alpine'  \s* $$ / {
@@ -113,7 +113,9 @@ END
 
           my $trigger;
 
-          for @rakudo_version -> $rv {
+          $rakudo_version = "default" unless $rakudo_version;
+
+          for $rakudo_version.split(',') -> $rv {
 
             $trigger = queue-build %(
               thing => $thing, 
