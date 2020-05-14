@@ -6,4 +6,4 @@ sparrowdo:
   docker: ubuntu-rakudist
   repo: http://repo.westus.cloudapp.azure.com
 disabled: false
-keep_builds: 100
+keep_builds: 10000

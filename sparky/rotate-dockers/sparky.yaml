@@ -5,4 +5,4 @@ sparrowdo:
   bootstrap: false
   format: default
 disabled: false
-keep_builds: 5
+keep_builds: 2
