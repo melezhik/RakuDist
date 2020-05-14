@@ -45,6 +45,15 @@ For example:
 rakudo_version=2020.05.1
 ```
 
+- `sha`
+
+Rakudo full SHA commit. Optional.
+
+For example:
+
+```
+sha=f0594084e88e3d36bdcbc220989c7c823233876b
+
 ## Return 
 
 Token. Use a token to track a build execution.

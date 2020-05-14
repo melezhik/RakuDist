@@ -80,7 +80,7 @@ sub queue-build ( %params ) is export {
     description => '$description',
   )";
 
-  say "queue build: {%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id:",
+  say "queue build: {%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id: ",
       "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id".IO.slurp;
 
   return $id

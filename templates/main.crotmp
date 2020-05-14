@@ -19,7 +19,7 @@
             <button class="delete" aria-label="delete"></button>
           </div>
           <div class="message-body">
-            One of the input parameters ( module|URL, rakudo_version, os) is not valid.
+            <.error-message>            
           </div>
         </article>
       </?>
@@ -72,6 +72,14 @@
               <div class="control">
                 <input class="input" type="text" name="thing" placeholder="Module Name or GitHub/GitLab project URL" value=<.thing>>
               </div>
+            </div>
+            <div class="field">
+              <label class="label">Rakudo SHA</label>
+              <div class="control">
+                <input class="input" type="text" name="sha" placeholder="Rakudo SHA" value=<.sha>>
+              </div>
+              <p class="help is-success">choose SHA or Rakudo Version</p>
+            </div>
             <div class="field">
               <label class="label">Rakudo Version</label>
               <div class="control">

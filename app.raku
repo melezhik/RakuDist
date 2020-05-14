@@ -91,17 +91,33 @@ END
         "2015.12" => "ec386e5ff54a6e8028e74092d1a41cfccdc531d2"
       );
 
-      request-body -> (:$thing, :$os = "debian", :$rakudo_version? = "default", :$client = "cli" ) {
+      request-body -> (:$thing, :$os = "debian", :$rakudo_version? = "default", :$sha?, :$client = "cli" ) {
+
+        my $is-error = False; my $error-message;
 
         if  $thing ~~! /^^ \s* <[ \/ \: \w \d  \_ \- \. ]>+ \s* $$/ 
-            or $os ~~! /^^ \s* 'debian' || 'centos' || 'ubuntu' || 'alpine'  \s* $$ / {
+            or $os ~~! /^^ \s* 'debian' || 'centos' || 'ubuntu' || 'alpine'  \s* $$ / 
+        { 
+          $is-error = True;
+          $error-message = "One of input parameters (module,os) is not valid."
+        }
+
+
+        if $sha && $sha ~~! /^^ \s* <[  \w \d   ]>+ \s* $$/ {
+          $is-error = True;
+          $error-message = "sha parameter is not valid."
+        }
+
+        if $is-error {
 
           if $client eq "webui" {
 
             template 'templates/main.crotmp', %( 
               thing => $thing, 
+              sha => $sha,
               os => $os,
               is-error => True,
+              error-message => $error-message,
               theme => $theme
             )
 
@@ -116,13 +132,22 @@ END
 
           my $trigger;
 
-          $rakudo_version = "default" unless $rakudo_version;
+          my $rakudo-versions;
 
-          for $rakudo_version.split(',') -> $rv {
+          if $sha {
+              $rakudo-versions = $sha
+          } else {
+              $rakudo-versions = $rakudo_version
+          }
 
+
+          for $rakudo-versions.split(',') -> $rv {
+
+            my $rakudo-commit-version = $sha ?? $sha !! %rakudo-version-to-sha{$rv};
+ 
             $trigger = queue-build %(
               thing => $thing, 
-              rakudo_version => %rakudo-version-to-sha{$rv} || "default",
+              rakudo_version => $rakudo-commit-version,
               rakudo-version-mnemonic => $rv,  
               os => $os 
             );
