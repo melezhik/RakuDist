@@ -45,10 +45,10 @@
             <a class="navbar-item" href="https://github.com/melezhik/RakuDist" target="_blank">
               GitHub
             </a>
-            <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/builds" target="_blank">
+            <a class="navbar-item" href="/sparky/builds" target="_blank">
               Recent Builds
             </a>
-            <a class="navbar-item" href="http://repo.westus.cloudapp.azure.com/sparky/queue" target="_blank">
+            <a class="navbar-item" href="/sparky/queue" target="_blank">
               Queue
             </a>
             <a class="navbar-item" href="https://modules.raku.org/" target="_blank">
@@ -107,9 +107,6 @@
                 <div class="select">
                   <select name="os">
                     <option selected>debian</option>
-                    <option>centos</option>
-                    <option>ubuntu</option>
-                    <option>alpine</option>
                   </select>
                 </div>
               </div>
