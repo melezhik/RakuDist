@@ -3,7 +3,9 @@ sparrowdo:
   no_index_update: false
   bootstrap: false
   format: default
-  docker: ubuntu-rakudist
-  repo: http://repo.westus.cloudapp.azure.com
+  host: ec2-44-226-198-49.us-west-2.compute.amazonaws.com
+  ssh_user: ubuntu
+  ssh_private_key: /home/melezhik/Downloads/aws-worker-ubuntu.pem
+  sync: /home/melezhik/repo
 disabled: false
 keep_builds: 10000

@@ -181,7 +181,7 @@ END
 }
 
 my Cro::Service $service = Cro::HTTP::Server.new:
-    :host<localhost>, :port<10001>, :$application;
+    :host<localhost>, :port<4000>, :$application;
 
 $service.start;
 
