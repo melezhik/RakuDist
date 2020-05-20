@@ -11,7 +11,7 @@ my @list = (
   "libogg-dev",
   "libvorbis-dev", 
   "libcairo2-dev",
-  "libcmark0",
+  #"libcmark0",
   "libbrotli-dev", 
   "libsnappy-dev",
   "libodbc1",
