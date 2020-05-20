@@ -57,7 +57,7 @@ my @list2 = (
   "libzmq3-dev",
   "libopencv-dev",
   "g++",
-  "libreadline7",
+  "libreadline-dev",
   "libsdl1.2-dev",
   "libsdl-mixer1.2-dev",
   "libsdl-image1.2-dev",
