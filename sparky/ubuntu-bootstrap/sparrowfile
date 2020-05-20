@@ -1,7 +1,21 @@
-package-install "procps wget zstd gcc make gcc libssl-dev";
+my @list = (
+  "procps",
+  "wget", 
+  "zstd",
+  "gcc",
+  "make",
+  "libssl-dev"
+);
+
+for @list -> $p {
+
+  package-install $p
+
+}
+
 zef "https://github.com/melezhik/sparrow6-rakudo-install.git", %( force => True );
 
-my @list = (
+my @list2 = (
   "libfann-dev", 
   "libimage-magick-perl",
   "libarchive13",
@@ -28,7 +42,7 @@ my @list = (
   "libgd-dev",
   "libimlib2-dev",
   "libperl-dev", 
-  "python-jupyter-core",
+  #"python-jupyter-core",
   "python3-jupyter-core",
   "liblmdb-dev",
   "libcurl4",
@@ -60,7 +74,7 @@ my @list = (
 ); 
 
 
-for @list -> $p {
+for @list2 -> $p {
 
   package-install $p
 
