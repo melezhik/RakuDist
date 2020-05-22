@@ -5,7 +5,7 @@ sparrowdo:
   format: default
   host: ec2-44-226-198-49.us-west-2.compute.amazonaws.com
   ssh_user: ubuntu
-  ssh_private_key: /home/melezhik/Downloads/aws-worker-ubuntu.pem
-  sync: /home/melezhik/repo
+  ssh_private_key: /home/rakudist/Downloads/aws-worker-ubuntu.pem
+  sync: /home/rakudist/repo
 disabled: false
 keep_builds: 10000
