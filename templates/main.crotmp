@@ -106,7 +106,7 @@
               <div class="control">
                 <div class="select">
                   <select name="os">
-                    <option selected>ubuntu</option>
+                    <option selected>debian</option>
                   </select>
                 </div>
               </div>
