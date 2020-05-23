@@ -1,6 +1,0 @@
-#!perl6
-
-task-run "stale ssh", "stale-proc-check", %(
-  filter => 'ssh\s',
-  history => "20 minutes",
-);
