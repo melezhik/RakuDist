@@ -46,6 +46,11 @@ module-run 'Rakudo::Install', %(
 
 say "<<< INSTALL Module >>>";
 
+bash "zef update", %(
+  description => "zef update for user $user",
+  user => $user
+);
+
 my %state = task-run "zef fetch {$module}", "zef-fetch", %(
   identity => $module,
   user => $user,
