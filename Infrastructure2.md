@@ -1,22 +1,21 @@
 # RakuDist on community infrastructure 
 
+Version 2
 
 ```
-                          +------- [AWS ec2] -----+                  +----------[VM host - brezeleisen] ----------------+
-                          |  |///////////////|    |                  |    |//////////////////////|     [test jobs]      |
- [user] =>   run tests => |  |    Web UI ----|----|---> scp file -->-|----|---> Sparky Daemon    | ~>  podman exec      |
-          read reports => |  |               |    |  (trigger build) |    |                      | ~> [docker debian]   |
-                          |  |               |    |                  |    |//////////////////////| ~> [docker ubuntu]   |
-                          |  |   Sparky UI   |->--|----- rsync ---->-|------>------ /  |           ~> [docker alpine]   |
-                          |  |///////////////|    |  sparky files,   |                 |                                |
-                          |       | (read)        |     reports      +-----------------|--------------------------------+
-                          |       \               |                                    |    
-                          |   ////////\           |                                    |
-                          |   | MySQL |  <--------|-----( read / write )  -------------+  
-                          |   \////////           |
-                          |                       |
-                          +-----------------------+
-
-
+                          +------- [AWS ec2] -----+                  +----------[VM host - brezeleisen] -----------------+
+                          |  |///////////////|    |                  |    |//////////////////////////////////////////////|
+ [user] =>  run tests     |  |  ssh tunnel   |----|---> http ---->---|----|--> RakuDist UI   |                           |
+          read reports    |  |               |    |                  |    |                  |                           |
+               |          |  |               |    |                  |    |                  |                           |
+               |          |  |  ssh tunnel   |----|---> http ---->---|----|--> Sparky UI     |                           |
+               |          |  |///////////////|    |                  |    |                  |                           |
+               |          |       | reverse       |                  |    |------------------+------------[ docker ] ----+
+               |          |       \  proxy        |                  |    |    Sparky  |              =>   debian        |    
+               |          |   ////////\           |                  |    |    Daemon  | -> [podman]  =>   centos        | 
+               \ ----->   |   | nginx |           |                  |    |            |      test    =>   alpine        |
+                          |   \////////           |                  |    |//////////////////////////////////////////////|
+                          |                       |                  |              SQLite DataBase / Reports            |
+                          +-----------------------+                  +---------------------------------------------------+
 
 ```  
