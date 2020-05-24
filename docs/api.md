@@ -6,11 +6,11 @@ Warning: an API server has limited capacity, throttling is enabled.
 
 # Base API URL
 
-Use this base URL to interact with API - `http://repo.westus.cloudapp.azure.com/rakudist2`
+Use this base URL to interact with API - `http://rakudist.raku.org/`
 
 # Queue build
 
-`POST /rakudist2/queue`
+`POST /queue`
 
 ## Parameters
 
@@ -64,12 +64,12 @@ Token. Use a token to track a build execution.
 curl -d thing=https://github.com/Kaiepi/p6-Kind \
 -d os=centos \
 -d rakudo_version=2020.05.1 \
-http://repo.westus.cloudapp.azure.com/rakudist2/queue
+http://rakudist.raku.org/queue
 ```
 
 # Track build status
 
-Use this base URL to track build statuses - `http://repo.westus.cloudapp.azure.com/sparky/`
+Use this base URL to track build statuses - `http://rakudist.raku.org/sparky/`
 
 ## Get build status
 
@@ -95,10 +95,10 @@ Build Status:
 ## Bash automation example
 
 ```bash
-token=$(curl -sf -d thing=Kind http://repo.westus.cloudapp.azure.com/rakudist2/queue)
+token=$(curl -sf -d thing=Kind http://rakudist.raku.org/queue)
 echo $token
 while true; do
-  status=$(curl -sf http://repo.westus.cloudapp.azure.com/sparky/status/$token)
+  status=$(curl -sf http://rakudist.raku.org/sparky/status/$token)
   sleep 5
   echo $status
   if test -z "$status" || test "$status" -eq "1" || test "$status" -eq "-1"; then
@@ -106,7 +106,7 @@ while true; do
   fi
 done
 echo "status: $status"
-report=$(curl -sf http://repo.westus.cloudapp.azure.com/sparky/report/raw/$token)
+report=$(curl -sf http://rakudist.raku.org/sparky/report/raw/$token)
 echo "report: $report"
 ```
 
@@ -114,7 +114,7 @@ echo "report: $report"
 
 To test a GitHub project named `$project` on certain `$os`, just use RakuDist helper:
 
-`curl -d thing=$thing http://repo.westus.cloudapp.azure.com/rakudist2/ci -s | bash`
+`curl -d thing=$thing http://rakudist.raku.org/ci -s | bash`
 
 For example to test `https://github.com/melezhik/sparrowdo` project on debian:
 
@@ -122,12 +122,12 @@ For example to test `https://github.com/melezhik/sparrowdo` project on debian:
 language: minimal
 
 script:
-  - curl -d thing=https://github.com/melezhik/sparrowdo http://repo.westus.cloudapp.azure.com/rakudist2/ci -s | bash
+  - curl -d thing=https://github.com/melezhik/sparrowdo http://rakudist.raku.org/ci -s | bash
 ```
 
 # Available reports
 
-Follow this link [http://repo.westus.cloudapp.azure.com/sparky/builds](http://repo.westus.cloudapp.azure.com/sparky/builds) to see RakuDist reports
+Follow this link [http://rakudist.raku.org/sparky/builds](http://rakudist.raku.org/sparky/builds) to see RakuDist reports
 
 # Thanks to
 
