@@ -1,11 +1,8 @@
 sparrowdo:
-  no_sudo: false
+  no_sudo: true
   no_index_update: false
   bootstrap: false
   format: default
-  host: ec2-44-226-198-49.us-west-2.compute.amazonaws.com
-  ssh_user: ubuntu
-  ssh_private_key: /home/rakudist/Downloads/aws-worker-ubuntu.pem
-  sync: /home/rakudist/repo
+  docker: ubuntu-rakudist
 disabled: false
 keep_builds: 10000
