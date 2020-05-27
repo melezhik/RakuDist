@@ -28,10 +28,10 @@ my $application = route {
 
         my $shell = q:to/END/;
         set -e
-        token=$(curl -sf -d thing=%thing% http://repo.westus.cloudapp.azure.com/rakudist2/queue)
+        token=$(curl -sf -d thing=%thing% http://rakudist.raku.org/queue)
         echo $token
         while true; do
-          status=$(curl -sf http://repo.westus.cloudapp.azure.com/sparky/status/$token)
+          status=$(curl -sf http://rakudist.raku.org/sparky/status/$token)
           sleep 5
           echo $status
           if test "$status" -eq "1" || test "$status" -eq "-1"; then
@@ -39,7 +39,7 @@ my $application = route {
           fi
         done
         echo "status: $status"
-        report=$(curl -sf http://repo.westus.cloudapp.azure.com/sparky/report/raw/$token)
+        report=$(curl -sf http://rakudist.raku.org/sparky/report/raw/$token)
         echo "report: $report"
   
         if test "$status" -eq "-1"; then

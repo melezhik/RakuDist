@@ -52,4 +52,4 @@ See various examples of test scenarios in `modules/` folder.
 
 ## Run test
 
-`sparrowdo --bootstrap --no_sudo --docker=debian-rakudist --repo=http://repo.westus.cloudapp.azure.com`
+`sparrowdo --bootstrap --no_sudo --docker=debian-rakudist`

@@ -9,11 +9,11 @@ docker run -d -t --rm --name centos-rakudist 0bfb68601d70
 docker ps
 
 cd ~/projects/RakuDist/dockers/debian
-sparrowdo --bootstrap --docker=debian-rakudist --no_sudo --repo=http://repo.westus.cloudapp.azure.com
+sparrowdo --bootstrap --docker=debian-rakudist --no_sudo
 
 cd ~/projects/RakuDist/dockers/centos
-sparrowdo --bootstrap --docker=centos-rakudist --no_sudo --repo=http://repo.westus.cloudapp.azure.com
+sparrowdo --bootstrap --docker=centos-rakudist --no_sudo
 
 cd ~/projects/RakuDist/dockers/alpine
-sparrowdo --bootstrap --docker=alpine-rakudist --no_sudo --repo=http://repo.westus.cloudapp.azure.com
+sparrowdo --bootstrap --docker=alpine-rakudist --no_sudo
 
