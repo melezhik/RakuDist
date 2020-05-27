@@ -20,6 +20,8 @@ sub queue-build ( %params ) is export {
     $type = "github"
   } elsif $thing ~~ s/^^ \s* 'https://gitlab.com/'// {
     $type = "gitlab"
+  } elsif $thing ~~ s/^^ \s* 'https://home.tyil.nl/git/'// {
+    $type = "tyilgit"
   } elsif "{%*ENV<HOME>}/projects/RakuDist/modules/$thing".IO ~~ :d {
     $type = "local"
   } else {
@@ -44,6 +46,20 @@ sub queue-build ( %params ) is export {
         user => '$user',
         project => '$thing',
         scm => 'https://$type.com/$thing',
+        rakudo_version => '$rakudo_version'
+     )";
+
+   # tyilgit project
+   } elsif $type eq "tyilgit"  {
+
+    shell "cp -r {%*ENV<HOME>}/projects/RakuDist/modules/default-github/* $effective-dir";
+
+    $description = "$type project $thing RakuDist test, $rakudo-version-mnemonic Rakudo version";
+
+    spurt "$effective-dir/config.pl6", "%(
+        user => '$user',
+        project => '$thing',
+        scm => 'https://home.tyil.nl/git/$thing',
         rakudo_version => '$rakudo_version'
      )";
 
