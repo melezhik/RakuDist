@@ -38,7 +38,7 @@ my $application = route {
           fi
           if test "$status" -eq "-2"; then
             echo -n "Q"
-          elif test "status" -eq "0"; then
+          elif test "$status" -eq "0"; then
             echo -n "R"
           fi
         done
