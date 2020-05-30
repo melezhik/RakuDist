@@ -33,12 +33,10 @@ my $application = route {
         while true; do
           status=$(curl -sf http://rakudist.raku.org/sparky/status/$token)
           sleep 10
-          echo $status
           if test "$status" -eq "1" || test "$status" -eq "-1"; then
             break
           fi
-
-          if test "$status" -eq "-2" then
+          if test "$status" -eq "-2"; then
             echo -n "Q"
           elif test "status" -eq "0"; then
             echo -n "R"
