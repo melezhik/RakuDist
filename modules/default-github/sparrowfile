@@ -52,6 +52,11 @@ module-run 'Rakudo::Install', %(
   skip-install-dependencies => True
 );
 
+bash Q|sed -i '2 i\($*OUT,$*ERR).map: {.out-buffer = 0}' $(which zef); echo $(which zef); cat $(which zef)|, %(
+  description => "zef patch for user $user",
+  user => $user
+);
+
 # ------------------------------------------- INSTALL Module -------------------------------------------------------- #
 
 say "<<< CHECKOUT Source Code >>>";
