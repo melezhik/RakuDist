@@ -46,6 +46,11 @@ module-run 'Rakudo::Install', %(
 
 say "<<< INSTALL Module >>>";
 
+bash Q|sed -i '2 i\($*OUT,$*ERR).map: {.out-buffer = 0}' $(which zef); cat $(which zef)|, %(
+  description => "zef patch for user $user",
+  user => $user
+);
+
 bash "zef update", %(
   description => "zef update for user $user",
   user => $user
