@@ -108,6 +108,7 @@
                   <select name="os">
                     <option selected>debian</option>
                     <option>ubuntu</option>
+                    <option>centos</option>
                     <option>alpine</option>
                   </select>
                 </div>
