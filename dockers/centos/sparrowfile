@@ -4,3 +4,9 @@ task-run "files/disable-gpg-check";
 package-install "glibc-langpack-en which gcc openssl openssl-devel wget";
 package-install "zstd";
 zef "https://github.com/melezhik/sparrow6-rakudo-install.git", %( force => True );
+
+# wget http://rpms.remirepo.net/enterprise/8/remi/x86_64/libzstd-1.4.2-1.el8.remi.x86_64.rpm
+# rpm -Uvh libzstd-1.4.2-1.el8.remi.x86_64.rpm 
+# wget http://rpms.remirepo.net/enterprise/8/remi/x86_64/zstd-1.4.2-1.el8.remi.x86_64.rpm
+# rpm -Uvh zstd-1.4.2-1.el8.remi.x86_64.rpm 
+
