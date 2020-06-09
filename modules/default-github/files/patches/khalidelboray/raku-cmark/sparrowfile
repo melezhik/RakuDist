@@ -15,7 +15,8 @@ bash "cd $dir && make INSTALL_PREFIX={$cmark-install-dir} && make install", %(
   description => "build cmark"
 );
 
-bash "echo LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.bash_profile", %(
+bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.bash_profile", %(
   description => "add cmark LD_LIBRARY_PATH to user $user profile"
 );
+
 
