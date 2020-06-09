@@ -1,0 +1,18 @@
+my $dir = "{%*ENV<HOME>}/{$user}/cmark";
+my $cmark-install-dir = "{%*ENV<HOME>}/{$user}/cmark";
+
+directory $dir, %(
+  owner => $user
+);
+
+git-scm "clone https://github.com/commonmark/cmark.git", %( to => $dir, user => $user );
+
+bash "cd $dir && cd make INSTALL_PREFIX={$cmark-install-dir} && make install", %(
+  user => $user,
+  description => "build cmark"
+);
+
+bash "echo LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> {%*ENV<HOME>}/{$user}/.bash_profile", %(
+  description => "add cmark LD_LIBRARY_PATH to user $user profile"
+);
+
