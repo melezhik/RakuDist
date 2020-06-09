@@ -1,1 +1,2 @@
-bash "cd ~/projects/RakuDist && tom pull";
+chdir "{%*ENV<HOME>/projects/RakuDist}";
+task-run "git pull", "git-pull";
