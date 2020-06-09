@@ -2,10 +2,11 @@ my $dir = "/home/{$user}/cmark";
 my $cmark-install-dir = "/home/{$user}/cmark";
 
 directory $dir, %(
-  owner => $user
+  owner => $user,
+  group => $user,
 );
 
-git-scm "clone https://github.com/commonmark/cmark.git", %( to => $dir, user => $user );
+git-scm "https://github.com/commonmark/cmark.git", %( to => $dir, user => $user );
 
 bash "cd $dir && cd make INSTALL_PREFIX={$cmark-install-dir} && make install", %(
   user => $user,
