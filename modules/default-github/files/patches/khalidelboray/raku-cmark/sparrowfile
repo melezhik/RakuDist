@@ -21,13 +21,25 @@ if os() eq "centos" {
    description => "setup default python"
  );
 
-}
+ bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.bash_profile", %(
+   description => "add cmark LD_LIBRARY_PATH to user $user profile"
+ );
 
-if os() eq "alpine" {
+} elsif os() eq "alpine" {
 
- bash "echo alias python=\$(which python3) >> /home/{$user}/.bash_profile", %(
+ bash "echo alias python=\$(which python3) >> /home/{$user}/.profile", %(
    description => "setup default python"
  );
+
+ bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.profile", %(
+   description => "add cmark LD_LIBRARY_PATH to user $user profile"
+ );
+
+} else {
+
+  bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.bash_profile", %(
+    description => "add cmark LD_LIBRARY_PATH to user $user profile"
+  );
 
 }
 
@@ -37,9 +49,6 @@ bash "cd $dir && make INSTALL_PREFIX={$cmark-install-dir} && make install", %(
   description => "build cmark"
 );
 
-bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.bash_profile", %(
-  description => "add cmark LD_LIBRARY_PATH to user $user profile"
-);
 
 
 
