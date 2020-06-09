@@ -24,4 +24,11 @@ bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.ba
   description => "add cmark LD_LIBRARY_PATH to user $user profile"
 );
 
+if os() eq "centos" {
+
+ bash "echo alias python=$(which python2) >> /home/{$user}/.bash_profile", %(
+   description => "setup default python"
+ );
+
+}
 
