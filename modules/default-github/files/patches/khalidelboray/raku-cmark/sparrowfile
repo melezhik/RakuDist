@@ -10,6 +10,11 @@ git-scm "https://github.com/commonmark/cmark.git", %( to => $dir, user => $user 
 
 package-install "cmake";
 
+package-install %(
+ centos => "gcc-c++",
+ alpine => "g++",
+);
+
 bash "cd $dir && make INSTALL_PREFIX={$cmark-install-dir} && make install", %(
   user => $user,
   description => "build cmark"
