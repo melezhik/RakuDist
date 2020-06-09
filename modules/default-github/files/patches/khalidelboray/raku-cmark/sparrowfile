@@ -23,6 +23,15 @@ if os() eq "centos" {
 
 }
 
+if os() eq "alpine" {
+
+ bash "echo alias python=\$(which python3) >> /home/{$user}/.bash_profile", %(
+   description => "setup default python"
+ );
+
+}
+
+
 bash "cd $dir && make INSTALL_PREFIX={$cmark-install-dir} && make install", %(
   user => $user,
   description => "build cmark"
