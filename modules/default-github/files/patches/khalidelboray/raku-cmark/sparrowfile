@@ -8,6 +8,8 @@ directory $dir, %(
 
 git-scm "https://github.com/commonmark/cmark.git", %( to => $dir, user => $user );
 
+package-install "cmake";
+
 bash "cd $dir && make INSTALL_PREFIX={$cmark-install-dir} && make install", %(
   user => $user,
   description => "build cmark"
