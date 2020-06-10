@@ -1,6 +1,6 @@
 if os() eq "alpine" {
 
- package-install "libuuid";
+ package-install "libuuid sqlite-libs";
  
  bash "echo export LD_LIBRARY_PATH=/lib >> /home/{$user}/.profile", %(
    description => "set LD_LIBRARY_PATH to user $user profile"
