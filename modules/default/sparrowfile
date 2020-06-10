@@ -3,6 +3,7 @@ my $module = config()<module>;
 my $rakudo-version = config()<rakudo_version>;
 my $dir = $*CWD;
 my $patch-dir = "$dir/files/patches/$module";
+my $zef-debug = False; # could be overiden in custom sparrowfile
 
 # Alpine patch
 
@@ -119,7 +120,7 @@ if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
 bash "cd {$directory} && zef install .", %(
   description => "zef install $module",
   user => $user,
-  debug => False
+  debug => $zef-debug
 );
 
 
