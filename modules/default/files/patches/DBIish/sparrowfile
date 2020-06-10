@@ -1,0 +1,12 @@
+package-install, %( 
+ alpine => "sqlite-libs",
+ ubuntu => "libsqlite3-dev",
+ debian => "libsqlite3-dev",
+ centos => "libsqlite3x-devel",
+);
+  
+if os() eq "alpine" {
+  bash "echo export LD_LIBRARY_PATH=/lib:/usr/lib/ >> /home/{$user}/.profile", %(
+   description => "set LD_LIBRARY_PATH to user $user profile"
+  );
+}
