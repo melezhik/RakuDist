@@ -14,6 +14,8 @@ my $dir = $*CWD;
 
 my $patch-dir = "{$dir}/files/patches/$project";
 
+my $zef-debug = False; # could be overiden in custom sparrowfile
+
 # Alpine patch
 
 if os() eq 'alpine' {
@@ -86,7 +88,6 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
 
 say "<<< INSTALL Module >>>";
 
-
 if "{$patch-dir}/sparrowfile".IO ~~ :f {
   say "*** patch dir: {$patch-dir}, patch found ***";
   say "*** execute patch from {$patch-dir}/sparrowfile ***";
@@ -141,11 +142,24 @@ if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
 
 bash "cd {$directory} && ls -l";
 
-bash "cd {$directory} && zef install .", %(
-  description => "zef install .",
-  user => $user,
-  debug => False
-);
+if $zef-debug {
+
+  bash "cd {$directory} && zef install --debug .", %(
+    description => "zef install .",
+    user => $user,
+    debug => False
+  );
+
+} else {
+
+  bash "cd {$directory} && zef install .", %(
+    description => "zef install .",
+    user => $user,
+    debug => False
+  );
+
+}
+
 
 
 if "{$directory}/.rakudist/smokefile".IO ~~ :f {
