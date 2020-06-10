@@ -1,4 +1,4 @@
-package-install, %( 
+package-install %( 
  alpine => "sqlite-libs",
  ubuntu => "libsqlite3-dev",
  debian => "libsqlite3-dev",
