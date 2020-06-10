@@ -12,7 +12,7 @@ package-install "cmake";
 
 package-install %(
  centos => "gcc-c++ python2",
- alpine => "g++ python3",
+ alpine => "g++ python",
 );
 
 if os() eq "centos" {
@@ -26,10 +26,6 @@ if os() eq "centos" {
  );
 
 } elsif os() eq "alpine" {
-
- bash "echo alias python=\$(which python3) >> /home/{$user}/.profile", %(
-   description => "setup default python"
- );
 
  bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.profile", %(
    description => "add cmark LD_LIBRARY_PATH to user $user profile"
