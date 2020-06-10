@@ -27,7 +27,7 @@ if os() eq "centos" {
 
 } elsif os() eq "alpine" {
 
- bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/ >> /home/{$user}/.profile", %(
+ bash "echo export LD_LIBRARY_PATH={$cmark-install-dir}/lib/:/lib >> /home/{$user}/.profile", %(
    description => "add cmark LD_LIBRARY_PATH to user $user profile"
  );
 
