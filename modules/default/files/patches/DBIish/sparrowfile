@@ -9,4 +9,11 @@ if os() eq "alpine" {
   bash "echo export LD_LIBRARY_PATH=/lib:/usr/lib/ >> /home/{$user}/.profile", %(
    description => "set LD_LIBRARY_PATH to user $user profile"
   );
+  
+  $zef-debug = True;
+  
+  bash "ls -l {$directory}", %(
+    description => "zef cwd dir [{$directory}] permissions",
+  );
+
 }
