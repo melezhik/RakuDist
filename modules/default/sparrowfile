@@ -116,12 +116,24 @@ if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
   }
 }
 
+if $zef-debug {
 
-bash "cd {$directory} && zef install .", %(
-  description => "zef install $module",
-  user => $user,
-  debug => $zef-debug
-);
+  bash "cd {$directory} && zef install --debug .", %(
+    description => "zef install $module",
+    user => $user,
+    debug => False
+  );
+
+} else {
+
+  bash "cd {$directory} && zef install .", %(
+    description => "zef install $module",
+    user => $user,
+    debug => False
+  );
+
+}
+
 
 
 if "{$directory}/.rakudist/smokefile".IO ~~ :f {
