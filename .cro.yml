@@ -6,3 +6,4 @@ ignore:
   - sparky/
   - modules/
   - .cache
+  - utils/	
