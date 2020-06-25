@@ -68,13 +68,13 @@ if os() eq "centos" && "$directory/META6.json".IO ~~ :e {
 
   say "handle native dependencies from $directory/META6.json ...";
 
+  package-install "dnf";
+
   my %deps = task-run "get packages", "raku-native-deps", %(
     path => "$directory/META6.json",
     skip => ['libcurl-0:7.61.1-12.el8.x86_64']
   );
   
-  package-install "dnf";
-
   for %deps<packages><> -> $i {
     package-install "{$i<package>}"
   }
