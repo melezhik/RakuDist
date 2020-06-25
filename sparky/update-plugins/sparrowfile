@@ -1,0 +1,5 @@
+chdir "{%*ENV<HOME>}/projects/sparrow-plugins";
+bash "tom pull";
+bash "tom upload-plugins";
+bash "s6 --index-update";
+bash "s6 --search";
