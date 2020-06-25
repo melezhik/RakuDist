@@ -4,7 +4,7 @@ my $rakudo-version = config()<rakudo_version>;
 my $dir = $*CWD;
 my $patch-dir = "$dir/files/patches/$module";
 my $zef-debug = False; # could be overiden in custom sparrowfile
-my $install-native-deps-from-meta = False; # install native deps stripped from META
+my $install-native-deps-from-meta = True; # install native deps stripped from META
 
 # Alpine patch
 
