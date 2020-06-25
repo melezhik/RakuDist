@@ -75,9 +75,9 @@ if os() eq "centos" && "$directory/META6.json".IO ~~ :e {
     skip => ['libcurl-0:7.61.1-12.el8.x86_64']
   );
   
-  for %deps<packages><> -> $i {
-    package-install "{$i<package>}"
-  }
+  #for %deps<packages><> -> $i {
+  #  package-install "{$i<package>}"
+  #}
   
 }
 
