@@ -1,1 +1,1 @@
-$install-native-deps-from-meta = False
+$install-native-deps-from-meta = True

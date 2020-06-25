@@ -16,6 +16,8 @@ my $patch-dir = "{$dir}/files/patches/$project";
 
 my $zef-debug = False; # could be overiden in custom sparrowfile
 
+my $install-native-deps-from-meta = True; # install native deps stripped from META
+
 # Alpine patch
 
 if os() eq 'alpine' {
@@ -88,7 +90,7 @@ bash "cd {$directory} && git log --name-status HEAD^..HEAD", %(
 
 say "<<< INSTALL Module >>>";
 
-if os() eq "centos" && "$directory/META6.json".IO ~~ :e {
+if os() eq "centos" && "$directory/META6.json".IO ~~ :f && $install-native-deps-from-meta {
 
   say "handle native dependencies from $directory/META6.json ...";
 
