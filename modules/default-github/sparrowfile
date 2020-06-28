@@ -102,7 +102,8 @@ if os() eq "centos" && "$directory/META6.json".IO ~~ :f && $install-native-deps-
   );
 
   for %deps<packages><> -> $i {
-    package-install "{$i<package>}"
+    package-install "{$i<package>}";
+    bash "rpm -ql {$i<package>}";
   }
 
 }
