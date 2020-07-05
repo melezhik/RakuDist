@@ -224,7 +224,7 @@ sub run-tomty-tests ( $path ) {
   bash "tomty --init && tomty --all --verbose", %(
     description => "tomty test",
     user => config()<user>,
-    envvars => %( SP6_REPO => 'http://repo.westus.cloudapp.azure.com/' ),
+    envvars => %( SP6_REPO => 'http://rakudist.raku.org/repo/' ),
     cwd => $path
   );
 
