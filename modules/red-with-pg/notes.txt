@@ -1,0 +1,22 @@
+SmokeMachine 12:35:10
+Most of the tests now use something like this:  https://www.irccloud.com/pastebin/ovfL7IpZ/
+melezhik 12:35:19
+let me check
+SmokeMachine 12:35:58
+and I'm planning to make the tests for SQLite only to be skipped if the env var RED_DATABASE is set... (NYI)
+melezhik 12:36:14
+yeah, I don't see how can an user provide a different driver, for example Pg?
+SmokeMachine 12:36:42
+RED_DATABASE=Pg mi6 test
+it also accepts something like:
+melezhik 12:37:09
+cool, this is what I wanted!
+SmokeMachine 12:37:33
+RED_DATABASE="Pg host=localhost database=my_database" mi6 test
+melezhik 12:37:39
+give me some time, I think I'll be able to bring environment back in day or too 
+SmokeMachine 12:38:15
+thank you very much! this weekend I'll make all tests accept it or skip
+melezhik 12:38:29
+yeah, NP, stay in touch 
+
