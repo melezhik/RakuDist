@@ -34,7 +34,7 @@ if os() eq "alpine" {
     description => "set RED_DATABASE to user $user profile"
   );
 
-  bash 'echo $RED_DATABASE', %(
+  bash 'env | grep RED_DATABASE', %(
     description => 'echo $RED_DATABASE',
     user => $user
   );
