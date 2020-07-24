@@ -21,11 +21,11 @@ if os() eq "alpine" {
   my $dbuser = "red";
 
   bash "psql -h {$dbhost} -U {$dbuser} -c 'drop database {$dbname}' || echo", %(
-    description => "drop database - {$dbname}",
+    description => "drop database [{$dbname}]",
   );
 
-  bash "psql -h {$dbhost} -U {$dbuser} -c 'createdb {$dbname}'", %(
-    description => "create test database - {$dbname}"
+  bash "psql -h {$dbhost} -U {$dbuser} -c 'create database {$dbname}'", %(
+    description => "create database [{$dbname}]"
   );
 
  bash "echo export RED_DATABASE='\"Pg host={$dbhost} database=$dbname\"' >> /home/{$user}/.profile", %(
