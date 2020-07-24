@@ -1,5 +1,7 @@
 #my $user = "ok";
 
+my $zef-debug = True;
+
 if os() eq "alpine" {
 
  package-install "libuuid sqlite-libs";
