@@ -30,7 +30,7 @@ if os() eq "alpine" {
     description => "create database [{$dbname}]"
   );
 
-  bash "echo export RED_DATABASE='\"Pg host={$dbhost} database=$dbname user={$dbuser}\"' >> /home/{$user}/.bash_profile", %(
+  bash "echo export RED_DATABASE='\"Pg host={$dbhost} dbname=$dbname user={$dbuser}\"' >> /home/{$user}/.bash_profile", %(
     description => "set RED_DATABASE to user $user bash profile"
   );
 
