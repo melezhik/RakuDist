@@ -1,6 +1,6 @@
 #my $user = "ok";
 
-my $zef-debug = True;
+$zef-debug = True;
 
 if os() eq "alpine" {
 
