@@ -1,6 +1,0 @@
-regexp: '"dbname=red' \d+
-
-generator: <<CODE
-!perl6
-update_state(%( dbnum => captures()<>.elems ))
-CODE

@@ -1,1 +1,0 @@
-regexp: role \s+ \S+ \s+ already \s+ exists || user \s+ created
