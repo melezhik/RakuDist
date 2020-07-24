@@ -20,7 +20,7 @@ if os() eq "alpine" {
 
   my $dbuser = "red";
 
-  bash "psql -h {$dbhost} -U {$dbuser} -c 'drop database {$dbname} dropdb {$dbname}' || echo", %(
+  bash "psql -h {$dbhost} -U {$dbuser} -c 'drop database {$dbname}' || echo", %(
     description => "drop database - {$dbname}",
   );
 
