@@ -1,2 +1,2 @@
-DBIish notest
 DB::Pg notest
+DBIish notest
