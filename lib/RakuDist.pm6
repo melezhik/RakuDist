@@ -92,7 +92,7 @@ sub queue-build ( %params ) is export {
 
   spurt "{%*ENV<HOME>}/projects/RakuDist/sparky/$os/.triggers/$id", "%(
     cwd =>  '$effective-dir',
-    conf => 'config.pl6',
+    sparrowdo => %( conf => 'config.pl6' ),
     description => '$description',
   )";
 

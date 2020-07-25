@@ -85,7 +85,8 @@
               <div class="control">
                 <div class="select is-multiple">
                   <select multiple size="10" name="rakudo_version">
-                    <option selected>2020.06</option>
+                    <option selected>2020.07</option>
+                    <option>2020.06</option>
                     <option>2020.05.01</option>
                     <option>2020.02</option>
                     <option>2020.01</option>
