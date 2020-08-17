@@ -1,2 +1,2 @@
-package-generic "primesieve";
+package-install "primesieve";
 
