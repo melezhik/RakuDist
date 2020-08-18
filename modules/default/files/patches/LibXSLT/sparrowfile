@@ -1,0 +1,5 @@
+package-install %(
+  debian => "libxslt1-dev",
+  ubuntu => "libxslt1-dev",
+  centos => "libxslt-devel"
+);
