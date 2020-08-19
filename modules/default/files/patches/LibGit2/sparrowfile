@@ -1,5 +1,5 @@
 package-install %(
-  debian => "libgit-dev",
-  ubuntu => "libgit-dev",
-  centos => "libgit-devel",
+  debian => "libgit2-dev",
+  ubuntu => "libgit2-dev",
+  centos => "libgit2-devel",
 );
