@@ -1,0 +1,5 @@
+package-install %(
+  debian => "libgit-dev",
+  ubuntu => "libgit-dev",
+  centos => "libgit-devel",
+);
