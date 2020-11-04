@@ -195,7 +195,7 @@ sub run-tomty-tests ( $path ) {
   bash "tomty --init && tomty --all --verbose", %(
     description => "tomty test",
     user => config()<user>,
-    envvars => %( SP6_REPO => 'http://rakudist.raku.org/repo/' ),
+    envvars => %( SP6_REPO => 'http://sparrowhub.io/repo/' ),
     cwd => $path
   );
 
