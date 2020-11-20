@@ -6,5 +6,6 @@ sparrowdo:
   bootstrap: false
   format: default
   repo: file:///home/rakudist/repo/
-disabled: false
+disabled: true
+allow_manual_run: false
 keep_builds: 10
