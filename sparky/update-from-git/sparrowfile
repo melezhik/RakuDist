@@ -1,2 +1,5 @@
 chdir "{%*ENV<HOME>}/projects/RakuDist";
 task-run "git pull", "git-pull";
+
+chdir "{%*ENV<HOME>}/projects/RakuPlay";
+task-run "git pull", "git-pull";
