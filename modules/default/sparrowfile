@@ -84,11 +84,11 @@ if os() eq "centos" && "$directory/META6.json".IO ~~ :f && $install-native-deps-
 
 if "{$patch-dir}/sparrowfile".IO ~~ :f {
   say "*** patch dir: {$patch-dir}, patch found ***";
-  say "*** execute patch from {$patch-dir}/sparrowfile ***";
+  say "*** execution of patches is disabled for security reasons ***";
   # post deployment checks
-  chdir $patch-dir;
-  EVALFILE "sparrowfile";
-  chdir $dir;
+  #chdir $patch-dir;
+  #EVALFILE "sparrowfile";
+  #chdir $dir;
 } else {
   say "*** patch dir: {$patch-dir}, no patch found ***";
 }
@@ -109,14 +109,15 @@ if "{$patch-dir}/depends.raku".IO ~~ :f {
 }
 
 if "{$directory}/.rakudist/sparrowfile".IO ~~ :f {
-  say "*** execute custom scenario from .rakudist/sparrowfile ***";
-  bash "mkdir -p {$directory}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>} {$directory}/.rakudist/conf/", %(
-    description => "copy configuartion file",
-  );
+  #say "*** execute custom scenario from .rakudist/sparrowfile ***";
+  say "*** execution of custom scenarios is disabled for serurity reasons ***";
+  #bash "mkdir -p {$directory}/.rakudist/conf && cp -v {%*ENV<SP6_CONFIG>} {$directory}/.rakudist/conf/", %(
+  #  description => "copy configuartion file",
+  #);
   # custom installation logic, for example external libraries
-  chdir "{$directory}/.rakudist/";
-  EVALFILE "sparrowfile";
-  chdir $dir;
+  #chdir "{$directory}/.rakudist/";
+  #EVALFILE "sparrowfile";
+  #chdir $dir;
 }
 
 if "{$directory}/.rakudist/depends.raku".IO ~~ :f {
@@ -160,9 +161,9 @@ if "{$directory}/.rakudist/smokefile".IO ~~ :f {
     description => "copy configuartion file",
   );
   # post deployment checks
-  chdir "$directory/.rakudist/";
-  EVALFILE "smokefile";
-  chdir $dir;
+  #chdir "$directory/.rakudist/";
+  #EVALFILE "smokefile";
+  #chdir $dir;
 }
 
 run-tomty-tests("{$directory}") if "{$directory}/.tomty".IO ~~ :d;
