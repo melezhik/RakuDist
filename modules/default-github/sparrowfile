@@ -110,11 +110,10 @@ if os() eq "centos" && "$directory/META6.json".IO ~~ :f && $install-native-deps-
 
 if "{$patch-dir}/sparrowfile".IO ~~ :f {
   say "*** patch dir: {$patch-dir}, patch found ***";
-  say "*** execute patch from {$patch-dir}/sparrowfile ***";
-  # post deployment checks
-  #chdir $patch-dir;
-  #EVALFILE "sparrowfile";
-  #chdir $dir;
+  say "*** executing patch scenario ***";
+  chdir $patch-dir;
+  EVALFILE "sparrowfile";
+  chdir $dir;
 } else {
   say "*** patch dir: {$patch-dir}, no patch found ***";
 }
