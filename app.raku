@@ -72,12 +72,13 @@ END
         $theme = "cosmo";
       }
 
-      my $default-rakudo-version-commit = "89e12a980a66b00bb724a602ca6bb2bf56c89183";
+      my $default-rakudo-version-commit = "34faae566b713e83b7291dfae716cb8bd161e040";
 
       my %rakudo-version-to-sha = %(
 
         "default" =>  $default-rakudo-version-commit,
-        "2020.10" =>  $default-rakudo-version-commit,
+        "2020.11" => $default-rakudo-version-commit,
+        "2020.10" =>  "89e12a980a66b00bb724a602ca6bb2bf56c89183",
         "2020.07" =>  "d0233dd8faa6803ac50da427f3a185b2673dfb8f",
         "2020.06" =>  "eda1a4b477dec7a490d0902b786c4af7ffb6b636",
         "2020.05.1" =>  "002acb1be2ba2a47ef8a48c30c340d43df91abed",
