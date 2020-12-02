@@ -81,7 +81,7 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
 
   my $rnd = ('a' .. 'z').pick(20).join('');
 
-  my $id = "{$rnd}{$*PID}-{$rakudo_version}-{$issue-num}";
+  my $id = "{$rnd}{$*PID}-{$rakudo_version}-{$iss-num}";
 
   my $effective-dir = "{%*ENV<HOME>}/projects/RakuPlay/.cache/{$id}";
 
@@ -98,21 +98,26 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
   return unless "{$build-dir}".IO ~~ :d;
 
   return unless "{$build-dir}/files/code.raku".IO ~~ :f;
-  
+
+  return unless "{$build-dir}/config.pl6".IO ~~ :f;
+
   copy "{%*ENV<HOME>}/projects/RakuPlay/runners/default/sparrowfile", "{$effective-dir}/sparrowfile";
 
   copy "{$build-dir}/files/code.raku", "{$effective-dir}/files/code.raku";
+ 
+  copy "{$build-dir}/files/Rakufile", "{$effective-dir}/files/Rakufile" if "{$build-dir}/files/Rakufile".IO ~~ :f;
   
   %trigger<cwd> = $effective-dir;
   
   %trigger<description> = "RakuPlay: [issue-{$iss-num}]. Rakudo version: [$rakudo_version]. OS: [debian]";
 
-  spurt "$effective-dir/config.pl6", "%(
-    user => '$user',
-    rakudo_version => '$rakudo_version',
-    skip-zef => False,
-    with-profile => False,
-);\n";
+  my %conf = EVALFILE "{$build-dir}/config.pl6";
+
+  %conf<user> = $user;
+  
+  %conf<rakudo_version> = $rakudo_version;
+  
+  spurt "$effective-dir/config.pl6", %conf.perl;
 
   my $sparky-dir = "{%*ENV<HOME>}/projects/RakuDist/sparky/RakuPlay-{$worker-num}";
 
