@@ -81,7 +81,7 @@ for @r -> $i {
 
 }
 
-build-report ($sha, @stat);
+build-report($sha, @stat);
 
 sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key ) {
 
