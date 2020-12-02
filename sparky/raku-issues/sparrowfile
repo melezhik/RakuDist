@@ -28,7 +28,7 @@ my $sth = $dbh.prepare("
     AND
     ( state == 1 OR state == -1 )
   order by id desc 
-  limit 1"
+  limit 1000"
 );
 
 $sth.execute();
