@@ -1,9 +1,11 @@
 use Sparky;
 use Data::Dump;
 
-my $rakudo-repo-dir = "/tmp/rakudo";
+my $rakudo-repo-dir = "{%*ENV<HOME>}/projects/rakudo-issues/rakudo";
+my $rakudo-issues-dir = "{%*ENV<HOME>}/projects/rakudo-issues/cache";
 
 directory-create $rakudo-repo-dir;
+directory-create $rakudo-issues-dir;
 
 git-scm "https://github.com/rakudo/rakudo.git", %(
   to => $rakudo-repo-dir
@@ -69,8 +71,13 @@ for @r -> $i {
   my $iss-num = "$0";
 
   if ! %seen{$iss-num}++ {
-    say "handle issue number $iss-num";
 
+    if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d {
+      say "issue: $iss-num is already done"
+    } else {
+      say "queue build, issue: $iss-num";
+      directory "{$rakudo-issues-dir}/{$sha}/{$iss-num}";
+    }
   }
 
 }
