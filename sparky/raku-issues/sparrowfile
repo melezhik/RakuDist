@@ -1,0 +1,76 @@
+use Sparky;
+use Data::Dump;
+
+my $rakudo-repo-dir = "/tmp/rakudo";
+
+directory-create $rakudo-repo-dir;
+
+git-scm "https://github.com/rakudo/rakudo.git", %(
+  to => $rakudo-repo-dir
+);
+ 
+chdir $rakudo-repo-dir;
+
+my $sha = qx{git rev-parse HEAD}.chomp;
+
+say "rakudo sha: $sha";
+
+my $dbh = get-dbh();
+
+my $sth = $dbh.prepare("
+  SELECT *
+  FROM 
+    builds 
+  where 
+    description LIKE '%issue-%' 
+    AND
+    ( state == 1 OR state == -1 )
+  order by id desc 
+  limit 5000"
+);
+
+$sth.execute();
+
+my @r = $sth.allrows(:array-of-hash);
+
+#my $state = @r[0]<state>;
+
+#my $dt = @r[0]<dt>;
+
+#my $description = @r[0]<description>;
+
+#my $key = @r[0]<key>;
+
+$sth.finish;
+
+$dbh.dispose;
+
+#say Dump(@r);
+
+=begin comment
+
+  {
+    description => "RakuPlay: [issue-4034]. Rakudo version: [2020.10]. OS: [debian]".Str,
+    dt          => "2020-11-17 15:33:45".Str,
+    id          => 1189.Int,
+    key         => "ajtpomqfciglyrshuzev20013".Str,
+    project     => "RakuPlay-2".Str,
+    state       => -1.Int,
+  },
+
+=end comment
+
+my %seen;
+
+for @r -> $i {
+
+  $i<description> ~~ /'issue-' (\d+)/ or next;
+  
+  my $iss-num = "$0";
+
+  if ! %seen{$iss-num}++ {
+    say "handle issue number $iss-num";
+
+  }
+
+}
