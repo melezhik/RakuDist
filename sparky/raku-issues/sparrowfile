@@ -81,7 +81,7 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
 
   my $rnd = ('a' .. 'z').pick(20).join('');
 
-  my $id = "{$rnd}{$*PID}-{$rakudo-version}-{$issue-num}";
+  my $id = "{$rnd}{$*PID}-{$rakudo_version}-{$issue-num}";
 
   my $effective-dir = "{%*ENV<HOME>}/projects/RakuPlay/.cache/{$id}";
 
