@@ -64,16 +64,16 @@ for @r -> $i {
 
   if ! %seen{$iss-num}++ {
 
-    if "{$rakudo-issues-dir}/{$i<id>}".IO ~~ :d {
-      say "issue: $iss-num is already done (cache exists, build_id: {$i<id>})"
+    if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d {
+      say "issue: $iss-num is already done (cache exists)"
     } else {
-      queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>,$i<id>);
+      queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>);
     }
   }
 
 }
 
-sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key, $build_id ) {
+sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key ) {
 
   my $worker-num = (1 .. 3).pick(1);
 
@@ -127,9 +127,7 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key, 
 
   spurt "{$sparky-dir}/.triggers/$id", %trigger.perl;
 
-  #say "mkdir {$rakudo-issues-dir}/{$build_id}";
-
-  mkdir "{$rakudo-issues-dir}/{$build_id}";
+  mkdir "{$rakudo-issues-dir}/{$rakudo_version}/{$iss-num}";
 
   say "queue build, issue: $iss-num";
 
