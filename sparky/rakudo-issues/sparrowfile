@@ -81,6 +81,8 @@ for @r -> $i {
 
 }
 
+build-report ($sha, @stat);
+
 sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key ) {
 
   my $worker-num = (1 .. 3).pick(1);
@@ -143,6 +145,8 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
 
 sub build-report ($rakudo_version, @stat) {
   
+  say "build report ...";
+
   my $fh = "{%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html".IO.open: :w;
 
   $fh.say("<h1>RakuPlay Rakudo Issues. Rakudo Version: {$rakudo_version.chop(32)}</h1>");
