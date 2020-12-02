@@ -1,8 +1,0 @@
-#crontab: "* * * * *"
-sparrowdo:
-  no_sudo: true
-  no_index_update: false
-  bootstrap: false
-disabled: false
-allow_manual_run: true
-keep_builds: 5
