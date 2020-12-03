@@ -72,7 +72,8 @@ for @r -> $i {
         build-id => $i<id>,
         state => $i<state>,
         project => $i<project>,
-        dt => $i<dt>
+        dt => $i<dt>,
+        descritpion => $i<description>,
       );
     } else {
       queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>);
@@ -156,6 +157,7 @@ sub build-report ($rakudo_version, @stat) {
     $fh.print: "RP: #<a target='_blank' href='http://rakudist.raku.org/sparky/report/{$i<project>}/{$i<build-id>}'>{$i<build-id>}</a> [";
     $fh.print: ($i<state> == 1 ?? "OK" !! "NOT-OK" );
     $fh.print: "]";
+    $fh.print: " | {$i<description>}";
     $fh.print: " | at {$i<dt>}<br>\n";
     
   }
