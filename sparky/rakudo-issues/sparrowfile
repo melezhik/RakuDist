@@ -152,7 +152,7 @@ sub build-report ($rakudo_version, @stat) {
 
   my $fh = "{%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html".IO.open: :w;
 
-  $fh.say("<head><title>RakuPlay Rakudo Issues</title></head>");
+  $fh.say("<head><title>RIP - Rakudo Issues Player</title></head>");
   $fh.say("<body>\n<h1>RakuPlay Rakudo Issues</h1>");
 
   for @stat.sort({ .<iss-num> }).reverse -> $i {
