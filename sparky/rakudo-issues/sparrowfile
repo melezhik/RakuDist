@@ -73,7 +73,7 @@ for @r -> $i {
         state => $i<state>,
         project => $i<project>,
         dt => $i<dt>,
-        descritpion => $i<description>,
+        description => $i<description>,
       );
     } else {
       queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>);
