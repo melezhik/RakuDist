@@ -41,21 +41,26 @@ $dbh.dispose;
 
 my @stat;
 
+my %seen;
+
 for @r -> $i {
 
   $i<description> ~~ /'issue-' (\d+)/ or next;
   
   my $iss-num = "$0";
 
-  push @stat, %(
-    iss-num => $iss-num,
-    build-id => $i<id>,
-    state => $i<state>,
-    project => $i<project>,
-    dt => $i<dt>,
-    description => $i<description>,
-  );
+  if ! %seen{$iss-num}++ {
 
+    push @stat, %(
+      iss-num => $iss-num,
+      build-id => $i<id>,
+      state => $i<state>,
+      project => $i<project>,
+      dt => $i<dt>,
+      description => $i<description>,
+    );
+
+  }
 }
 
 build-report(@stat);
