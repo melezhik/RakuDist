@@ -159,14 +159,18 @@ sub build-report ($rakudo_version, @stat) {
 
   $fh.say("<body>");
   $fh.say('<div class="container">');
-  $fh.say("<h1>RIP - Rakudo Issues Player</h1>");
   $fh.say('<table class="table">');
+  $fh.say("<thead>RIP - Rakudo Issues Player</thead>");
   $fh.say('<th>GH Issue</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
   for @stat.sort({ .<iss-num> }).reverse -> $i {
     $fh.print: "<tr>\n";
     $fh.print: "<td>#<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a></td>";
     $fh.print: "<td>#<a target='_blank' href='http://rakudist.raku.org/sparky/report/{$i<project>}/{$i<build-id>}'>{$i<build-id>}</a></td>";
-    $fh.print: ($i<state> == 1 ?? "<td>OK</td>" !! "<td>NOT-OK</td>");
+    if $i<state> == 1 {
+      $fh.print: "<td><span class='icon has-text-success'><i class='fas fa-check-square'></i></span></td>";
+    } else {
+      $fh.print: "<td><span class='icon has-text-danger'><i class='fas fa-ban'></i></span></td>";
+    }
     $fh.print: "<td>{$i<description>}</td>";
     $fh.print: "<td>{$i<dt>}</td>\n";
     $fh.print: "</tr>\n";
