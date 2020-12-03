@@ -152,20 +152,28 @@ sub build-report ($rakudo_version, @stat) {
 
   my $fh = "{%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html".IO.open: :w;
 
-  $fh.say("<head><title>RIP - Rakudo Issues Player</title></head>");
-  $fh.say("<body>\n<h1>RIP - Rakudo Issues Player</h1>");
+  $fh.say("<head><title>RIP - Rakudo Issues Player</title>");
+  $fh.say('<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/default/bulmaswatch.min.css">');
+  $fh.say('<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>');
+  $fh.say("</head>");
 
+  $fh.say("<body>");
+  $fh.say('<div class="container">');
+  $fh.say("<h1>RIP - Rakudo Issues Player</h1>");
+  $fh.say('<table class="table">');
+  $fh.say('<th>GH Issue</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
   for @stat.sort({ .<iss-num> }).reverse -> $i {
-    $fh.print: "GH Issue: #<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a> | ";
-    $fh.print: "RP: #<a target='_blank' href='http://rakudist.raku.org/sparky/report/{$i<project>}/{$i<build-id>}'>{$i<build-id>}</a> [";
-    $fh.print: ($i<state> == 1 ?? "OK" !! "NOT-OK" );
-    $fh.print: "]";
-    $fh.print: " | {$i<description>}";
-    $fh.print: " | at {$i<dt>}<br>\n";
+    $fh.print: "<tr>\n";
+    $fh.print: "<td>#<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a></td>";
+    $fh.print: "<td>#<a target='_blank' href='http://rakudist.raku.org/sparky/report/{$i<project>}/{$i<build-id>}'>{$i<build-id>}</a></td>";
+    $fh.print: ($i<state> == 1 ?? "<td>OK</td>" !! "<td>NOT-OK</td>");
+    $fh.print: "<td>{$i<description>}</td>";
+    $fh.print: "<td>{$i<dt>}</td>\n";
+    $fh.print: "</tr>\n";
     
   }
 
-  $fh.print: "</body>\n";
+  $fh.print: "</table></div></body>\n";
   $fh.close;
 
   say "report saved to {%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html";
