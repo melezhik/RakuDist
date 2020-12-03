@@ -15,6 +15,11 @@ chdir $rakudo-repo-dir;
 
 my $sha = qx{git rev-parse HEAD}.chomp;
 
+bash "curl -f -o /dev/null -s -D - https://whateverable.6lang.org/{$sha}", %(
+   description => "check if {$sha} is available",
+   debug => 1
+);
+
 say "rakudo sha: $sha";
 
 my $dbh = get-dbh();
