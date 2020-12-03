@@ -153,7 +153,7 @@ sub build-report ($rakudo_version, @stat) {
   $fh.say("<head><title>RakuPlay Rakudo Issues</title></head>");
   $fh.say("<body>\n<h1>RakuPlay Rakudo Issues</h1>");
 
-  for @stat.sort({ .<iss-num> }) -> $i {
+  for @stat.sort({ .<iss-num> }).reverse -> $i {
     $fh.print: "GH Issue: #<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a> | ";
     $fh.print: "RP: #<a target='_blank' href='http://rakudist.raku.org/sparky/report/{$i<project>}/{$i<build-id>}'>{$i<build-id>}</a> [";
     $fh.print: ($i<state> == 1 ?? "OK" !! "NOT-OK" );
