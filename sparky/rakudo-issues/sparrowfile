@@ -150,7 +150,8 @@ sub build-report ($rakudo_version, @stat) {
 
   my $fh = "{%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html".IO.open: :w;
 
-  $fh.say("<h1>RakuPlay Rakudo Issues. Rakudo Version: {$rakudo_version.chop(32)}</h1>");
+  $fh.say("<head><title>RakuPlay Rakudo Issues</title></head>");
+  $fh.say("<body>\n<h1>RakuPlay Rakudo Issues</h1>");
 
   for @stat -> $i {
     $fh.print: "GH Issue: #<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a> | ";
@@ -162,6 +163,7 @@ sub build-report ($rakudo_version, @stat) {
     
   }
 
+  $fh.print: "</body>\n";
   $fh.close;
 
   say "report saved to {%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html";
