@@ -65,11 +65,11 @@ for @r -> $i {
 
   if ! %seen{$iss-num}++ {
 
-    if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d {
-      say "issue: $iss-num is already done (cache exists)";
-    } else {
+    #if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d {
+    #  say "issue: $iss-num is already done (cache exists)";
+    #} else {
       queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>);
-    }
+    #}
 
     push @stat, %(
       iss-num => $iss-num,
@@ -140,7 +140,7 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
 
   spurt "{$sparky-dir}/.triggers/$id", %trigger.perl;
 
-  mkdir "{$rakudo-issues-dir}/{$rakudo_version}/{$iss-num}";
+  #mkdir "{$rakudo-issues-dir}/{$rakudo_version}/{$iss-num}";
 
   say "queue build, issue: $iss-num";
 
@@ -152,7 +152,7 @@ sub build-report ($rakudo_version, @stat) {
 
   my $fh = "{%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html".IO.open: :w;
 
-  $fh.say("<head><title>RIP - Rakudo Issues Player</title>");
+  $fh.say("<head><title>RICH -Rakudo Issues Confirmation Helper</title>");
   $fh.say('<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/default/bulmaswatch.min.css">');
   $fh.say('<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>');
   $fh.say("</head>");
@@ -160,7 +160,7 @@ sub build-report ($rakudo_version, @stat) {
   $fh.say("<body>");
   $fh.say('<div class="container">');
   $fh.say('<nav class="panel is-primary">');
-  $fh.say("<p class='panel-heading'>RIP - Rakudo Issues Player</p>");
+  $fh.say("<p class='panel-heading'>RICH -Rakudo Issues Confirmation Helper</p>");
   $fh.say('<table class="table panel-block">');
   $fh.say('<th>GH Issue</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
   for @stat.sort({ .<iss-num> }).reverse -> $i {
