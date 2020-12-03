@@ -70,7 +70,7 @@ for @r -> $i {
 
   if ! %seen{$iss-num}++ {
 
-    if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d && $i<state> == 1 {
+    if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d  {
       say "issue: $iss-num is already succeded (cache exists)";
     } else {
       queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>);
