@@ -67,17 +67,19 @@ for @r -> $i {
 
     if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d {
       say "issue: $iss-num is already done (cache exists)";
-      push @stat, %(
-        iss-num => $iss-num,
-        build-id => $i<id>,
-        state => $i<state>,
-        project => $i<project>,
-        dt => $i<dt>,
-        description => $i<description>,
-      );
     } else {
       queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>);
     }
+
+    push @stat, %(
+      iss-num => $iss-num,
+      build-id => $i<id>,
+      state => $i<state>,
+      project => $i<project>,
+      dt => $i<dt>,
+      description => $i<description>,
+    );
+
   }
 
 }
