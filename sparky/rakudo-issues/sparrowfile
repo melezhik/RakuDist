@@ -16,7 +16,7 @@ chdir $rakudo-repo-dir;
 my $sha = qx{git rev-parse HEAD}.chomp;
 
 bash "curl -f -o /dev/null -s -D - https://whateverable.6lang.org/{$sha}", %(
-   description => "check if {$sha} is available",
+   description => "check if {$sha.chop(32)} is available",
    debug => 1
 );
 
