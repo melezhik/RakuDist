@@ -84,8 +84,6 @@ for @r -> $i {
 
 }
 
-build-report($sha, @stat);
-
 sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key ) {
 
   my $worker-num = (1 .. 3).pick(1);
@@ -146,40 +144,3 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
 
 }
 
-sub build-report ($rakudo_version, @stat) {
-  
-  say "build report ...";
-
-  my $fh = "{%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html".IO.open: :w;
-
-  $fh.say("<head><title>RICH - Rakudo Issues Confirmation Helper</title>");
-  $fh.say('<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/default/bulmaswatch.min.css">');
-  $fh.say('<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>');
-  $fh.say("</head>");
-
-  $fh.say("<body>");
-  $fh.say('<div class="container">');
-  $fh.say('<nav class="panel is-primary">');
-  $fh.say("<p class='panel-heading'>RICH - Rakudo Issues Confirmation Helper</p>");
-  $fh.say('<table class="table panel-block">');
-  $fh.say('<th>GH Issue</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
-  for @stat.sort({ .<iss-num> }).reverse -> $i {
-    $fh.print: "<tr>\n";
-    $fh.print: "<td>#<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a></td>";
-    $fh.print: "<td>#<a target='_blank' href='http://rakudist.raku.org/sparky/report/{$i<project>}/{$i<build-id>}'>{$i<build-id>}</a></td>";
-    if $i<state> == 1 {
-      $fh.print: "<td><span class='icon has-text-success'><i class='fas fa-check-square'></i></span></td>";
-    } else {
-      $fh.print: "<td><span class='icon has-text-danger'><i class='fas fa-ban'></i></span></td>";
-    }
-    $fh.print: "<td>{$i<description>}</td>";
-    $fh.print: "<td>{$i<dt>}</td>\n";
-    $fh.print: "</tr>\n";
-    
-  }
-
-  $fh.print: "</table></nav></div></body>\n";
-  $fh.close;
-
-  say "report saved to {%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html";
-}

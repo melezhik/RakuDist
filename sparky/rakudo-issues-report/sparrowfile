@@ -58,9 +58,9 @@ for @r -> $i {
 
 }
 
-build-report($sha, @stat);
+build-report(@stat);
 
-sub build-report ($rakudo_version, @stat) {
+sub build-report ( @stat) {
   
   say "build report ...";
 
