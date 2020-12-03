@@ -1,0 +1,99 @@
+use Sparky;
+
+use Data::Dump;
+
+my $dbh = get-dbh();
+
+my $sth = $dbh.prepare("
+  SELECT *
+  FROM 
+    builds 
+  where 
+    description LIKE '%issue-%' 
+    AND
+    ( state == 1 OR state == -1 )
+  order by id desc 
+  limit 1000"
+);
+
+$sth.execute();
+
+my @r = $sth.allrows(:array-of-hash);
+
+$sth.finish;
+
+$dbh.dispose;
+
+#say Dump(@r);
+
+=begin comment
+
+  {
+    description => "RakuPlay: [issue-4034]. Rakudo version: [2020.10]. OS: [debian]".Str,
+    dt          => "2020-11-17 15:33:45".Str,
+    id          => 1189.Int,
+    key         => "ajtpomqfciglyrshuzev20013".Str,
+    project     => "RakuPlay-2".Str,
+    state       => -1.Int,
+  },
+
+=end comment
+
+my @stat;
+
+for @r -> $i {
+
+  $i<description> ~~ /'issue-' (\d+)/ or next;
+  
+  my $iss-num = "$0";
+
+  push @stat, %(
+    iss-num => $iss-num,
+    build-id => $i<id>,
+    state => $i<state>,
+    project => $i<project>,
+    dt => $i<dt>,
+    description => $i<description>,
+  );
+
+}
+
+build-report($sha, @stat);
+
+sub build-report ($rakudo_version, @stat) {
+  
+  say "build report ...";
+
+  my $fh = "{%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html".IO.open: :w;
+
+  $fh.say("<head><title>RICH - Rakudo Issues Confirmation Helper</title>");
+  $fh.say('<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/default/bulmaswatch.min.css">');
+  $fh.say('<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>');
+  $fh.say("</head>");
+
+  $fh.say("<body>");
+  $fh.say('<div class="container">');
+  $fh.say('<nav class="panel is-primary">');
+  $fh.say("<p class='panel-heading'>RICH - Rakudo Issues Confirmation Helper</p>");
+  $fh.say('<table class="table panel-block">');
+  $fh.say('<th>GH Issue</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
+  for @stat.sort({ .<iss-num> }).reverse -> $i {
+    $fh.print: "<tr>\n";
+    $fh.print: "<td>#<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a></td>";
+    $fh.print: "<td>#<a target='_blank' href='http://rakudist.raku.org/sparky/report/{$i<project>}/{$i<build-id>}'>{$i<build-id>}</a></td>";
+    if $i<state> == 1 {
+      $fh.print: "<td><span class='icon has-text-success'><i class='fas fa-check-square'></i></span></td>";
+    } else {
+      $fh.print: "<td><span class='icon has-text-danger'><i class='fas fa-ban'></i></span></td>";
+    }
+    $fh.print: "<td>{$i<description>}</td>";
+    $fh.print: "<td>{$i<dt>}</td>\n";
+    $fh.print: "</tr>\n";
+    
+  }
+
+  $fh.print: "</table></nav></div></body>\n";
+  $fh.close;
+
+  say "report saved to {%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html";
+}
