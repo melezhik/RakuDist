@@ -159,8 +159,9 @@ sub build-report ($rakudo_version, @stat) {
 
   $fh.say("<body>");
   $fh.say('<div class="container">');
-  $fh.say('<table class="table">');
-  $fh.say("<thead>RIP - Rakudo Issues Player</thead>");
+  $fh.say('<nav class="panel is-primary">');
+  $fh.say("<p class='panel-heading'>RIP - Rakudo Issues Player</p>");
+  $fh.say('<table class="table panel-block">');
   $fh.say('<th>GH Issue</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
   for @stat.sort({ .<iss-num> }).reverse -> $i {
     $fh.print: "<tr>\n";
@@ -177,7 +178,7 @@ sub build-report ($rakudo_version, @stat) {
     
   }
 
-  $fh.print: "</table></div></body>\n";
+  $fh.print: "</table></nav></div></body>\n";
   $fh.close;
 
   say "report saved to {%*ENV<HOME>}/projects/RakuDist/sparky/rakudo-issues/report.html";
