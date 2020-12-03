@@ -65,11 +65,11 @@ for @r -> $i {
 
   if ! %seen{$iss-num}++ {
 
-    #if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d {
-    #  say "issue: $iss-num is already done (cache exists)";
-    #} else {
+    if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d && $i<state> == 1 {
+      say "issue: $iss-num is already succeded (cache exists)";
+    } else {
       queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>);
-    #}
+    }
 
     push @stat, %(
       iss-num => $iss-num,
@@ -140,7 +140,7 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
 
   spurt "{$sparky-dir}/.triggers/$id", %trigger.perl;
 
-  #mkdir "{$rakudo-issues-dir}/{$rakudo_version}/{$iss-num}";
+  mkdir "{$rakudo-issues-dir}/{$rakudo_version}/{$iss-num}";
 
   say "queue build, issue: $iss-num";
 
