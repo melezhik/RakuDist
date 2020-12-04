@@ -123,6 +123,8 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
  
   copy "{$build-dir}/files/Rakufile", "{$effective-dir}/files/Rakufile" if "{$build-dir}/files/Rakufile".IO ~~ :f;
   
+  shell("cp -r {%*ENV<HOME>}/projects/RakuPlay/issues {$effective-dir}/files");
+  
   %trigger<cwd> = $effective-dir;
   
   %trigger<description> = "RakuPlay: [issue-{$iss-num}]. Rakudo version: [$rakudo_version]. OS: [debian]";
