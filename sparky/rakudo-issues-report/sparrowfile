@@ -81,6 +81,7 @@ sub build-report ( @stat) {
   $fh.say('<nav class="panel is-primary">');
   $fh.say("<p class='panel-heading'>RICH - Rakudo Issues Confirmation Helper</p>");
   $fh.say("<p class='panel-tabs'>");
+  $fh.say("<a href='http://rakudist.raku.org/play/' target='_blank'>Play New Issue</a>");
   $fh.say("<a href='https://github.com/rakudo/rakudo/issues' target='_blank'>Rakudo GH Issues</a>");
   $fh.say("</p>");
   $fh.say('<table class="table panel-block">');
