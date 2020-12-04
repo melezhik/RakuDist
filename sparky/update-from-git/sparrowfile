@@ -1,5 +1,7 @@
+say "update {%*ENV<HOME>}/projects/RakuDist";
 chdir "{%*ENV<HOME>}/projects/RakuDist";
 task-run "git pull", "git-pull";
 
+say "{%*ENV<HOME>}/projects/RakuPlay";
 chdir "{%*ENV<HOME>}/projects/RakuPlay";
 task-run "git pull", "git-pull";
