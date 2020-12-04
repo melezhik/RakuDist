@@ -80,6 +80,9 @@ sub build-report ( @stat) {
   $fh.say('<div class="container">');
   $fh.say('<nav class="panel is-primary">');
   $fh.say("<p class='panel-heading'>RICH - Rakudo Issues Confirmation Helper</p>");
+  $fh.say("<p class='panel-tabs'>");
+  $fh.say("<a href='https://github.com/rakudo/rakudo/issues' target='_blank'>Rakudo GH Issues</a>");
+  $fh.say("</p>");
   $fh.say('<table class="table panel-block">');
   $fh.say('<th>GH Issue</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
   for @stat.sort({ .<iss-num> }).reverse -> $i {
