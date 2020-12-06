@@ -1,6 +1,7 @@
 use Sparky;
 
 use Data::Dump;
+use JSON::Tiny;
 
 my $dbh = get-dbh();
 
@@ -85,10 +86,24 @@ sub build-report ( @stat) {
   $fh.say("<a href='https://github.com/rakudo/rakudo/issues' target='_blank'>Rakudo GH Issues</a>");
   $fh.say("</p>");
   $fh.say('<table class="table panel-block">');
-  $fh.say('<th>GH Issue</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
+  $fh.say('<th>GH Issue</th><th>Status</th><th>Play</th><th>Status</th><th>Desc</th><th>Time</th>');
   for @stat.sort({ .<iss-num> }).reverse -> $i {
+    task-run "issue status", "curl", %(
+       args => [ 
+          "https://api.github.com/repos/rakudo/rakudo/issues/{$i<iss-num>}",
+          [ "silent", "fail" ],
+          %( output => "{%*ENV<PWD>}/{$i<iss-num>}.json" ),
+      ]
+    );
+
+    my %issue = from-json("{%*ENV<PWD>}/{$i<iss-num>}.json".IO.slurp);
     $fh.print: "<tr>\n";
     $fh.print: "<td>#<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a></td>";
+    if $i<state> == "closed" {
+      $fh.print: "<td><span class='icon has-text-success'><i class='fas fa-check-square'></i></span></td>";
+    } else {
+      $fh.print: "<td><span class='icon has-text-danger'><i class='fas fa-ban'></i></span></td>";
+    }
     $fh.print: "<td>#<a target='_blank' href='http://rakudist.raku.org/sparky/report/{$i<project>}/{$i<build-id>}'>{$i<build-id>}</a></td>";
     if $i<state> == 1 {
       $fh.print: "<td><span class='icon has-text-success'><i class='fas fa-check-square'></i></span></td>";
