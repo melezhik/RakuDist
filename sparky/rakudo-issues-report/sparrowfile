@@ -99,7 +99,7 @@ sub build-report ( @stat) {
     my %issue = from-json("{%*ENV<PWD>}/{$i<iss-num>}.json".IO.slurp);
     $fh.print: "<tr>\n";
     $fh.print: "<td>#<a target='_blank' href='https://github.com/rakudo/rakudo/issues/{$i<iss-num>}'>{$i<iss-num>}</a></td>";
-    if $i<state> == "closed" {
+    if %issue<state> == "closed" {
       $fh.print: "<td><span class='icon has-text-success'><i class='fas fa-check-square'></i></span></td>";
     } else {
       $fh.print: "<td><span class='icon has-text-danger'><i class='fas fa-ban'></i></span></td>";
