@@ -72,14 +72,14 @@ for @r -> $i {
     if "{$rakudo-issues-dir}/{$sha}/{$iss-num}".IO ~~ :d  {
       say "issue: $iss-num is already done (cache exists)";
     } else {
-      queue-build($rakudo-issues-dir,$sha,$iss-num,$i<project>,$i<key>);
+      queue-build($rakudo-issues-dir,$sha,$iss-num);
     }
 
   }
 
 }
 
-sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key ) {
+sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num ) {
 
   my $worker-num = (1 .. 3).pick(1);
 
@@ -93,33 +93,29 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num, $project, $key )
 
   mkdir "{$effective-dir}/files";
 
-  my $root = %*ENV<SPARKY_ROOT> || %*ENV<HOME> ~ '/.sparky/projects';
-  
-  return unless "$root/../work/$project/.triggers/$key".IO ~~ :f;
-  
-  my %trigger = EVALFILE "$root/../work/$project/.triggers/$key";
-  
-  my $build-dir = %trigger<cwd>;
-  
-  return unless "{$build-dir}".IO ~~ :d;
-
-  return unless "{$build-dir}/files/code.raku".IO ~~ :f;
-
-  return unless "{$build-dir}/config.pl6".IO ~~ :f;
-
   copy "{%*ENV<HOME>}/projects/RakuPlay/runners/default/sparrowfile", "{$effective-dir}/sparrowfile";
 
-  copy "{$build-dir}/files/code.raku", "{$effective-dir}/files/code.raku";
+  "{$effective-dir}/files/code.raku".IO.spurt("use Sparrow6::DSL; task-run '$iss-num';");
  
-  copy "{$build-dir}/files/Rakufile", "{$effective-dir}/files/Rakufile" if "{$build-dir}/files/Rakufile".IO ~~ :f;
+  "{$effective-dir}/files/Rakufile".IO.spurt("Sparrow6 --/test");
   
-  shell("cp -r {%*ENV<HOME>}/projects/RakuPlay/issues {$effective-dir}/files");
+  shell("cp -rv {%*ENV<HOME>}/projects/RakuPlay/issues/$iss-num {$effective-dir}/files");
+
+  my %trigger = Hash.new;
   
   %trigger<cwd> = $effective-dir;
-  
+
+  %trigger<sparrowdo> =  %( 
+    conf => 'config.pl6', 
+    docker => 'debian-rakudist', 
+    bootstrap => False, 
+    no_index_update => False, 
+    no_sudo => True,
+  );
+
   %trigger<description> = "RakuPlay: [issue-{$iss-num}]. Rakudo version: [$rakudo_version]. OS: [debian]";
 
-  my %conf = EVALFILE "{$build-dir}/config.pl6";
+  my %conf = Hash.new;
 
   %conf<user> = $user;
   
