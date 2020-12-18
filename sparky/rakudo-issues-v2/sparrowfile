@@ -81,6 +81,8 @@ for @r -> $i {
 
 sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num ) {
 
+  return unless "{%*ENV<HOME>}/projects/RakuPlay/issues/$iss-num".IO ~~ :d;
+
   my $worker-num = (1 .. 3).pick(1);
 
   my $user = "rkp-{$worker-num}-{$rakudo_version.chop(32)}";
