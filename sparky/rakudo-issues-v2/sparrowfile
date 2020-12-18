@@ -93,15 +93,15 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num ) {
 
   my $effective-dir = "{%*ENV<HOME>}/projects/RakuPlay/.cache/{$id}";
 
-  mkdir "{$effective-dir}/files";
+  mkdir "{$effective-dir}/files/issues/";
 
   copy "{%*ENV<HOME>}/projects/RakuPlay/runners/default/sparrowfile", "{$effective-dir}/sparrowfile";
 
-  "{$effective-dir}/files/code.raku".IO.spurt("use Sparrow6::DSL; task-run '$iss-num';");
+  "{$effective-dir}/files/code.raku".IO.spurt("use Sparrow6::DSL; task-run 'issues/$iss-num';");
  
   "{$effective-dir}/files/Rakufile".IO.spurt("Sparrow6 --/test");
   
-  shell("cp -rv {%*ENV<HOME>}/projects/RakuPlay/issues/$iss-num {$effective-dir}/files");
+  shell("cp -rv {%*ENV<HOME>}/projects/RakuPlay/issues/$iss-num {$effective-dir}/files/issues");
 
   my %trigger = Hash.new;
   
