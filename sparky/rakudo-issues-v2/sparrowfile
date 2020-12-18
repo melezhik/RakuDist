@@ -101,7 +101,7 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num ) {
  
   "{$effective-dir}/files/Rakufile".IO.spurt("Sparrow6 --/test");
   
-  shell("cp -rv {%*ENV<HOME>}/projects/RakuPlay/issues/$iss-num {$effective-dir}/files/issues");
+  shell("cp -r {%*ENV<HOME>}/projects/RakuPlay/issues/$iss-num {$effective-dir}/files/issues");
 
   my %trigger = Hash.new;
   
