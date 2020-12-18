@@ -115,7 +115,7 @@ sub queue-build ($rakudo-issues-dir, $rakudo_version, $iss-num ) {
     no_sudo => True,
   );
 
-  %trigger<description> = "RakuPlay: [issue-{$iss-num}]. Rakudo version: [$rakudo_version]. OS: [debian]";
+  %trigger<description> = "RakuPlay V2: [issue-{$iss-num}]. Rakudo version: [$rakudo_version]. OS: [debian]";
 
   my %conf = Hash.new;
 
