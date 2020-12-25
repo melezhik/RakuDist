@@ -1,8 +1,8 @@
-crontab: "10 4 * * *"
+#crontab: "10 4 * * *"
 sparrowdo:
   no_sudo: true
   no_index_update: false
   bootstrap: false
 disabled: false
-allow_manual_run: true
+allow_manual_run: false
 keep_builds: 100
