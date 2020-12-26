@@ -1,4 +1,4 @@
-crontab: "22 * * * *"
+#crontab: "22 * * * *"
 
 sparrowdo:
   no_sudo: true
